@@ -18,7 +18,7 @@ public class BoundedIteratorTest  extends TestCase
 
   public void test1()
   {
-    java.util.Iterator bi = new BoundedIterator(list, 2, 5);
+    java.util.Iterator bi = Mango.BoundedIterator(list, 2, 5);
     assertEquals(true, bi.hasNext());
     assertEquals(new Integer(2), bi.next());
     assertEquals(true, bi.hasNext());
@@ -30,7 +30,7 @@ public class BoundedIteratorTest  extends TestCase
 
   public void test2()
   {
-    java.util.Iterator bi = new BoundedIterator(list, 8, 12);
+    java.util.Iterator bi = Mango.BoundedIterator(list, 8, 12);
     assertEquals(true, bi.hasNext());
     assertEquals(new Integer(8), bi.next());
     assertEquals(true, bi.hasNext());
@@ -40,13 +40,13 @@ public class BoundedIteratorTest  extends TestCase
 
   public void test3()
   {
-    java.util.Iterator bi = new BoundedIterator(list, 12, 12);
+    java.util.Iterator bi = Mango.BoundedIterator(list, 12, 12);
     assertEquals(false, bi.hasNext());
   } // test3
 
   public void test4()
   {
-    java.util.Iterator bi = new BoundedIterator(list.iterator(), 2, 5);
+    java.util.Iterator bi = Mango.BoundedIterator(list.iterator(), 2, 5);
     assertEquals(true, bi.hasNext());
     assertEquals(new Integer(2), bi.next());
     assertEquals(true, bi.hasNext());
@@ -58,7 +58,7 @@ public class BoundedIteratorTest  extends TestCase
 
   public void test5()
   {
-    java.util.Iterator bi = new BoundedIterator(list.iterator(), 8, 12);
+    java.util.Iterator bi = Mango.BoundedIterator(list.iterator(), 8, 12);
     assertEquals(true, bi.hasNext());
     assertEquals(new Integer(8), bi.next());
     assertEquals(true, bi.hasNext());
@@ -68,7 +68,7 @@ public class BoundedIteratorTest  extends TestCase
 
   public void test6()
   {
-    java.util.Iterator bi = new BoundedIterator(list.iterator(), 12, 12);
+    java.util.Iterator bi = Mango.BoundedIterator(list.iterator(), 12, 12);
     assertEquals(false, bi.hasNext());
   } // test6
 } // BoundedIteratorTest

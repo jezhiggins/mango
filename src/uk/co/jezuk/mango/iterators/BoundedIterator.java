@@ -1,4 +1,4 @@
-package uk.co.jezuk.mango;
+package uk.co.jezuk.mango.iterators;
 
 /**
  * A <code>BoundedIterator</code> enumerates of a subset of a collection, in the

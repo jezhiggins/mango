@@ -27,7 +27,7 @@ public class PredicatedIteratorTest  extends TestCase
   
   public void test1()
   {
-    java.util.Iterator iter = new PredicatedIterator(list.iterator(), new LessThanFive());
+    java.util.Iterator iter = Mango.PredicatedIterator(list.iterator(), new LessThanFive());
     int i = 0;
     while(iter.hasNext())
     {
@@ -53,7 +53,7 @@ public class PredicatedIteratorTest  extends TestCase
     list.add("CHARLES");
     list.add("SIMEON");
 
-    java.util.Iterator iter = new PredicatedIterator(list.iterator(), 
+    java.util.Iterator iter = Mango.PredicatedIterator(list.iterator(), 
                                        new Predicate() {
                                            public boolean test(Object o) {
                                              String s = (String)o;

@@ -1,4 +1,4 @@
-package uk.co.jezuk.mango;
+package uk.co.jezuk.mango.iterators;
 
 /**
  * A <code>PredicatedIterator</code> enumerates only those elements of a collection
@@ -9,7 +9,7 @@ package uk.co.jezuk.mango;
  */
 public class PredicatedIterator implements java.util.Iterator
 {
-  public PredicatedIterator(java.util.Iterator iterator, Predicate predicate)
+  public PredicatedIterator(java.util.Iterator iterator, uk.co.jezuk.mango.Predicate predicate)
   {
     iter_ = iterator;
     pred_ = predicate;
@@ -47,7 +47,7 @@ public class PredicatedIterator implements java.util.Iterator
 
   ////////////////////////
   private java.util.Iterator iter_;
-  private Predicate pred_;
+  private uk.co.jezuk.mango.Predicate pred_;
   private Object next_;
 } // PredicatedIterator
 
