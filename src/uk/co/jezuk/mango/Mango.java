@@ -20,11 +20,12 @@ public class Mango
   static public void forEach(java.util.Iterator iterator, UnaryFunction fn) { uk.co.jezuk.mango.algorithms.ForEach.execute(iterator, fn); } 
 
   /**
-   * The algorith Transform applies the function <code>fn</code> to
+   * The algorithm Transform applies the function <code>fn</code> to
    * each element in the <code>iterator</code> sequence.
-   * The return value of <code>fn</code> is added to the collection <code>results</code>
-   * If the return value of <code>fn</code> is a collection, then each member of 
-   * the return value is added to results.
+   * The return value of <code>fn</code> is added to the <code>results</code>
+   * collection.  If the return value of <code>fn</code> is itself a
+   * collection, then each member of that collection is added to 
+   * <code>results</code>.
    */
   static public void transform(java.util.Collection collection, UnaryFunction fn, java.util.Collection results) { uk.co.jezuk.mango.algorithms.Transform.execute(collection.iterator(), fn, results); }
   static public void transform(java.util.Collection collection, int start, int end, UnaryFunction fn, java.util.Collection results) { uk.co.jezuk.mango.algorithms.Transform.execute(BoundedIterator(collection.iterator(), start, end), fn, results); }
