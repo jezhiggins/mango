@@ -1,0 +1,13 @@
+#!/bin/sh
+# $Id$
+
+JAVA_LIB=~/work/java_lib
+
+CLASSPATH=./classes
+CLASSPATH=$CLASSPATH:.
+CLASSPATH=$CLASSPATH:$JAVA_LIB/ant.jar
+CLASSPATH=$CLASSPATH:$JAVA_LIB/jakarta-ant-1.4.1-optional.jar
+CLASSPATH=$CLASSPATH:$JAVA_LIB/junit.jar
+CLASSPATH=$CLASSPATH:$JAVA_HOME/lib/tools.jar
+
+export CLASSPATH JAVA_LIB

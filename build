@@ -1,0 +1,7 @@
+#!/bin/sh
+# $Id$
+
+. ./classpath
+
+echo $CLASSPATH
+java org.apache.tools.ant.Main %*
