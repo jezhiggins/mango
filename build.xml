@@ -54,6 +54,7 @@
     </zip>
     <zip zipfile="${distdir}/mango-src.zip">
       <fileset dir=".">
+        <include name="build.xml"/>
         <include name="mango/*"/>
         <include name="${srcdir}/**"/>
         <include name="${srctests}/**"/>
@@ -64,7 +65,8 @@
     </tar>
     <tar tarfile="${distdir}/mango-src.tar">
       <tarfileset dir=".">
-        <include name="./*"/>
+        <include name="build.xml"/>
+        <include name="mango/*"/>
         <include name="${srcdir}/**"/>
         <include name="${srctests}/**"/>
       </tarfileset>
