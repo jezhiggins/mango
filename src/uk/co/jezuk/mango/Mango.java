@@ -17,6 +17,19 @@ public class Mango
   static public void forEach(java.util.Collection collection, int start, int end, UnaryFunction fn) { uk.co.jezuk.mango.algorithms.ForEach.execute(BoundedIterator(collection.iterator(), start, end), fn); }
   static public void forEach(java.util.List list, int start, int end, UnaryFunction fn) { uk.co.jezuk.mango.algorithms.ForEach.execute(BoundedIterator(list, start, end), fn); }
   static public void forEach(java.util.Iterator iterator, UnaryFunction fn) { uk.co.jezuk.mango.algorithms.ForEach.execute(iterator, fn); } 
+
+  /**
+   * The algorith Transform applies the function <code>fn</code> to
+   * each element in the <code>iterator</code> sequence.
+   * The return value of <code>fn</code> is added to the collection <code>results</code>
+   * If the return value of <code>fn</code> is a collection, then each member of 
+   * the return value is added to results.
+   */
+  static public void transform(java.util.Collection collection, UnaryFunction fn, java.util.Collection results) { uk.co.jezuk.mango.algorithms.Transform.execute(collection.iterator(), fn, results); }
+  static public void transform(java.util.Collection collection, int start, int end, UnaryFunction fn, java.util.Collection results) { uk.co.jezuk.mango.algorithms.Transform.execute(BoundedIterator(collection.iterator(), start, end), fn, results); }
+  static public void transform(java.util.List list, int start, int end, UnaryFunction fn, java.util.Collection results) { uk.co.jezuk.mango.algorithms.Transform.execute(BoundedIterator(list, start, end), fn, results); }
+  static public void transform(java.util.Iterator iterator, UnaryFunction fn, java.util.Collection results) { uk.co.jezuk.mango.algorithms.Transform.execute(iterator, fn, results); } 
+
   /**
    * <code>Count</code> computes the number of elements in the sequence that 
    * are equal to <code>value</code>.  <br>
@@ -99,6 +112,16 @@ public class Mango
    * that match the supplied <code>Predicate</code>.
    */
   static public java.util.Iterator PredicatedIterator(java.util.Iterator iterator, Predicate predicate) { return new uk.co.jezuk.mango.iterators.PredicatedIterator(iterator, predicate); }
+
+  /** 
+   * Provides an iterator over an array
+   */
+  static public java.util.Iterator ArrayIterator(Object[] array) { return new uk.co.jezuk.mango.iterators.ArrayIterator(array); }
+
+  /** 
+   * Provides an iterator over an array
+   */
+  static public java.util.Iterator SingletonIterator(Object object) { return new uk.co.jezuk.mango.iterators.SingletonIterator(object); }
 
   ///////////////////////////////////////////////////////
   // Unary Predicates
