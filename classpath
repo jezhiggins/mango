@@ -1,6 +1,7 @@
 #!/bin/sh
 # $Id$
 
+JAVA_HOME=/var/j2sdk1.4.0
 JAVA_LIB=~/work/java_lib
 
 CLASSPATH=./classes

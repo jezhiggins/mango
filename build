@@ -3,5 +3,4 @@
 
 . ./classpath
 
-echo $CLASSPATH
-java org.apache.tools.ant.Main %*
+java org.apache.tools.ant.Main $*
