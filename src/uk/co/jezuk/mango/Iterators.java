@@ -26,7 +26,7 @@ public class Iterators
   static public java.util.Iterator BoundedIterator(java.util.List list, int start, int end) { return new uk.co.jezuk.mango.iterators.BoundedIterator(list, start, end); }
 
   /**
-   * @deprecated see {@link FilteredIterator}   
+   * @deprecated see {@link #FilteredIterator}   
    */
   static public java.util.Iterator PredicatedIterator(java.util.Iterator iterator, Predicate predicate) { return FilteredIterator(iterator, predicate); }
 
@@ -41,7 +41,7 @@ public class Iterators
    * interested in those that begin with 'S'. What you need is
    *
    * <pre>
-Iterator iter = Mango.FilteredIterator(myStringList.iterator(), 
+Iterator iter = Iterators.FilteredIterator(myStringList.iterator(), 
                                        new {@link Predicate}() {
                                            boolean test(Object o) {
                                              String s = (String)o;
@@ -59,7 +59,9 @@ Iterator iter = Mango.FilteredIterator(myStringList.iterator(),
    * stepping over the elements
    * that match the supplied <code>Predicate</code>.
    * <p>
-   * Is it equivalent to <code>{@link FilteredIterator(iter, {@link predicates.Not}(predicate))</code>
+   * Is it equivalent to <code>FilteredIterator(iter, Not(predicate))</code>
+   * 
+   * @see #FilteredIterator
    */ 
   static public java.util.Iterator SkippingIterator(java.util.Iterator iterator, Predicate predicate) { return new uk.co.jezuk.mango.iterators.SkippingIterator(iterator, predicate); }
 
