@@ -16,6 +16,6 @@ public class Generators
    * Sequence begins at 0 if no seed value is given.
    */
   static public Generator IntegerSequence() { return new IntegerSequence(); }
-  static Generator IntegerSequence(int seed) { return new IntegerSequence(seed); }
-  static Generator IntegerSequence(Integer seed) { return new IntegerSequence(seed); }
+  static public Generator IntegerSequence(int seed) { return new IntegerSequence(seed); }
+  static public Generator IntegerSequence(Integer seed) { return new IntegerSequence(seed); }
 } // class Generators
