@@ -1,7 +1,7 @@
 package uk.co.jezuk.mango;
 
 /**
- * A Pair holds two Objects.
+ * A <code>Pair</code> holds two <code>Object</code>s.
  * @author Jez Higgins, Jez UK Ltd
  * @version $Id$
  */
