@@ -37,7 +37,7 @@
     </javadoc>
   </target>
 
-  <target name="jar">
+  <target name="jar" depends="clean, compile">
     <jar jarfile="mango.jar">
       <fileset dir="${targetdir}">
         <exclude name="**/*Test*.class"/>
