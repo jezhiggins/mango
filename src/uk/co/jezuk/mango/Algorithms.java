@@ -92,6 +92,17 @@ public class Algorithms
   static public Object findIf(java.util.Iterator iterator, Predicate test) { return uk.co.jezuk.mango.algorithms.FindIf.execute(iterator, test); } 
 
   /**
+   * Searchs the sequence traversed by the Iterator and returns the first
+   * object encountered for which the Predicate returns <code>false</code>.
+   * The iterator will have been advanced to the next object 
+   * in the sequence.
+   */
+  static public Object findIfNot(java.util.Collection collection, Predicate test) { return uk.co.jezuk.mango.algorithms.FindIfNot.execute(collection.iterator(), test); }
+  static public Object findIfNot(java.util.Collection collection, int start, int end, Predicate test) { return uk.co.jezuk.mango.algorithms.FindIfNot.execute(Iterators.BoundedIterator(collection.iterator(), start, end), test); }
+  static public Object findIfNot(java.util.List list, int start, int end, Predicate test) { return uk.co.jezuk.mango.algorithms.FindIfNot.execute(Iterators.BoundedIterator(list, start, end), test); }
+  static public Object findIfNot(java.util.Iterator iterator, Predicate test) { return uk.co.jezuk.mango.algorithms.FindIfNot.execute(iterator, test); } 
+
+  /**
    * Removes objects equal to <code>value</code> from the sequence.
    */
   static public void remove(java.util.Collection collection, Object value) { uk.co.jezuk.mango.algorithms.Remove.execute(collection.iterator(), value); }
