@@ -1,5 +1,7 @@
 package uk.co.jezuk.mango.algorithms;
 
+import uk.co.jezuk.mango.iterators.PredicatedIterator;
+import java.util.Iterator;
 /**
  * <code>CountIf</code> is similar to <code>Count</code>, but more general.
  * It computes the number of elements in the sequence which satisfy some condition.  
@@ -17,9 +19,10 @@ public class CountIf
       return 0;  
 
     int c = 0;
-    while(iterator.hasNext())
-      if(test.test(iterator.next()))
-	++c;
+    for(Iterator filter = new PredicatedIterator(iterator, test); 
+	filter.hasNext();
+	filter.next())
+      ++c;
 
     return c;
   } // execute
