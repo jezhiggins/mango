@@ -14,28 +14,24 @@ import java.util.Iterator;
  */
 public class Transform
 {
-    public static Collection execute(Iterator iterator, UnaryFunction fn, Collection results)
+  public static Collection execute(Iterator iterator, UnaryFunction fn, Collection results)
+  {
+    if(iterator == null || fn == null || results == null)
+      return results;
+
+    while(iterator.hasNext())
     {
-	if (iterator == null || fn == null)
-	    return results;
+      Object o = fn.fn(iterator.next());
+      if(o != null)
+      {
+	if(o instanceof Collection)
+          results.addAll((Collection)o);
+	else
+	  results.add(o);
+      } // if(o != null)
+    } // while ...
+    return results;
+  } // execute
 
-	while(iterator.hasNext())
-	{
-	    Object o = fn.fn(iterator.next());
-	    if (o != null)
-	    {
-		if (o instanceof Collection)
-		{
-		    results.addAll((Collection)o);
-		}
-		else
-		{
-		    results.add(o);
-		}
-	    }
-	}
-	return results;
-    } // execute
-
-    private Transform() {}
-}
+  private Transform() {}
+} // Tranform
