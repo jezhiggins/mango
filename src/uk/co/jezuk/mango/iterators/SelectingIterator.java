@@ -1,21 +1,21 @@
 package uk.co.jezuk.mango.iterators;
 
 /**
- * A <code>FilteredIterator</code> enumerates only those elements of a collection
+ * A <code>SelectingIterator</code> enumerates only those elements of a collection
  * that match the supplied <code>Predicate</code>.
  * 
  * @author Jez Higgins, jez@jezuk.co.uk
  * @version $Id$
  */
-public class FilteredIterator implements java.util.Iterator
+public class SelectingIterator implements java.util.Iterator
 {
-  public FilteredIterator(java.util.Iterator iterator, uk.co.jezuk.mango.Predicate predicate)
+  public SelectingIterator(java.util.Iterator iterator, uk.co.jezuk.mango.Predicate predicate)
   {
     iter_ = iterator;
     pred_ = predicate;
 
     findNext();
-  } // FilteredIterator
+  } // SelectingIterator
 
   public boolean hasNext()
   {
@@ -31,7 +31,7 @@ public class FilteredIterator implements java.util.Iterator
 
   public void remove()
   {
-    throw new UnsupportedOperationException("uk.co.jezuk.mango.FilteredIterator does not support the remove method");
+    throw new UnsupportedOperationException("uk.co.jezuk.mango.SelectingIterator does not support the remove method");
   } // remove
 
   private void findNext()
@@ -49,6 +49,6 @@ public class FilteredIterator implements java.util.Iterator
   private java.util.Iterator iter_;
   private uk.co.jezuk.mango.Predicate pred_;
   private Object next_;
-} // FilteredIterator
+} // SelectingIterator
 
 

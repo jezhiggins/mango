@@ -1,6 +1,6 @@
 package uk.co.jezuk.mango.algorithms;
 
-import uk.co.jezuk.mango.iterators.FilteredIterator;
+import uk.co.jezuk.mango.iterators.SelectingIterator;
 import java.util.Iterator;
 /**
  * <code>CountIf</code> is similar to <code>Count</code>, but more general.
@@ -20,7 +20,7 @@ public class CountIf
       return 0;  
 
     int c = 0;
-    for(Iterator filter = new FilteredIterator(iterator, test); 
+    for(Iterator filter = new SelectingIterator(iterator, test); 
 	filter.hasNext();
 	filter.next(), ++c);
 

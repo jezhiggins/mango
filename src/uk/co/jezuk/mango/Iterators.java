@@ -1,5 +1,7 @@
 package uk.co.jezuk.mango;
 
+import uk.co.jezuk.mango.iterators.*;
+
 /**
  * The Mango Library Iterator classes. 
  *
@@ -22,16 +24,16 @@ public class Iterators
    * <code>BoundedIterator</code> therefore allows you to pick out a sub-set without
    * using <code>list.subList()</code> or equivalent.
    */
-  static public java.util.Iterator BoundedIterator(java.util.Iterator iterator, int start, int end) { return new uk.co.jezuk.mango.iterators.BoundedIterator(iterator, start, end); }
-  static public java.util.Iterator BoundedIterator(java.util.List list, int start, int end) { return new uk.co.jezuk.mango.iterators.BoundedIterator(list, start, end); }
+  static public java.util.Iterator BoundedIterator(java.util.Iterator iterator, int start, int end) { return new BoundedIterator(iterator, start, end); }
+  static public java.util.Iterator BoundedIterator(java.util.List list, int start, int end) { return new BoundedIterator(list, start, end); }
 
   /**
-   * @deprecated see {@link #FilteredIterator}   
+   * @deprecated see {@link #SelectingIterator}   
    */
-  static public java.util.Iterator PredicatedIterator(java.util.Iterator iterator, Predicate predicate) { return FilteredIterator(iterator, predicate); }
+  static public java.util.Iterator PredicatedIterator(java.util.Iterator iterator, Predicate predicate) { return SelectingIterator(iterator, predicate); }
 
   /**
-   * A <code>FilteredIterator</code> enumerates only those elements of a collection
+   * A <code>SelectingIterator</code> enumerates only those elements of a collection
    * that match the supplied <code>Predicate</code>.
    * <p>
    * It takes a {@link Predicate} which encapsulates some test, and only 
@@ -41,7 +43,7 @@ public class Iterators
    * interested in those that begin with 'S'. What you need is
    *
    * <pre>
-Iterator iter = Iterators.FilteredIterator(myStringList.iterator(), 
+Iterator iter = Iterators.SelectingIterator(myStringList.iterator(), 
                                        new {@link Predicate}() {
                                            boolean test(Object o) {
                                              String s = (String)o;
@@ -49,21 +51,21 @@ Iterator iter = Iterators.FilteredIterator(myStringList.iterator(),
                                            }
                                        });</pre>
    * <p>
-   * A <code>FilteredIterator</code> implements the <code>java.util.Iterator</code> interface, 
+   * A <code>SelectingIterator</code> implements the <code>java.util.Iterator</code> interface, 
    * and is constructed by wrapping around an existing iterator. 
    */
-  static public java.util.Iterator FilteredIterator(java.util.Iterator iterator, Predicate predicate) { return new uk.co.jezuk.mango.iterators.FilteredIterator(iterator, predicate); }
+  static public java.util.Iterator SelectingIterator(java.util.Iterator iterator, Predicate predicate) { return new SelectingIterator(iterator, predicate); }
 
   /**
    * A <code>SkippingIterator</code> enumerates a sequence,
    * stepping over the elements
    * that match the supplied <code>Predicate</code>.
    * <p>
-   * Is it equivalent to <code>FilteredIterator(iter, Not(predicate))</code>
+   * Is it equivalent to <code>SelectingIterator(iter, Not(predicate))</code>
    * 
-   * @see #FilteredIterator
+   * @see #SelectingIterator
    */ 
-  static public java.util.Iterator SkippingIterator(java.util.Iterator iterator, Predicate predicate) { return new uk.co.jezuk.mango.iterators.SkippingIterator(iterator, predicate); }
+  static public java.util.Iterator SkippingIterator(java.util.Iterator iterator, Predicate predicate) { return new SkippingIterator(iterator, predicate); }
 
   /** 
    * Iterates over an array of objects.
@@ -71,7 +73,7 @@ Iterator iter = Iterators.FilteredIterator(myStringList.iterator(),
    * An <code>ArrayIterator</code> puts a <code>java.util.Iterator</code> face on an 
    * object array, allowing it be treated as you would a <code>java.util.Collection.</code>
    */
-  static public java.util.Iterator ArrayIterator(Object[] array) { return new uk.co.jezuk.mango.iterators.ArrayIterator(array); }
+  static public java.util.Iterator ArrayIterator(Object[] array) { return new ArrayIterator(array); }
 
   /** 
    * Iterates over a single object.
@@ -81,7 +83,7 @@ Iterator iter = Iterators.FilteredIterator(myStringList.iterator(),
    * implements the <code>java.util.Iterator</code> interface, it provides a convienent way of
    * passing a single object to an algorithm or other iterator consumer.
    */
-  static public java.util.Iterator SingletonIterator(Object object) { return new uk.co.jezuk.mango.iterators.SingletonIterator(object); }
+  static public java.util.Iterator SingletonIterator(Object object) { return new SingletonIterator(object); }
 
   /**
    * A <code>TransfromIterator</code> applies a <code>{@link UnaryFunction}</code> to 
@@ -110,7 +112,7 @@ Iterator iter = Iterators.FilteredIterator(myStringList.iterator(),
        ...
      </pre> 
    */ 
-  static public java.util.Iterator TransformIterator(java.util.Iterator iterator, UnaryFunction transform) { return new uk.co.jezuk.mango.iterators.TransformIterator(iterator, transform); }
+  static public java.util.Iterator TransformIterator(java.util.Iterator iterator, UnaryFunction transform) { return new TransformIterator(iterator, transform); }
 
   //////////////////////////////////
   private Iterators() { }

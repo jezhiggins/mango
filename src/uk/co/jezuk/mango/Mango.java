@@ -139,7 +139,7 @@ Iterator iter = Mango.PredicatedIterator(myStringList.iterator(),
    * A <code>PredicatedIterator</code> implements the <code>java.util.Iterator</code> interface, 
    * and is constructed by wrapping around an existing iterator. 
    */
-  static public java.util.Iterator PredicatedIterator(java.util.Iterator iterator, Predicate predicate) { return new uk.co.jezuk.mango.iterators.FilteredIterator(iterator, predicate); }
+  static public java.util.Iterator PredicatedIterator(java.util.Iterator iterator, Predicate predicate) { return new uk.co.jezuk.mango.iterators.SelectingIterator(iterator, predicate); }
 
   /** 
    * Iterates over an array of objects.

@@ -1,8 +1,7 @@
 package uk.co.jezuk.mango.algorithms;
 
-import uk.co.jezuk.mango.iterators.FilteredIterator;
+import uk.co.jezuk.mango.iterators.SkippingIterator;
 import java.util.Iterator;
-import uk.co.jezuk.mango.unarypredicates.Not;
 
 /**
  * <code>CountIfNot</code> is the complement of <code>CountIf</code>.
@@ -22,7 +21,7 @@ public class CountIfNot
       return 0;  
 
     int c = 0;
-    for(Iterator filter = new FilteredIterator(iterator, new Not(test)); 
+    for(Iterator filter = new SkippingIterator(iterator, test); 
 	filter.hasNext();
 	filter.next(), ++c);
 
