@@ -16,6 +16,7 @@
     <delete dir="${targetdir}"/>
     <delete dir="${javadocdir}"/>
     <delete dir="${distdir}"/>
+    <delete dir="${srctests}/results"/>
   </target>
 
   <target name="compile" depends="prepare">
@@ -55,9 +56,8 @@
     <zip zipfile="${distdir}/mango-src.zip">
       <fileset dir=".">
         <include name="build.xml"/>
-        <include name="mango/*"/>
-        <include name="${srcdir}/**"/>
-        <include name="${srctests}/**"/>
+        <include name="${srcdir}/**/*.java"/>
+        <include name="${srctests}/**/*.java"/>
       </fileset>
     </zip>
     <tar tarfile="${distdir}/mango-bin.tar">
@@ -66,9 +66,8 @@
     <tar tarfile="${distdir}/mango-src.tar">
       <tarfileset dir=".">
         <include name="build.xml"/>
-        <include name="mango/*"/>
-        <include name="${srcdir}/**"/>
-        <include name="${srctests}/**"/>
+        <include name="${srcdir}/**/*.java"/>
+        <include name="${srctests}/**/*.java"/>
       </tarfileset>
     </tar>
     <gzip src="${distdir}/mango-bin.tar" zipfile="${distdir}/mango-bin.tar.gz"/>
@@ -78,12 +77,14 @@
   </target>
 
   <target name="test" depends="compile">
+    <delete dir="${srctests}/results"/>
+    <mkdir dir="${srctests}/results"/>
     <junit>
       <classpath>
         <pathelement location="${targetdir}"/>
       </classpath>
       <formatter type="plain"/>
-      <batchtest todir=".">
+      <batchtest todir="${srctests}/results">
         <fileset dir="${targetdir}">
 	  <include name="**/*Test.class"/>
 	</fileset>
