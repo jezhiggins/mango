@@ -10,5 +10,5 @@ package uk.co.jezuk.mango;
 public interface Generator
 {
   abstract public Object fn();
-} // UnaryFunction
+} // Generator
 
