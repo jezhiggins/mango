@@ -1,6 +1,8 @@
 package uk.co.jezuk.mango;
 
 /**
+ * The algorithm ForEach applies the function <code>fn</code> to
+ * each element in the <code>iterator</code> sequence. 
  * @version $Id$
  */
 class ForEach
@@ -12,7 +14,7 @@ class ForEach
 
 	while(iterator.hasNext())
 	    fn.fn(iterator.next());
-    } // do
+    } // execute
 
     //////////////////////////////////
     private ForEach() { }
