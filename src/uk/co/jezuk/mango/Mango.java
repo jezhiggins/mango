@@ -1,7 +1,8 @@
 package uk.co.jezuk.mango;
 
 /**
- * 
+ * The Mango Library. 
+ *
  * @author Jez Higgins, jez@jezuk.co.uk
  * @version $Id$
  */
@@ -119,9 +120,15 @@ public class Mango
   static public java.util.Iterator ArrayIterator(Object[] array) { return new uk.co.jezuk.mango.iterators.ArrayIterator(array); }
 
   /** 
-   * Provides an iterator over an array
+   * Provides an iterator over a single object
    */
   static public java.util.Iterator SingletonIterator(Object object) { return new uk.co.jezuk.mango.iterators.SingletonIterator(object); }
+
+  /**
+   * A <code>TransfromIterator</code> applies a <code>UnaryFunction</code> to 
+   * each element in the sequence, returning the the function result at each step.
+   */ 
+  static public java.util.Iterator TransformIterator(java.util.Iterator iterator, UnaryFunction transform) { return new uk.co.jezuk.mango.iterators.TransformIterator(iterator, transform); }
 
   ///////////////////////////////////////////////////////
   // Unary Predicates
