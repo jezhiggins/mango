@@ -1,4 +1,4 @@
-package uk.co.jezuk.mango;
+package uk.co.jezuk.mango.binarypredicates;
 
 /**
  * <code>BinaryPredicate</code> that returns true if <code>x</code> is less that <code>y</code>.
@@ -6,7 +6,7 @@ package uk.co.jezuk.mango;
  * @author Jez Higgins, jez@jezuk.co.uk
  * @version $Id$
  */
-public class LessThan implements BinaryPredicate
+public class LessThan implements uk.co.jezuk.mango.BinaryPredicate
 {
   /**
    * @return <code>true</code> if <code>x.compareTo(y) &lt; 0</code> 

@@ -7,13 +7,13 @@ public class EqualToTest  extends TestCase
   java.util.List list;
 
   public EqualToTest(String name) { super(name); }
-  public static Test suite() { return new TestSuite(GreaterThanTest.class); }
+  public static Test suite() { return new TestSuite(EqualToTest.class); }
 
   private BinaryPredicate p_;
 
   protected void setUp() 
   {
-    p_ = new EqualTo();
+    p_ = Mango.EqualTo();
   } // setUp
 
   public void test1()

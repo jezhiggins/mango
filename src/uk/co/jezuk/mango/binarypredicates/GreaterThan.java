@@ -1,4 +1,4 @@
-package uk.co.jezuk.mango;
+package uk.co.jezuk.mango.binarypredicates;
 
 /**
  * <code>BinaryPredicate</code> that returns true if <code>x</code> is greater than <code>y</code>.
@@ -6,7 +6,7 @@ package uk.co.jezuk.mango;
  * @author Jez Higgins, jez@jezuk.co.uk
  * @version $Id$
  */
-public class GreaterThan implements BinaryPredicate
+public class GreaterThan implements uk.co.jezuk.mango.BinaryPredicate
 {
   /**
    * @return <code>true</code> if <code>x.compareTo(y) &gt; 0</code> 

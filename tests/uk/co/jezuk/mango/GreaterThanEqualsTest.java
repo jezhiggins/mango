@@ -13,7 +13,7 @@ public class GreaterThanEqualsTest  extends TestCase
 
   protected void setUp() 
   {
-    p_ = new GreaterThanEquals();
+    p_ = Mango.GreaterThanEquals();
   } // setUp
 
   public void test1()

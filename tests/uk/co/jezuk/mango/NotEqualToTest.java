@@ -7,13 +7,13 @@ public class NotEqualToTest  extends TestCase
   java.util.List list;
 
   public NotEqualToTest(String name) { super(name); }
-  public static Test suite() { return new TestSuite(GreaterThanTest.class); }
+  public static Test suite() { return new TestSuite(NotEqualToTest.class); }
 
   private BinaryPredicate p_;
 
   protected void setUp() 
   {
-    p_ = new NotEqualTo();
+    p_ = Mango.NotEqualTo();
   } // setUp
  
   public void test1()
