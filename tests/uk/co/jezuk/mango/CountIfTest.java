@@ -30,13 +30,13 @@ public class CountIfTest  extends TestCase
 
   public void test2()
   {
-    assertEquals(0, Mango.countIf(list, new BinaryPredicate.BindFirst(new EqualTo(), new String("hello"))));
-    assertEquals(0, Mango.countIf(list, new BinaryPredicate.BindFirst(new EqualTo(), null)));
-    assertEquals(1, Mango.countIf(list, new BinaryPredicate.BindFirst(new EqualTo(), new Integer(5))));
+    assertEquals(0, Mango.countIf(list, Bind.First(new EqualTo(), new String("hello"))));
+    assertEquals(0, Mango.countIf(list, Bind.First(new EqualTo(), null)));
+    assertEquals(1, Mango.countIf(list, Bind.First(new EqualTo(), new Integer(5))));
     list.add(new Integer(5));
     list.add(new Integer(5));
     list.add(new Integer(5));
     list.add(new Integer(5));
-    assertEquals(5, Mango.countIf(list, new BinaryPredicate.BindFirst(new EqualTo(), new Integer(5))));
+    assertEquals(5, Mango.countIf(list, Bind.First(new EqualTo(), new Integer(5))));
   } // 
 } // CountIfTest
