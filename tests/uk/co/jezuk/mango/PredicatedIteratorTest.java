@@ -37,4 +37,36 @@ public class PredicatedIteratorTest  extends TestCase
 
     assertEquals(5, i);
   } // test1
+
+  public void test2()
+  {
+    list = new java.util.ArrayList();
+    list.add("hawkeye pierce");
+    list.add("sacremento");
+    list.add("GOBBLE");
+    list.add("SINGLETON");
+    list.add("BILBO");
+    list.add("ERNEST");
+    list.add("DAVID");
+    list.add("BILLY");
+    list.add("SCAGGS");
+    list.add("CHARLES");
+    list.add("SIMEON");
+
+    java.util.Iterator iter = new PredicatedIterator(list.iterator(), 
+                                       new Predicate() {
+                                           public boolean test(Object o) {
+                                             String s = (String)o;
+                                             return s.charAt(0) == 'S';
+                                           }
+                                       });
+    int i = 0;
+    while(iter.hasNext())
+    {
+      ++i;
+      String s = (String)iter.next();
+      assertEquals(true, s.startsWith("S"));
+    } // while
+    assertEquals(3, i);
+  } // test2
 } // 
