@@ -11,6 +11,12 @@ import uk.co.jezuk.mango.iterators.*;
 public class Iterators
 {
   /**
+   * A <code>NullIterator</code> iterates over nothing.  That is, <code>hasNext</code>
+   * always returns <code>false</code>.
+   */
+  static public java.util.Iterator NullIterator() { return new uk.co.jezuk.mango.iterators.NullIterator(); }
+  
+  /**
    * A <code>BoundedIterator</code> enumerates of a subset of a collection, in the
    * range [<code>start</code>, <code>end</code>).  
    * <p>
