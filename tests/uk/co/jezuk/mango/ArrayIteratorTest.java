@@ -9,7 +9,7 @@ public class ArrayIteratorTest  extends TestCase
 
   public void test1()
   {
-    java.util.Iterator i = Mango.ArrayIterator(new String[]{ "one", "two", "three" } );
+    java.util.Iterator i = Iterators.ArrayIterator(new String[]{ "one", "two", "three" } );
     assertEquals(true, i.hasNext());
     assertEquals("one", i.next());
     assertEquals(true, i.hasNext());
@@ -21,7 +21,7 @@ public class ArrayIteratorTest  extends TestCase
 
   public void test2()
   {
-    java.util.Iterator i = Mango.ArrayIterator(null);
+    java.util.Iterator i = Iterators.ArrayIterator(null);
     assertEquals(false, i.hasNext());
   } // test2
 } // ArrayIteratorTest

@@ -1,6 +1,5 @@
 package uk.co.jezuk.mango;
 
-import uk.co.jezuk.mango.algorithms.Transform;
 import junit.framework.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class TransformTest extends TestCase
     in.add(new Integer(1));
     in.add(new Integer(2));
     in.add(new Integer(3));
-    List out = (List)Transform.execute(in.iterator(), new Square(), new ArrayList());
+    List out = (List)Algorithms.transform(in.iterator(), new Square(), new ArrayList());
     assertEquals(3, out.size());
     assertEquals(1, ((Integer)out.get(0)).intValue());
     assertEquals(4, ((Integer)out.get(1)).intValue());
@@ -36,7 +35,7 @@ public class TransformTest extends TestCase
     in.add("A");
     in.add("B");
     in.add("C");
-    List out = (List)Transform.execute(in.iterator(), new Duplicator(), new ArrayList());
+    List out = (List)Algorithms.transform(in.iterator(), new Duplicator(), new ArrayList());
     assertEquals(6, out.size());
     assertEquals("A", out.get(0));
     assertEquals("A", out.get(1));

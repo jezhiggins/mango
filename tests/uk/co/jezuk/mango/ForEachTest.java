@@ -27,6 +27,6 @@ public class ForEachTest  extends TestCase
 
   public void test1()
   {
-    Algorithm.forEach(list, new Print());
+    Algorithms.forEach(list, new Print());
   } // 
 } // ForEachTest

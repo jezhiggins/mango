@@ -9,7 +9,7 @@ public class SingletonIteratorTest  extends TestCase
 
   public void test1()
   {
-    java.util.Iterator i = Mango.SingletonIterator(new String("one"));
+    java.util.Iterator i = Iterators.SingletonIterator(new String("one"));
     assertEquals(true, i.hasNext());
     assertEquals("one", i.next());
     assertEquals(false, i.hasNext());
@@ -17,7 +17,7 @@ public class SingletonIteratorTest  extends TestCase
 
   public void test2()
   {
-      java.util.Iterator i = Mango.SingletonIterator(null);
+      java.util.Iterator i = Iterators.SingletonIterator(null);
     assertEquals(false, i.hasNext());
   } // test2
 } // SingletonIteratorTest

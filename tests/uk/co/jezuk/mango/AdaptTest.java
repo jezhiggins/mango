@@ -19,14 +19,14 @@ public class AdaptTest  extends TestCase
   public void test1()
   {
     System.out.println("test1");
-    Algorithm.forEach(list, Adapt.Method(System.out, "println"));
+    Algorithms.forEach(list, Adapt.Method(System.out, "println"));
   } // 
 
   public void test2()
   {
     try {
       // should throw
-      Algorithm.forEach(list, Adapt.Method(System.out, "charles"));
+      Algorithms.forEach(list, Adapt.Method(System.out, "charles"));
       fail();
     } // try
     catch(RuntimeException e) {
@@ -37,7 +37,7 @@ public class AdaptTest  extends TestCase
   {
     try {
       // should throw
-      Algorithm.forEach(list, Adapt.Method(System.out, "close"));
+      Algorithms.forEach(list, Adapt.Method(System.out, "close"));
       fail();
     } // try
     catch(RuntimeException e) {
@@ -48,7 +48,7 @@ public class AdaptTest  extends TestCase
   {
     try {
       // should throw
-      Algorithm.forEach(list, Adapt.Method(System.in, "skip"));
+      Algorithms.forEach(list, Adapt.Method(System.in, "skip"));
       fail();
     } // try
     catch(RuntimeException e) {
@@ -58,13 +58,13 @@ public class AdaptTest  extends TestCase
   public void test5()
   {
     System.out.println("test5");
-    Algorithm.forEach(list, Adapt.Method(this, "staticMethod"));
+    Algorithms.forEach(list, Adapt.Method(this, "staticMethod"));
   } // test5
 
   public void test6()
   {
     System.out.println("test6");
-    Algorithm.forEach(list, Adapt.Method(this.getClass(), "staticMethod"));
+    Algorithms.forEach(list, Adapt.Method(this.getClass(), "staticMethod"));
   } // test6
 
   class Something
@@ -81,7 +81,7 @@ public class AdaptTest  extends TestCase
     for(int i = 0; i < 10000; ++i)
 	l.add(new Something(i));
 
-    Algorithm.forEach(l, Adapt.ArgumentMethod("print"));
+    Algorithms.forEach(l, Adapt.ArgumentMethod("print"));
   } // test7
 
   public void test8()

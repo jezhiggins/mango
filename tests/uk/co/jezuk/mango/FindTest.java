@@ -18,10 +18,10 @@ public class FindTest  extends TestCase
 
   public void test1()
   {
-    assertEquals(list.get(2), Algorithm.find(list, new Integer(2)));
-    assertEquals(list.get(4), Algorithm.find(list, new Integer(4)));
-    assertEquals(list.get(7), Algorithm.find(list, new Integer(7)));
-    assertEquals(null, Algorithm.find(list, new Integer(99)));
-    assertEquals(null, Algorithm.find(list, new String("charles dickens")));
+    assertEquals(list.get(2), Algorithms.find(list, new Integer(2)));
+    assertEquals(list.get(4), Algorithms.find(list, new Integer(4)));
+    assertEquals(list.get(7), Algorithms.find(list, new Integer(7)));
+    assertEquals(null, Algorithms.find(list, new Integer(99)));
+    assertEquals(null, Algorithms.find(list, new String("charles dickens")));
   } // 
 } // FindTest

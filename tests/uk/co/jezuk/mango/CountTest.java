@@ -18,13 +18,13 @@ public class CountTest  extends TestCase
 
   public void test1()
   {
-    assertEquals(0, Algorithm.count(list, new String("hello")));
-    assertEquals(0, Algorithm.count(list, null));
-    assertEquals(1, Algorithm.count(list, new Integer(5)));
+    assertEquals(0, Algorithms.count(list, new String("hello")));
+    assertEquals(0, Algorithms.count(list, null));
+    assertEquals(1, Algorithms.count(list, new Integer(5)));
     list.add(new Integer(5));
     list.add(new Integer(5));
     list.add(new Integer(5));
     list.add(new Integer(5));
-    assertEquals(5, Algorithm.count(list, new Integer(5)));
+    assertEquals(5, Algorithms.count(list, new Integer(5)));
   } // 
 } // CountTest

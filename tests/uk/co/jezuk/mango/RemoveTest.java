@@ -18,17 +18,17 @@ public class RemoveTest  extends TestCase
 
   public void test1()
   {
-    Algorithm.remove(list, new Integer(7));
+    Algorithms.remove(list, new Integer(7));
 
     assertEquals(9, list.size());
-    assertEquals(null, Algorithm.find(list, new Integer(7)));
+    assertEquals(null, Algorithms.find(list, new Integer(7)));
   } // test1
 
   public void test2()
   {
-    Algorithm.remove(list, 1, 5, new Integer(7));
+    Algorithms.remove(list, 1, 5, new Integer(7));
 
     assertEquals(10, list.size());
-    assertEquals(list.get(7), Algorithm.find(list, new Integer(7)));
+    assertEquals(list.get(7), Algorithms.find(list, new Integer(7)));
   } // test2
 } // FindTest

@@ -27,7 +27,7 @@ public class TransformIteratorTest  extends TestCase
   
   public void test1()
   {
-    java.util.Iterator iter = Mango.TransformIterator(list.iterator(), new DoubleUp());
+    java.util.Iterator iter = Iterators.TransformIterator(list.iterator(), new DoubleUp());
 
     int i = 0;
     while(iter.hasNext())
@@ -65,7 +65,7 @@ public class TransformIteratorTest  extends TestCase
     list.add(new NameObject("SIMEON"));
 
     // find the object called CORGAN
-    String found = (String)Algorithm.find(Mango.TransformIterator(list.iterator(), 
+    String found = (String)Algorithms.find(Iterators.TransformIterator(list.iterator(), 
 					      Adapt.ArgumentMethod("getName")),
 					      new String("CORGAN"));
     assertEquals(found, "CORGAN");
