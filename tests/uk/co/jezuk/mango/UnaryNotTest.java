@@ -9,7 +9,7 @@ public class UnaryNotTest  extends TestCase
 
   public void test1()
   {
-    Predicate t = Mango.Not(Mango.True());
+    Predicate t = Predicates.Not(Predicates.True());
     assertEquals(false, t.test(new Integer(7)));
     assertEquals(false, t.test(t));
     assertEquals(false, t.test(new String("brainfart")));
@@ -17,7 +17,7 @@ public class UnaryNotTest  extends TestCase
 
   public void test2()
   {
-    Predicate t = Mango.Not(Mango.False());
+    Predicate t = Predicates.Not(Predicates.False());
     assertEquals(true, t.test(new Integer(7)));
     assertEquals(true, t.test(t));
     assertEquals(true, t.test(new String("brainfart")));

@@ -9,25 +9,25 @@ public class UnaryAndTest  extends TestCase
 
   public void test1()
   {
-    Predicate t = Mango.And(Mango.True(), Mango.True());
+    Predicate t = Predicates.And(Predicates.True(), Predicates.True());
     assertEquals(true, t.test(null));
   } // test1
 
   public void test2()
   {
-    Predicate t = Mango.And(Mango.False(), Mango.True());
+    Predicate t = Predicates.And(Predicates.False(), Predicates.True());
     assertEquals(false, t.test(null));
   } // test2
 
   public void test3()
   {
-    Predicate t = Mango.And(Mango.True(), Mango.False());
+    Predicate t = Predicates.And(Predicates.True(), Predicates.False());
     assertEquals(false, t.test(null));
   } // test3
 
   public void test4()
   {
-    Predicate t = Mango.And(Mango.False(), Mango.False());
+    Predicate t = Predicates.And(Predicates.False(), Predicates.False());
     assertEquals(false, t.test(null));
   } // test4
 } // UnaryAndTest

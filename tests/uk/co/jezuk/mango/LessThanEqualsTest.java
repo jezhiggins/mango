@@ -13,7 +13,7 @@ public class LessThanEqualsTest  extends TestCase
 
   protected void setUp() 
   {
-    p_ = Mango.LessThanEquals();
+    p_ = Predicates.LessThanEquals();
   } // setUp
 
   public void test1()

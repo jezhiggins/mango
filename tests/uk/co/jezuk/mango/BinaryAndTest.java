@@ -12,25 +12,25 @@ public class BinaryAndTest  extends TestCase
 
   public void test1()
   {
-    BinaryPredicate o = Mango.And(new t(), new t());
+    BinaryPredicate o = Predicates.And(new t(), new t());
     assertEquals(true, o.test(null, null));
   } // test1
 
   public void test2()
   {
-    BinaryPredicate o = Mango.And(new f(), new t());
+    BinaryPredicate o = Predicates.And(new f(), new t());
     assertEquals(false, o.test(null, null));
   } // test2
 
   public void test3()
   {
-    BinaryPredicate o = Mango.And(new t(), new f());
+    BinaryPredicate o = Predicates.And(new t(), new f());
     assertEquals(false, o.test(null, null));
   } // test3
 
   public void test4()
   {
-    BinaryPredicate o = Mango.And(new f(), new f());
+    BinaryPredicate o = Predicates.And(new f(), new f());
     assertEquals(false, o.test(null, null));
   } // test4
 } // BinaryAndTest

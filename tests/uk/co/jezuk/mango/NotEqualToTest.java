@@ -13,7 +13,7 @@ public class NotEqualToTest  extends TestCase
 
   protected void setUp() 
   {
-    p_ = Mango.NotEqualTo();
+    p_ = Predicates.NotEqualTo();
   } // setUp
  
   public void test1()

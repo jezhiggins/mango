@@ -9,7 +9,7 @@ public class BinaryNotTest  extends TestCase
 
   public void test1()
   {
-    BinaryPredicate t = Mango.Not(Mango.EqualTo());
+    BinaryPredicate t = Predicates.Not(Predicates.EqualTo());
     assertEquals(false, t.test(new Integer(7), new Integer(7)));
     assertEquals(false, t.test(t, t));
     assertEquals(false, t.test(new String("brainfart"), new String("brainfart")));
@@ -17,7 +17,7 @@ public class BinaryNotTest  extends TestCase
 
   public void test2()
   {
-    BinaryPredicate t = Mango.Not(Mango.EqualTo());
+    BinaryPredicate t = Predicates.Not(Predicates.EqualTo());
     assertEquals(true, t.test(t, new Integer(7)));
     assertEquals(true, t.test(t, null));
     assertEquals(true, t.test(new String("brainfart"), new String("brainfart and chips")));

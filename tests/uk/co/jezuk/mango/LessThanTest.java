@@ -13,7 +13,7 @@ public class LessThanTest  extends TestCase
 
   protected void setUp() 
   {
-    p_ = Mango.LessThan();
+    p_ = Predicates.LessThan();
   } // setUp
 
   public void test1()

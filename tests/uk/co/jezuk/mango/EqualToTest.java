@@ -13,7 +13,7 @@ public class EqualToTest  extends TestCase
 
   protected void setUp() 
   {
-    p_ = Mango.EqualTo();
+    p_ = Predicates.EqualTo();
   } // setUp
 
   public void test1()

@@ -9,7 +9,7 @@ public class FalseTest  extends TestCase
 
   public void test1()
   {
-    Predicate t = Mango.False();
+    Predicate t = Predicates.False();
     assertEquals(false, t.test(new Integer(7)));
     assertEquals(false, t.test(t));
     assertEquals(false, t.test(new String("brainfart")));
