@@ -28,7 +28,7 @@
   </target>
 
   <target name="javadoc" depends="clean, prepare">
-    <javadoc packagenames="uk.co.jezuk.mango.*"
+    <javadoc packagenames="uk.co.jezuk.mango"
            sourcepath="${srcdir}"
            destdir="${javadocdir}"
            author="true"
