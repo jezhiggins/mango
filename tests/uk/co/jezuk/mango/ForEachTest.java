@@ -18,9 +18,10 @@ public class ForEachTest  extends TestCase
 
   private class Print implements UnaryFunction 
   {
-    public void fn(Object o)
+    public Object fn(Object o)
     {
       System.out.println(o.toString());
+      return null;
     } 
   } // Print
 
