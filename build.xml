@@ -36,7 +36,7 @@
            use="true"
 	   >
       <doctitle><![CDATA[<h2>The Mango Library</h2>]]></doctitle>
-      <bottom>Copyright &#169; 2002 JezUK Ltd.</bottom>
+      <bottom>Copyright &#169; 2002-2003 JezUK Ltd.</bottom>
     </javadoc>
   </target>
 
@@ -73,12 +73,15 @@
     </tar>
     <gzip src="${distdir}/mango-bin.tar" zipfile="${distdir}/mango-bin.tar.gz"/>
     <gzip src="${distdir}/mango-src.tar" zipfile="${distdir}/mango-src.tar.gz"/>
-    <delete file="mango-bin.tar"/>
-    <delete file="mango-src.tar"/>
+    <delete file="${distdir}/mango-bin.tar"/>
+    <delete file="${distdir}/mango-src.tar"/>
   </target>
 
   <target name="test" depends="compile">
-    <junit printsummary="yes">
+    <junit>
+      <classpath>
+        <pathelement location="${targetdir}"/>
+      </classpath>
       <formatter type="plain"/>
       <batchtest todir=".">
         <fileset dir="${targetdir}">

@@ -27,6 +27,6 @@ public class ForEachTest  extends TestCase
 
   public void test1()
   {
-    Mango.forEach(list, new Print());
+    Algorithm.forEach(list, new Print());
   } // 
 } // ForEachTest

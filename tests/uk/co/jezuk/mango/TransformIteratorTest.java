@@ -65,9 +65,11 @@ public class TransformIteratorTest  extends TestCase
     list.add(new NameObject("SIMEON"));
 
     // find the object called CORGAN
-    NameObject found = (NameObject)Mango.find(Mango.TransformIterator(list.iterator(), 
-								      Adapt.ArgumentMethod("GetName")),
-					      "CORGAN");
-    assertEquals(found, theOneIWant);
+    String found = (String)Algorithm.find(Mango.TransformIterator(list.iterator(), 
+					      Adapt.ArgumentMethod("getName")),
+					      new String("CORGAN"));
+    assertEquals(found, "CORGAN");
   } // test2
 } // 
+
+

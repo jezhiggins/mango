@@ -37,11 +37,11 @@ public class BinaryFunctionTest  extends TestCase
 
   public void test1()
   {
-    Mango.forEach(list, Bind.First(new Print2ndTo1st(), System.out));
+    Algorithm.forEach(list, Bind.First(new Print2ndTo1st(), System.out));
   } // 
 
   public void test2()
   {
-    Mango.forEach(list, Bind.Second(new Print1stTo2nd(), System.out));
+    Algorithm.forEach(list, Bind.Second(new Print1stTo2nd(), System.out));
   } // 
 } // BinaryFunctionTest
