@@ -84,6 +84,39 @@ public class AdaptTest  extends TestCase
     Mango.forEach(l, Adapt.ArgumentMethod("print"));
   } // test7
 
+  public void test8()
+  {
+    UnaryFunction fn = Adapt.Compose(new AppendX(), new AppendX());
+    assertEquals("helloXX", fn.fn("hello"));
+  } // test8
+
+  public void test9()
+  {
+    BinaryFunction fn = Adapt.Compose(new Concat(), new AppendX(), new AppendX());
+    assertEquals("helloXworldX", fn.fn("hello", "world"));
+  } // test9
+		
+  static public class Concat implements BinaryFunction
+  {
+    public Object fn(Object x, Object y)
+    {
+      String s1 = (String)x;
+      String s2 = (String)y;
+      return s1+s2;
+    } // fn
+  } // Concat
+  
+
+  static public class AppendX implements UnaryFunction
+  {
+    public Object fn(Object x)
+    {
+      String s = (String)x;
+      return s+'X';
+    } 
+  } // AppendX
+    
+
   static public void staticMethod(Object o)
   {
     System.out.println(o);
