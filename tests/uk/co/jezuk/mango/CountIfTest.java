@@ -18,18 +18,6 @@ public class CountIfTest  extends TestCase
 
   public void test1()
   {
-    assertEquals(0, Mango.countIf(list, new EqualTo(new String("hello"))));
-    assertEquals(0, Mango.countIf(list, new EqualTo(null)));
-    assertEquals(1, Mango.countIf(list, new EqualTo(new Integer(5))));
-    list.add(new Integer(5));
-    list.add(new Integer(5));
-    list.add(new Integer(5));
-    list.add(new Integer(5));
-    assertEquals(5, Mango.countIf(list, new EqualTo(new Integer(5))));
-  } // 
-
-  public void test2()
-  {
     assertEquals(0, Mango.countIf(list, Bind.First(new EqualTo(), new String("hello"))));
     assertEquals(0, Mango.countIf(list, Bind.First(new EqualTo(), null)));
     assertEquals(1, Mango.countIf(list, Bind.First(new EqualTo(), new Integer(5))));
@@ -38,5 +26,17 @@ public class CountIfTest  extends TestCase
     list.add(new Integer(5));
     list.add(new Integer(5));
     assertEquals(5, Mango.countIf(list, Bind.First(new EqualTo(), new Integer(5))));
+  } // 
+
+  public void test2()
+  {
+    assertEquals(10, Mango.countIf(list, Bind.First(new NotEqualTo(), new String("hello"))));
+    assertEquals(10, Mango.countIf(list, Bind.First(new NotEqualTo(), null)));
+    assertEquals(9, Mango.countIf(list, Bind.First(new NotEqualTo(), new Integer(5))));
+    list.add(new Integer(5));
+    list.add(new Integer(5));
+    list.add(new Integer(5));
+    list.add(new Integer(5));
+    assertEquals(9, Mango.countIf(list, Bind.First(new NotEqualTo(), new Integer(5))));
   } // 
 } // CountIfTest
