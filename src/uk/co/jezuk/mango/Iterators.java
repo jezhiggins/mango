@@ -54,6 +54,15 @@ Iterator iter = Mango.FilteredIterator(myStringList.iterator(),
    */
   static public java.util.Iterator FilteredIterator(java.util.Iterator iterator, Predicate predicate) { return new uk.co.jezuk.mango.iterators.FilteredIterator(iterator, predicate); }
 
+  /**
+   * A <code>SkippingIterator</code> enumerates a sequence,
+   * stepping over the elements
+   * that match the supplied <code>Predicate</code>.
+   * <p>
+   * Is it equivalent to <code>{@link FilteredIterator(iter, {@link predicates.Not}(predicate))</code>
+   */ 
+  static public java.util.Iterator SkippingIterator(java.util.Iterator iterator, Predicate predicate) { return new uk.co.jezuk.mango.iterators.SkippingIterator(iterator, predicate); }
+
   /** 
    * Iterates over an array of objects.
    * <p>
