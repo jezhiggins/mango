@@ -1,7 +1,7 @@
 package uk.co.jezuk.mango;
 
 /**
- * Function and Predicate adaptors.
+ * Function and Predicate binding adaptors.
  * @author Jez Higgins, jez@jezuk.co.uk
  * @version $Id$
  */
@@ -70,5 +70,8 @@ public class Bind
 	public boolean test(Object arg) { return test_.test(arg, c_); }
       };
   } // Second
+
+  //////////////////////////////////////////
+  private Bind() { }
 } // Bind
 
