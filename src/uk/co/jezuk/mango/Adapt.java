@@ -11,6 +11,42 @@ import java.lang.reflect.Method;
 public class Adapt
 {
   /**
+   * Compose is a unary function adaptor.  If <code>f</code> and <code>g</code>
+   * are <code>UnaryFunctions</code>, the <code>Compose</code> creates a new
+   * function <code>h</code>, where <code>h(x)</code> is equal to <code>f(g(x))</code>.
+   */
+  static public UnaryFunction Compose(UnaryFunction f, UnaryFunction g)
+  {
+    final UnaryFunction ff = f;
+    final UnaryFunction gg = g;
+    return new UnaryFunction() {
+	public Object fn(Object x)
+	{
+	  return ff.fn(gg.fn(x));
+	} // fn
+      };
+  } // Compose
+
+  /**
+   * Compose is a function adaptor.  If <code>f</code> is a <code>BinaryFunction</code>
+   * and <code>g1</code> and <code>g2</code> are <code>UnaryFunctions</code>, then Compose
+   * returns a new <code>BinaryFunction</code> <code>h</code> such that <code>h(x, y)</code>
+   * is <code>f(g1(x), g2(y))</code>
+   */
+  static public BinaryFunction Compose(BinaryFunction f, UnaryFunction g1, UnaryFunction g2)
+  {
+    final BinaryFunction ff = f;
+    final UnaryFunction gg1 = g1;
+    final UnaryFunction gg2 = g2;
+    return new BinaryFunction() {
+	public Object fn(Object x, Object y)
+	{
+	  return ff.fn(gg1.fn(x), gg2.fn(y));
+	} // fn
+      };
+  } // Compose
+
+  /**
    * Adapts member functions as <code>UnaryFunction</code> objects, allowing them
    * to be passed to algorithms.
    * <br>
