@@ -68,7 +68,7 @@ public class TransformIteratorTest  extends TestCase
     String found = (String)Algorithms.find(Iterators.TransformIterator(list.iterator(), 
 					      Adapt.ArgumentMethod("getName")),
 					      new String("CORGAN"));
-    assertEquals(found, "CORGAN");
+    assertEquals("CORGAN", found);
   } // test2
 } // 
 
