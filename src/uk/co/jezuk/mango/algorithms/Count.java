@@ -1,4 +1,4 @@
-package uk.co.jezuk.mango;
+package uk.co.jezuk.mango.algorithms;
 
 /**
  * <code>Count</code> computes the number of elements in the sequence that 
@@ -9,9 +9,9 @@ package uk.co.jezuk.mango;
  * @see CountIf
  * @version $Id$
  */
-class Count
+public class Count
 {
-  static int execute(java.util.Iterator iterator, Object value)
+  static public int execute(java.util.Iterator iterator, Object value)
   {
     if(iterator == null)
       return 0;  

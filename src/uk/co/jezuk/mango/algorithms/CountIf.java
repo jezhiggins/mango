@@ -1,4 +1,4 @@
-package uk.co.jezuk.mango;
+package uk.co.jezuk.mango.algorithms;
 
 /**
  * <code>CountIf</code> is similar to <code>Count</code>, but more general.
@@ -9,9 +9,9 @@ package uk.co.jezuk.mango;
  * @see Count
  * @version $Id$
  */
-class CountIf
+public class CountIf
 {
-  static int execute(java.util.Iterator iterator, Predicate test)
+  static public int execute(java.util.Iterator iterator, uk.co.jezuk.mango.Predicate test)
   {
     if((iterator == null) || (test == null))
       return 0;  

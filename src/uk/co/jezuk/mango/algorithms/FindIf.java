@@ -1,4 +1,4 @@
-package uk.co.jezuk.mango;
+package uk.co.jezuk.mango.algorithms;
 
 /**
  * Searchs the sequence traversed by the Iterator and returns the first
@@ -9,9 +9,9 @@ package uk.co.jezuk.mango;
  * @see Find
  * @version $Id$
  */
-class FindIf
+public class FindIf
 {
-  static Object execute(java.util.Iterator iterator, Predicate test)
+  static public Object execute(java.util.Iterator iterator, uk.co.jezuk.mango.Predicate test)
   {
     if((iterator == null) || (test == null))
       return null;  
@@ -28,3 +28,9 @@ class FindIf
 
   private FindIf() { }
 } // Find
+
+
+
+
+
+

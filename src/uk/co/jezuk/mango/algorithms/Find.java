@@ -1,4 +1,4 @@
-package uk.co.jezuk.mango;
+package uk.co.jezuk.mango.algorithms;
 
 /**
  * Searchs the sequence travesed by the Iterator for the given value.
@@ -10,9 +10,9 @@ package uk.co.jezuk.mango;
  * @see FindIf
  * @version $Id$
  */
-class Find
+public class Find
 {
-  static Object execute(java.util.Iterator iterator, Object value)
+  static public Object execute(java.util.Iterator iterator, Object value)
   {
     if((iterator == null) || (value == null))
       return null;  

@@ -61,7 +61,7 @@ public class Adapt
   static private UnaryFunction wrapMethod(final Class klass, final Object obj, String methodName)
   {
     Method[] methods = klass.getMethods();
-    final Method m = (Method)FindIf.execute(java.util.Arrays.asList(methods).iterator(), new UnaryMethodNamed(methodName, 1));
+    final Method m = (Method)Mango.findIf(java.util.Arrays.asList(methods).iterator(), new UnaryMethodNamed(methodName, 1));
     if(m == null)
       throw new RuntimeException(new NoSuchMethodException());
 
@@ -114,7 +114,7 @@ public class Adapt
 	{
 	  lastClass_ = arg.getClass();
 	  Method[] methods = lastClass_.getMethods();
-	  method_ = (Method)FindIf.execute(java.util.Arrays.asList(methods).iterator(), new UnaryMethodNamed(methodName, 0));
+	  method_ = (Method)Mango.findIf(java.util.Arrays.asList(methods).iterator(), new UnaryMethodNamed(methodName, 0));
 	  if(method_ == null)
 	    throw new RuntimeException(new NoSuchMethodException());
 	} // if ...
