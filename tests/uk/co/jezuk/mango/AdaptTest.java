@@ -48,7 +48,7 @@ public class AdaptTest  extends TestCase
   {
     try {
       // should throw
-      Algorithms.forEach(list, Adapt.Method(System.in, "skip"));
+      Algorithms.forEach(list, Adapt.Method(System.in, "bongo"));
       fail();
     } // try
     catch(RuntimeException e) {
