@@ -1,5 +1,9 @@
 package uk.co.jezuk.mango.algorithms;
 
+import uk.co.jezuk.mango.iterators.PredicatedIterator;
+import java.util.Iterator;
+
+
 /**
  * Searchs the sequence traversed by the Iterator and returns the first
  * object encountered for which the Predicate returns <code>true</code>.
@@ -16,14 +20,8 @@ public class FindIf
     if((iterator == null) || (test == null))
       return null;  
 
-    while(iterator.hasNext())
-    {
-      Object obj = iterator.next();
-      if(test.test(obj))
-	return obj;
-    } // while ...
-
-    return null;
+    Iterator filter = new PredicatedIterator(iterator, test);
+    return filter.hasNext() ? filter.next() : null;
   } // execute
 
   private FindIf() { }
