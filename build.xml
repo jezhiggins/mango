@@ -25,8 +25,8 @@
   </target>
 
   <target name="javadoc" depends="prepare">
-    <javadoc packagenames="com.versim.*"
-           sourcepath="${srcdir}"
+    <javadoc packagenames="uk.co.jezuk.mango.*"
+           sourcepath=".\${srcdir}"
            destdir="${javadocdir}"
            author="true"
            version="true"
@@ -46,7 +46,7 @@
   </target>
 
   <target name="test" depends="compile">
-    <junit printsummary="no">
+    <junit printsummary="yes">
       <formatter type="plain"/>
       <batchtest todir=".">
         <fileset dir="${targetdir}">
