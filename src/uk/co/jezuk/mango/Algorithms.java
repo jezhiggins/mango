@@ -55,6 +55,18 @@ public class Algorithms
   static public int countIf(java.util.Iterator iterator, Predicate test) { return uk.co.jezuk.mango.algorithms.CountIf.execute(iterator, test); } 
   
   /**
+   * <code>CountIfNot</code> is the complement of <code>CountIf</code>.
+   * It counts the number of elements in the sequence which fail some condition.  
+   * The condition is a described in the user-supplied <code>test</code> object, and 
+   * <code>CountIfNot</code> computes the number of objects such that <code>test.test(o)</code>
+   * is <code>false</code>.
+   */ 
+  static public int countIfNot(java.util.Collection collection, Predicate test) { return uk.co.jezuk.mango.algorithms.CountIfNot.execute(collection.iterator(), test); }
+  static public int countIfNot(java.util.Collection collection, int start, int end, Predicate test) { return uk.co.jezuk.mango.algorithms.CountIfNot.execute(Iterators.BoundedIterator(collection.iterator(), start, end), test); }
+  static public int countIfNot(java.util.List list, int start, int end, Predicate test) { return uk.co.jezuk.mango.algorithms.CountIfNot.execute(Iterators.BoundedIterator(list, start, end), test); }
+  static public int countIfNot(java.util.Iterator iterator, Predicate test) { return uk.co.jezuk.mango.algorithms.CountIfNot.execute(iterator, test); } 
+  
+  /**
    * Searchs the sequence travesed by the Iterator for the given value.
    * Returns the <code>Object</code>, or <code>null</code> if the value
    * is not found.  The iterator will have been advanced to the next object 
