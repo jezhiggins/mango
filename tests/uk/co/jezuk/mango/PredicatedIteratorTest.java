@@ -16,17 +16,25 @@ public class PredicatedIteratorTest  extends TestCase
       list.add(new Integer(i));
   } // setUp
 
-    class LessThanFive implements Predicate
+  class LessThanFive implements Predicate
+  {
+    public boolean test(Object obj)
     {
-	public boolean test(Object obj)
-	{
-	    Integer i = (Integer)obj;
-	    return i.asInt();
-	} // test
-    }
-
+      Integer i = (Integer)obj;
+      return i.intValue() < 5;
+    } // test
+  }
+  
   public void test1()
   {
-    assertEquals(Mango.count(new PredicatedIterator(list.iterator(), new LessThanFive())));
+    java.util.Iterator iter = new PredicatedIterator(list.iterator(), new LessThanFive());
+    int i = 0;
+    while(iter.hasNext())
+    {
+      ++i;
+      iter.next();
+    } // while ...
+
+    assertEquals(5, i);
   } // test1
 } // 
