@@ -47,7 +47,7 @@ public class Adapt
     } // for 
 
     throw new RuntimeException(new NoSuchMethodException());
-  } // 
+  } // Method 
 
   //////////////////////////////////////////
   private Adapt() { }
