@@ -15,7 +15,7 @@ public class Adapt
    * to be passed to algorithms.
    * <br>
    * e.g. to print all the elements in a list<br>
-   * <code>Mango.forEach(list, Bind.Method(System.out, "println"));</code><br>
+   * <code>Mango.forEach(list, Adapt.Method(System.out, "println"));</code><br>
    * is equivalent to <br>
    * <code>for(int i = 0; i < list.size(); ++i)</code><br>
    * <code>  System.out.println(list.get(i));</code>
@@ -37,7 +37,7 @@ public class Adapt
    * RuntimeException.  If multiple methods have the correct name, and take a single
    * parameter one of them will be called, but you can't determine which.
    */
-   static public UnaryFunction Method(final Class klass, String methodName)
+  static public UnaryFunction Method(final Class klass, String methodName)
   {
     return wrapMethod(klass, null, methodName);
   } // Method

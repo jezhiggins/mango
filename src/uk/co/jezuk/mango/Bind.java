@@ -9,7 +9,7 @@ public class Bind
 {
   /**
    * Adapts a <code>BinaryFunction</code> into a <code>UnaryFunction</code>.
-   * If <code>f</code> an object implementing <code>BinaryFunction</code>, then
+   * If <code>f</code> is an object implementing <code>BinaryFunction</code>, then
    * <code>Bind.First(f, C).fn(arg)</code> returns <code>f(C, arg)</code>.<p>
    * Intuitively, you can think of this as "binding" the first argument of a 
    * <code>BinaryFunction</code> to a constant, thus giving a <code>UnaryFunction</code>.
@@ -41,7 +41,7 @@ public class Bind
 
   /**
    * Adapts a <code>BinaryFunction</code> into a <code>UnaryFunction</code>.
-   * If <code>f</code> an object implementing <code>BinaryFunction</code>, then
+   * If <code>f</code> is an object implementing <code>BinaryFunction</code>, then
    * <code>Bind.Second(f, C).fn(arg)</code> returns <code>f(arg, C)</code>.<p>
    * Intuitively, you can think of this as "binding" the second argument of a 
    * <code>BinaryFunction</code> to a constant, thus giving a <code>UnaryFunction</code>.
