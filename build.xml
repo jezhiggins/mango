@@ -1,0 +1,67 @@
+<project name="mango" default="compile" basedir=".">
+
+  <property name="targetdir"    value="classes"/>
+  <property name="srcdir"       value="src"/>
+  <property name="srctests"     value="tests"/>
+  <property name="javadocdir"	value="javadoc"/>
+
+  <target name="prepare">
+    <mkdir dir="${targetdir}"/>
+    <mkdir dir="${javadocdir}"/>
+  </target>
+
+  <target name="clean">
+    <delete dir="${targetdir}"/>
+    <delete dir="${javadocdir}"/>
+  </target>
+
+  <target name="compile" depends="prepare">
+    <javac srcdir="${srcdir};${srctests}" 
+           destdir="${targetdir}" 
+           classpath="${targetdir}"
+           debug="on" 
+           optimize="off" 
+           deprecation="on"/>
+  </target>
+
+  <target name="javadoc" depends="prepare">
+    <javadoc packagenames="com.versim.*"
+           sourcepath="${srcdir}"
+           destdir="${javadocdir}"
+           author="true"
+           version="true"
+           use="true"
+	   Public="true">
+      <doctitle><![CDATA[<h2>The Mango Library</h2>]]></doctitle>
+      <bottom>Copyright &#169; 2002 JezUK Ltd.</bottom>
+    </javadoc>
+  </target>
+
+  <target name="jar">
+    <jar jarfile="mango.jar">
+      <fileset dir="${targetdir}">
+        <exclude name="**/*Test*.class"/>
+      </fileset>
+    </jar>
+  </target>
+
+  <target name="test" depends="compile">
+    <junit printsummary="no">
+      <formatter type="plain"/>
+      <batchtest todir=".">
+        <fileset dir="${targetdir}">
+	  <include name="**/*Test.class"/>
+	</fileset>
+      </batchtest>
+    </junit>
+  </target>
+
+  <target name="all" depends="clean,prepare,compile,javadoc,jar"/>
+</project>
+
+
+
+
+
+
+
