@@ -7,5 +7,5 @@ set CLASSPATH=%CLASSPATH%;.
 set CLASSPATH=%CLASSPATH%;%JAVA_LIB%\ant.jar
 set CLASSPATH=%CLASSPATH%;%JAVA_LIB%\jakarta-ant-1.4.1-optional.jar
 set CLASSPATH=%CLASSPATH%;%JAVA_LIB%\junit.jar
-
+set CLASSPATH=%CLASSPATH%;%JAVA_HOME%\lib\tools.jar
 
