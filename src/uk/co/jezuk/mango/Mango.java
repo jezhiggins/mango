@@ -22,6 +22,15 @@ public class Mango
   static public int countIf(java.util.List list, int start, int end, Predicate test) { return CountIf.execute(new BoundedIterator(list, start, end), test); }
   static public int countIf(java.util.Iterator iterator, Predicate test) { return CountIf.execute(iterator, test); } 
   
-  //////////////////////////////////
+  static public Object find(java.util.Collection collection, Object value) { return Find.execute(collection.iterator(), value); }
+  static public Object find(java.util.Collection collection, int start, int end, Object value) { return Find.execute(new BoundedIterator(collection.iterator(), start, end), value); }
+  static public Object find(java.util.List list, int start, int end, Object value) { return Find.execute(new BoundedIterator(list, start, end), value); }
+  static public Object find(java.util.Iterator iterator, Object value) { return Find.execute(iterator, value); } 
+  
+  static public Object findIf(java.util.Collection collection, Predicate test) { return FindIf.execute(collection.iterator(), test); }
+  static public Object findIf(java.util.Collection collection, int start, int end, Predicate test) { return FindIf.execute(new BoundedIterator(collection.iterator(), start, end), test); }
+  static public Object findIf(java.util.List list, int start, int end, Predicate test) { return FindIf.execute(new BoundedIterator(list, start, end), test); }
+  static public Object findIf(java.util.Iterator iterator, Predicate test) { return FindIf.execute(iterator, test); } 
+   //////////////////////////////////
   private Mango() { }
 } // Mango

@@ -31,7 +31,7 @@ public class PredicatedIterator implements java.util.Iterator
 
   public void remove()
   {
-    // throw something
+    throw new UnsupportedOperationException("uk.co.jezuk.mango.PredicatedIterator does not support the remove method");
   } // remove
 
   private void findNext()
