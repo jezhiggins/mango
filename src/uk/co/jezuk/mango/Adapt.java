@@ -13,7 +13,7 @@ public class Adapt
    * to be passed to algorithms.
    * <br>
    * e.g. to print all the elements in a list<br>
-   * <code>Mango.forEach(list, Bind.Member(System.out, "println"));</code><br>
+   * <code>Mango.forEach(list, Bind.Method(System.out, "println"));</code><br>
    * is equivalent to <br>
    * <code>for(int i = 0; i < list.size(); ++i)</code><br>
    * <code>  System.out.println(list.get(i));</code>
