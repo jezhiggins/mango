@@ -78,7 +78,7 @@
   </target>
 
   <target name="test" depends="compile">
-    <junit printsummary="no">
+    <junit printsummary="yes">
       <formatter type="plain"/>
       <batchtest todir=".">
         <fileset dir="${targetdir}">

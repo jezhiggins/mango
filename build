@@ -1,6 +1,0 @@
-#!/bin/sh
-# $Id$
-
-. ./classpath
-
-java org.apache.tools.ant.Main $*

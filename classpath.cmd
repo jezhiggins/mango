@@ -1,7 +1,7 @@
 @echo off
 rem $Id$
 
-set JAVA_LIB=c:\work\java_lib
+set JAVA_LIB=d:\work\java_lib
 set CLASSPATH=.\classes
 set CLASSPATH=%CLASSPATH%;.
 set CLASSPATH=%CLASSPATH%;%JAVA_LIB%\ant.jar
