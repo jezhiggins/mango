@@ -1,18 +1,40 @@
 package uk.co.jezuk.mango;
 
 /**
- *
+ * A <code>BoundedIterator</code> enumerates of a subset of a collection, in the
+ * range [<code>start</code>, <code>end</code>).  A normal <code>java.util.Iterator</code> 
+ * traverses [0, collection.size()), so BoundedIterator allows you
+ * to pick out a sub-set without using <code>list.subList()</code> 
+ * or equivalent.
+ * 
  * @author Jez Higgins, jez@jezuk.co.uk
  * @version $Id$
  */
-class BoundedIterator implements java.util.Iterator
+public class BoundedIterator implements java.util.Iterator
 {
-  BoundedIterator(java.util.Iterator iterator, int start, int end)
+  /**
+   * This form of <code>BoundedIterator</code> limits the range traversed by the 
+   * underlying <code>iterator</code>. <p>
+   * If <code>iterator.hasNext()</code> fails before <code>end</code> is
+   * reached, the traversal will stop prematurely.<p>
+   * @throws java.lang.IndexOutOfBoundsException if start<0, end<0 or start>end
+   */
+  public BoundedIterator(java.util.Iterator iterator, int start, int end)
   {
     iter_ = new iteratorWrapper(iterator, start, end);
   } // BoundIterator
   
-  BoundedIterator(java.util.List list, int start, int end)
+  /**
+   * The form of <code>BoundedIterator</code> uses indexed access directly into
+   * the list.<p>
+   * If <code>end</code> > list.end() the travesal will stop with
+   * list.end() is reached.<p>
+   * For <code>ArrayLists</code> and <code>Vectors</code> it 
+   * should be slightly quicker.  For <code>LinkedLists</code> it
+   * will be slower.
+   * @throws java.lang.IndexOutOfBoundsException if start<0, end<0 or start>end
+   */
+  public BoundedIterator(java.util.List list, int start, int end)
   {
     iter_ = new listIterator(list, start, end);
   } // BoundedIterator
@@ -35,7 +57,7 @@ class BoundedIterator implements java.util.Iterator
   private java.util.Iterator iter_;
 
   ///////////////////////////////////////////////////
-  static void checkConstraints(int start, int end)
+  static private void checkConstraints(int start, int end)
   {
     if(start < 0)
       throw new IndexOutOfBoundsException("start < 0");
