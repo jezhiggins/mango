@@ -16,14 +16,6 @@ public class BoundedIteratorTest  extends TestCase
       list.add(new Integer(i));
   } // setUp
 
-  private class Print implements UnaryFunction 
-  {
-    public void fn(Object o)
-    {
-      System.out.println(o.toString());
-    } 
-  } // Print
-
   public void test1()
   {
     java.util.Iterator bi = new BoundedIterator(list, 2, 5);
