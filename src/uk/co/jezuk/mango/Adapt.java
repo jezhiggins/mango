@@ -12,7 +12,7 @@ public class Adapt
 {
   /**
    * Compose is a unary function adaptor.  If <code>f</code> and <code>g</code>
-   * are <code>UnaryFunctions</code>, the <code>Compose</code> creates a new
+   * are <code>UnaryFunctions</code>, then <code>Compose</code> creates a new
    * function <code>h</code>, where <code>h(x)</code> is equal to <code>f(g(x))</code>.
    */
   static public UnaryFunction Compose(UnaryFunction f, UnaryFunction g)
