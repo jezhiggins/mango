@@ -176,7 +176,7 @@ Iterator iter = Mango.PredicatedIterator(myStringList.iterator(),
    * <pre>
      MyComplexObject mco = (MyComplexObject)Mango.find(
                                 Mango.TransformIterator(list.iterator(), 
-                                                        {@link Adapt#ArgumentMethod}("GetName"),
+                                                        Adapt.ArgumentMethod("GetName"),
                                 theSearchName);
      if(mco != null) 
        ... found!
