@@ -17,7 +17,6 @@ public class Mango
   static public void forEach(java.util.Collection collection, int start, int end, UnaryFunction fn) { uk.co.jezuk.mango.algorithms.ForEach.execute(BoundedIterator(collection.iterator(), start, end), fn); }
   static public void forEach(java.util.List list, int start, int end, UnaryFunction fn) { uk.co.jezuk.mango.algorithms.ForEach.execute(BoundedIterator(list, start, end), fn); }
   static public void forEach(java.util.Iterator iterator, UnaryFunction fn) { uk.co.jezuk.mango.algorithms.ForEach.execute(iterator, fn); } 
-  
   /**
    * <code>Count</code> computes the number of elements in the sequence that 
    * are equal to <code>value</code>.  <br>
@@ -67,6 +66,22 @@ public class Mango
   static public Object findIf(java.util.List list, int start, int end, Predicate test) { return uk.co.jezuk.mango.algorithms.FindIf.execute(BoundedIterator(list, start, end), test); }
   static public Object findIf(java.util.Iterator iterator, Predicate test) { return uk.co.jezuk.mango.algorithms.FindIf.execute(iterator, test); } 
 
+  /**
+   * Removes objects equal to <code>value</code> from the sequence.
+   */
+  static public void remove(java.util.Collection collection, Object value) { uk.co.jezuk.mango.algorithms.Remove.execute(collection.iterator(), value); }
+  static public void remove(java.util.Collection collection, int start, int end, Object value) { uk.co.jezuk.mango.algorithms.Remove.execute(BoundedIterator(collection.iterator(), start, end), value); }
+  static public void remove(java.util.List list, int start, int end, Object value) { uk.co.jezuk.mango.algorithms.Remove.execute(BoundedIterator(list, start, end), value); }
+  static public void remove(java.util.Iterator iterator, Object value) { uk.co.jezuk.mango.algorithms.Remove.execute(iterator, value); } 
+  
+  /**
+   * Removes objects which match <code>test</code> from the sequence.
+   */
+  static public void removeIf(java.util.Collection collection, Predicate pred) { uk.co.jezuk.mango.algorithms.RemoveIf.execute(collection.iterator(), pred); }
+  static public void removeIf(java.util.Collection collection, int start, int end, Predicate pred) { uk.co.jezuk.mango.algorithms.RemoveIf.execute(BoundedIterator(collection.iterator(), start, end), pred); }
+  static public void removeIf(java.util.List list, int start, int end, Predicate pred) { uk.co.jezuk.mango.algorithms.RemoveIf.execute(BoundedIterator(list, start, end), pred); }
+  static public void removeIf(java.util.Iterator iterator, Predicate pred) { uk.co.jezuk.mango.algorithms.RemoveIf.execute(iterator, pred); } 
+  
   //////////////////////////////////////////
   // Iterators
   /**
@@ -152,13 +167,13 @@ public class Mango
    */
   static public BinaryPredicate Not(BinaryPredicate pred) { return new uk.co.jezuk.mango.binarypredicates.Not(pred); }
   /**
-   * A <code>Predicate</code> which returns the logical AND of two other <code>Predicate</code>.  If <code>a</code>
+   * A <code>BinaryPredicate</code> which returns the logical AND of two other <code>BinaryPredicate</code>.  If <code>a</code>
    * is an <code>And</code> object, constructed with <code>pred1</code> and <code>pred2</code>, then 
    * <code>a.test(x,y)</code> returns <code>pred1.test(x,y) && pred2.test(x,y)</code>
    */
   static public BinaryPredicate And(BinaryPredicate pred1, BinaryPredicate pred2) { return new uk.co.jezuk.mango.binarypredicates.And(pred1, pred2); }
   /**
-   * A <code>Predicate</code> which returns the logical OR of two other <code>Predicate</code>.  If <code>a</code>
+   * A <code>BinaryPredicate</code> which returns the logical OR of two other <code>BinaryPredicate</code>.  If <code>a</code>
    * is an <code>Or</code> object, constructed with <code>pred1</code> and <code>pred2</code>, then 
    * <code>a.test(x,y)</code> returns <code>pred1.test(x,y) || pred2.test(x,y)</code>
    */
