@@ -18,6 +18,7 @@ public class AdaptTest  extends TestCase
 
   public void test1()
   {
+    System.out.println("test1");
     Mango.forEach(list, Adapt.Method(System.out, "println"));
   } // 
 
@@ -53,4 +54,21 @@ public class AdaptTest  extends TestCase
     catch(RuntimeException e) {
     } // RuntimeException
   } // test4
+
+  public void test5()
+  {
+    System.out.println("test5");
+    Mango.forEach(list, Adapt.Method(this, "staticMethod"));
+  } // test5
+
+  public void test6()
+  {
+    System.out.println("test6");
+    Mango.forEach(list, Adapt.Method(this.getClass(), "staticMethod"));
+  } // test6
+
+  static public void staticMethod(Object o)
+  {
+    System.out.println(o);
+  } // staticMethod
 } // AdaptTest

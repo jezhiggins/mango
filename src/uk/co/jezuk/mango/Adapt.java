@@ -24,7 +24,17 @@ public class Adapt
    */
   static public UnaryFunction Method(final Object obj, String methodName)
   {
-    java.lang.reflect.Method[] methods = obj.getClass().getMethods();
+    return wrapMethod(obj.getClass(), obj, methodName);
+  } // Method 
+
+  static public UnaryFunction Method(final Class klass, String methodName)
+  {
+    return wrapMethod(klass, null, methodName);
+  } // Method
+
+  static private UnaryFunction wrapMethod(final Class klass, final Object obj, String methodName)
+  {
+    java.lang.reflect.Method[] methods = klass.getMethods();
     for(int i = 0; i < methods.length; ++i)
     {
       final java.lang.reflect.Method m = methods[i];
@@ -47,7 +57,12 @@ public class Adapt
     } // for 
 
     throw new RuntimeException(new NoSuchMethodException());
-  } // Method 
+  } // wrapMethod
+
+  static public UnaryFunction ElementMethod(String methodName)
+  {
+    return null;
+  } // ElementMethod
 
   //////////////////////////////////////////
   private Adapt() { }
