@@ -1,6 +1,6 @@
 package uk.co.jezuk.mango.algorithms;
 
-import uk.co.jezuk.mango.iterators.PredicatedIterator;
+import uk.co.jezuk.mango.iterators.FilteredIterator;
 import uk.co.jezuk.mango.unarypredicates.Not;
 import java.util.Iterator;
 
@@ -18,7 +18,7 @@ public class FindIfNot
     if((iterator == null) || (test == null))
       return null;  
 
-    Iterator filter = new PredicatedIterator(iterator, new Not(test));
+    Iterator filter = new FilteredIterator(iterator, new Not(test));
     return filter.hasNext() ? filter.next() : null;
   } // execute
 

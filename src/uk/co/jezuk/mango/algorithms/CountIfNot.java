@@ -1,6 +1,6 @@
 package uk.co.jezuk.mango.algorithms;
 
-import uk.co.jezuk.mango.iterators.PredicatedIterator;
+import uk.co.jezuk.mango.iterators.FilteredIterator;
 import java.util.Iterator;
 import uk.co.jezuk.mango.unarypredicates.Not;
 
@@ -22,7 +22,7 @@ public class CountIfNot
       return 0;  
 
     int c = 0;
-    for(Iterator filter = new PredicatedIterator(iterator, new Not(test)); 
+    for(Iterator filter = new FilteredIterator(iterator, new Not(test)); 
 	filter.hasNext();
 	filter.next(), ++c);
 

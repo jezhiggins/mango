@@ -1,6 +1,6 @@
 package uk.co.jezuk.mango.algorithms;
 
-import uk.co.jezuk.mango.iterators.PredicatedIterator;
+import uk.co.jezuk.mango.iterators.FilteredIterator;
 import java.util.Iterator;
 
 
@@ -21,7 +21,7 @@ public class FindIf
     if((iterator == null) || (test == null))
       return null;  
 
-    Iterator filter = new PredicatedIterator(iterator, test);
+    Iterator filter = new FilteredIterator(iterator, test);
     return filter.hasNext() ? filter.next() : null;
   } // execute
 

@@ -2,12 +2,12 @@ package uk.co.jezuk.mango;
 
 import junit.framework.*;
 
-public class PredicatedIteratorTest  extends TestCase
+public class FilteredIteratorTest  extends TestCase
 {
   java.util.List list;
 
-  public PredicatedIteratorTest(String name) { super(name); }
-  public static Test suite() { return new TestSuite(PredicatedIteratorTest.class); }
+  public FilteredIteratorTest(String name) { super(name); }
+  public static Test suite() { return new TestSuite(FilteredIteratorTest.class); }
 
   protected void setUp()
   {
@@ -27,7 +27,7 @@ public class PredicatedIteratorTest  extends TestCase
   
   public void test1()
   {
-    java.util.Iterator iter = Iterators.PredicatedIterator(list.iterator(), new LessThanFive());
+    java.util.Iterator iter = Iterators.FilteredIterator(list.iterator(), new LessThanFive());
     int i = 0;
     while(iter.hasNext())
     {
@@ -53,7 +53,7 @@ public class PredicatedIteratorTest  extends TestCase
     list.add("CHARLES");
     list.add("SIMEON");
 
-    java.util.Iterator iter = Iterators.PredicatedIterator(list.iterator(), 
+    java.util.Iterator iter = Iterators.FilteredIterator(list.iterator(), 
                                        new Predicate() {
                                            public boolean test(Object o) {
                                              String s = (String)o;

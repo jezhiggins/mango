@@ -26,7 +26,12 @@ public class Iterators
   static public java.util.Iterator BoundedIterator(java.util.List list, int start, int end) { return new uk.co.jezuk.mango.iterators.BoundedIterator(list, start, end); }
 
   /**
-   * A <code>PredicatedIterator</code> enumerates only those elements of a collection
+   * @deprecated see {@link FilteredIterator}   
+   */
+  static public java.util.Iterator PredicatedIterator(java.util.Iterator iterator, Predicate predicate) { return FilteredIterator(iterator, predicate); }
+
+  /**
+   * A <code>FilteredIterator</code> enumerates only those elements of a collection
    * that match the supplied <code>Predicate</code>.
    * <p>
    * It takes a {@link Predicate} which encapsulates some test, and only 
@@ -36,7 +41,7 @@ public class Iterators
    * interested in those that begin with 'S'. What you need is
    *
    * <pre>
-Iterator iter = Mango.PredicatedIterator(myStringList.iterator(), 
+Iterator iter = Mango.FilteredIterator(myStringList.iterator(), 
                                        new {@link Predicate}() {
                                            boolean test(Object o) {
                                              String s = (String)o;
@@ -44,10 +49,10 @@ Iterator iter = Mango.PredicatedIterator(myStringList.iterator(),
                                            }
                                        });</pre>
    * <p>
-   * A <code>PredicatedIterator</code> implements the <code>java.util.Iterator</code> interface, 
+   * A <code>FilteredIterator</code> implements the <code>java.util.Iterator</code> interface, 
    * and is constructed by wrapping around an existing iterator. 
    */
-  static public java.util.Iterator PredicatedIterator(java.util.Iterator iterator, Predicate predicate) { return new uk.co.jezuk.mango.iterators.PredicatedIterator(iterator, predicate); }
+  static public java.util.Iterator FilteredIterator(java.util.Iterator iterator, Predicate predicate) { return new uk.co.jezuk.mango.iterators.FilteredIterator(iterator, predicate); }
 
   /** 
    * Iterates over an array of objects.
