@@ -31,7 +31,7 @@
            author="true"
            version="true"
            use="true"
-	   Public="true">
+	   >
       <doctitle><![CDATA[<h2>The Mango Library</h2>]]></doctitle>
       <bottom>Copyright &#169; 2002 JezUK Ltd.</bottom>
     </javadoc>

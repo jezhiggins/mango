@@ -6,6 +6,7 @@ package uk.co.jezuk.mango;
  * <code>value</code> may be <code>null</code>.<br>
  * The objects in the sequence and <code>value</code> must be comparable using
  * <code>Object.equals</code> (unless <code>value</code> is <code>null</code>).
+ * @see CountIf
  * @version $Id$
  */
 class Count
