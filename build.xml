@@ -93,11 +93,5 @@
   </target>
 
   <target name="all" depends="clean,prepare,compile,javadoc,jar"/>
+
 </project>
-
-
-
-
-
-
-
