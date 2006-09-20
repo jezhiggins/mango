@@ -11,6 +11,11 @@ import uk.co.jezuk.mango.iterators.*;
 public class Iterators
 {
   /**
+   * A <code>StringIterator</code> iterators over a String, returning each <code>char</code> in the String in turn.
+   */
+	static public java.util.Iterator StringIterator(String s) { return new uk.co.jezuk.mango.iterators.StringIterator(s); }
+
+  /**
    * A <code>NullIterator</code> iterates over nothing.  That is, <code>hasNext</code>
    * always returns <code>false</code>.
    */
