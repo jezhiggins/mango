@@ -11,7 +11,8 @@ import uk.co.jezuk.mango.iterators.*;
 public class Iterators
 {
   /**
-   * A <code>StringIterator</code> iterators over a String, returning each <code>char</code> in the String in turn.
+   * A <code>StringIterator</code> iterators over a String, returning each character in turn as a <code>String</code> of length 1.
+	 * e.g. StringIterator("123") will return "1", "2", "3"
    */
 	static public java.util.Iterator StringIterator(String s) { return new uk.co.jezuk.mango.iterators.StringIterator(s); }
 

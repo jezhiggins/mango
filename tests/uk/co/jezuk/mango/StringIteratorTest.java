@@ -24,11 +24,11 @@ public class StringIteratorTest extends TestCase
 	{
 		Iterator i = Iterators.StringIterator("123");
 		assertEquals(true, i.hasNext());
-		assertEquals(new Character('1'), i.next());
+		assertEquals("1", i.next());
 		assertEquals(true, i.hasNext());
-		assertEquals(new Character('2'), i.next());
+		assertEquals("2", i.next());
 		assertEquals(true, i.hasNext());
-		assertEquals(new Character('3'), i.next());
+		assertEquals("3", i.next());
 		assertEquals(false, i.hasNext());
 	} // test3
 } // class StringIteratorTest

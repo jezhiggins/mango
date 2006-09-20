@@ -20,10 +20,10 @@ public class StringIterator implements java.util.Iterator
   
   public Object next()
   {
-		char c = s_.charAt(pos_++);
-		if(pos_ == s_.length())
+		String c = s_.substring(pos_, pos_+1);
+		if(++pos_ == s_.length())
 			pos_ = -1;
-		return new Character(c);
+		return c;
   } // next
   
   public void remove()
