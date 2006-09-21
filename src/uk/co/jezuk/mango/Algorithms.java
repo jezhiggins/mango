@@ -117,6 +117,23 @@ public class Algorithms
   static public void removeIf(java.util.Collection collection, int start, int end, Predicate pred) { uk.co.jezuk.mango.algorithms.RemoveIf.execute(Iterators.BoundedIterator(collection.iterator(), start, end), pred); }
   static public void removeIf(java.util.List list, int start, int end, Predicate pred) { uk.co.jezuk.mango.algorithms.RemoveIf.execute(Iterators.BoundedIterator(list, start, end), pred); }
   static public void removeIf(java.util.Iterator iterator, Predicate pred) { uk.co.jezuk.mango.algorithms.RemoveIf.execute(iterator, pred); } 
+
+  /**
+   * Removes duplicate elements.  Whenever a consecutive groups of duplicate objects
+   * occur in the sequence, <code>unique</code> removes all but the first objects
+   * in each group.
+   * <code>iterator</code> must support the <code>remove</code> method.
+   * @see java.util.Iterator
+   * @see java.util.Comparator
+   */
+	static public void unique(java.util.Collection collection) { uk.co.jezuk.mango.algorithms.Unique.execute(collection.iterator(), null);	} 
+	static public void unique(java.util.Collection collection, int start, int end) { uk.co.jezuk.mango.algorithms.Unique.execute(Iterators.BoundedIterator(collection.iterator(), start, end), null);	} 
+	static public void unique(java.util.List list, int start, int end) { uk.co.jezuk.mango.algorithms.Unique.execute(Iterators.BoundedIterator(list, start, end), null);	} 
+	static public void unique(java.util.Iterator iterator) { uk.co.jezuk.mango.algorithms.Unique.execute(iterator, null);	} 
+	static public void unique(java.util.Collection collection, java.util.Comparator comparator) { uk.co.jezuk.mango.algorithms.Unique.execute(collection.iterator(), comparator);	} 
+	static public void unique(java.util.Collection collection, int start, int end, java.util.Comparator comparator) { uk.co.jezuk.mango.algorithms.Unique.execute(Iterators.BoundedIterator(collection.iterator(), start, end), comparator);	} 
+	static public void unique(java.util.List list, int start, int end, java.util.Comparator comparator) { uk.co.jezuk.mango.algorithms.Unique.execute(Iterators.BoundedIterator(list, start, end), comparator);	} 
+	static public void unique(java.util.Iterator iterator, java.util.Comparator comparator) { uk.co.jezuk.mango.algorithms.Unique.execute(iterator, comparator);	} 
   
   private Algorithms() { } // prevent instantiation
 } // public class Algorithms
