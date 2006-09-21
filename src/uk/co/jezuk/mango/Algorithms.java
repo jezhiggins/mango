@@ -88,6 +88,19 @@ public class Algorithms
   static public Object find(java.util.Iterator iterator, Object value) { return uk.co.jezuk.mango.algorithms.Find.execute(iterator, value); } 
   
   /**
+   * Searchs the sequence travesed by the Iterator for the given value.
+   * Returns the index of the value in the collection, or <code>-1</code>
+	 * if the value is not found.  The iterator will have been advanced to 
+	 * the next object in the sequence.
+   * The objects in the sequence and <code>value</code> must be comparable using
+   * <code>Object.equals</code> (unless <code>value</code> is <code>null</code>).
+   */
+  static public int findPosition(java.util.Collection collection, Object value) { return uk.co.jezuk.mango.algorithms.FindPosition.execute(collection.iterator(), value); }
+  static public int findPosition(java.util.Collection collection, int start, int end, Object value) { return uk.co.jezuk.mango.algorithms.FindPosition.execute(Iterators.BoundedIterator(collection.iterator(), start, end), value); }
+  static public int findPosition(java.util.List list, int start, int end, Object value) { return uk.co.jezuk.mango.algorithms.FindPosition.execute(Iterators.BoundedIterator(list, start, end), value); }
+  static public int findPosition(java.util.Iterator iterator, Object value) { return uk.co.jezuk.mango.algorithms.FindPosition.execute(iterator, value); } 
+  
+  /**
    * Searchs the sequence traversed by the Iterator and returns the first
    * object encountered for which the Predicate returns <code>true</code>.
    * Returns the <code>Object</code>, or <code>null</code> if the value
