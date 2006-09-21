@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Intersection
 {
-	static public void execute(Iterator iter, Collection coll, Collection results)
+	static public Collection execute(Iterator iter, Collection coll, Collection results)
 	{
 		while(iter.hasNext())
 		{
@@ -14,14 +14,15 @@ public class Intersection
 			if(coll.contains(o))
 				results.add(o);
 		} // while
+		return results;
 	} // execute
 
-	static public void execute(Iterator iter, Iterator iter2, Collection results)
+	static public Collection execute(Iterator iter, Iterator iter2, Collection results)
 	{
 		Collection coll = new ArrayList();
 		while(iter2.hasNext())
 			coll.add(iter2.next());
-		execute(iter, coll, results);
+		return execute(iter, coll, results);
 	} // execute
 	
 	private Intersection() { }
