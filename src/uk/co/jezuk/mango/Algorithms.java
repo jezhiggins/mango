@@ -8,6 +8,13 @@ package uk.co.jezuk.mango;
  */
 public class Algorithms
 {
+	/**
+   * Algorithm intersection finds the common elements in both collections
+	 */
+	static public void intersection(java.util.Collection coll1, java.util.Collection coll2, java.util.Collection results) { uk.co.jezuk.mango.algorithms.Intersection.execute(coll1.iterator(), coll2, results); }
+	static public void intersection(java.util.Iterator iter1, java.util.Collection coll2, java.util.Collection results) { uk.co.jezuk.mango.algorithms.Intersection.execute(iter1, coll2, results); }
+	static public void intersection(java.util.Iterator iter1, java.util.Iterator iter2, java.util.Collection results) { uk.co.jezuk.mango.algorithms.Intersection.execute(iter1, iter2, results); }
+
   /**
    * The algorithm ForEach applies the function <code>fn</code> to
    * each element in the <code>iterator</code> sequence. 
