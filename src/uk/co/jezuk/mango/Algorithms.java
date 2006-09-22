@@ -10,10 +10,20 @@ public class Algorithms
 {
 	/**
    * Algorithm intersection finds the common elements in both collections
+	 * See http://en.wikipedia.org/wiki/Intersection_(set_theory)
 	 */
 	static public java.util.Collection intersection(java.util.Collection coll1, java.util.Collection coll2, java.util.Collection results) { return uk.co.jezuk.mango.algorithms.Intersection.execute(coll1.iterator(), coll2, results); }
 	static public java.util.Collection intersection(java.util.Iterator iter1, java.util.Collection coll2, java.util.Collection results) { return uk.co.jezuk.mango.algorithms.Intersection.execute(iter1, coll2, results); }
 	static public java.util.Collection intersection(java.util.Iterator iter1, java.util.Iterator iter2, java.util.Collection results) { return uk.co.jezuk.mango.algorithms.Intersection.execute(iter1, iter2, results); }
+
+	/**
+   * Algorithm symmetricDifference returns the elements that are on coll1 
+	 * and not in coll2, and those elements in coll2 that are not in coll1.
+	 * See http://en.wikipedia.org/wiki/Symmetric_difference
+	 */
+	static public java.util.Collection symmetricDifference(java.util.Collection coll1, java.util.Collection coll2, java.util.Collection results) { return uk.co.jezuk.mango.algorithms.SymmetricDifference.execute(coll1.iterator(), coll2, results); }
+	static public java.util.Collection symmetricDifference(java.util.Iterator iter1, java.util.Collection coll2, java.util.Collection results) { return uk.co.jezuk.mango.algorithms.SymmetricDifference.execute(iter1, coll2, results); }
+	static public java.util.Collection symmetricDifference(java.util.Iterator iter1, java.util.Iterator iter2, java.util.Collection results) { return uk.co.jezuk.mango.algorithms.SymmetricDifference.execute(iter1, iter2, results); }
 
 
   /**
