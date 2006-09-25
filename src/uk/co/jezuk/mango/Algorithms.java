@@ -148,6 +148,15 @@ public class Algorithms
   static public void removeIf(java.util.Collection collection, int start, int end, Predicate pred) { uk.co.jezuk.mango.algorithms.RemoveIf.execute(Iterators.BoundedIterator(collection.iterator(), start, end), pred); }
   static public void removeIf(java.util.List list, int start, int end, Predicate pred) { uk.co.jezuk.mango.algorithms.RemoveIf.execute(Iterators.BoundedIterator(list, start, end), pred); }
   static public void removeIf(java.util.Iterator iterator, Predicate pred) { uk.co.jezuk.mango.algorithms.RemoveIf.execute(iterator, pred); } 
+ 
+ /**
+   * Removes objects which match <code>test</code> from the sequence.
+	 * Removed objects are appended to <code>removed</code> Collection.  Returns <code>removed<code>.
+   */
+  static public java.util.Collection removeIf(java.util.Collection collection, Predicate pred, java.util.Collection removed) { return uk.co.jezuk.mango.algorithms.RemoveIf.execute(collection.iterator(), pred, removed); }
+  static public java.util.Collection removeIf(java.util.Collection collection, int start, int end, Predicate pred, java.util.Collection removed) { return uk.co.jezuk.mango.algorithms.RemoveIf.execute(Iterators.BoundedIterator(collection.iterator(), start, end), pred, removed); }
+  static public java.util.Collection removeIf(java.util.List list, int start, int end, Predicate pred, java.util.Collection removed) { return uk.co.jezuk.mango.algorithms.RemoveIf.execute(Iterators.BoundedIterator(list, start, end), pred, removed); }
+  static public java.util.Collection removeIf(java.util.Iterator iterator, Predicate pred, java.util.Collection removed) { return uk.co.jezuk.mango.algorithms.RemoveIf.execute(iterator, pred, removed); } 
 
   /**
    * Removes duplicate elements.  Whenever a consecutive groups of duplicate objects
