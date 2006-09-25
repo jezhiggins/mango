@@ -150,13 +150,14 @@ public class Algorithms
   static public void removeIf(java.util.Iterator iterator, Predicate pred) { uk.co.jezuk.mango.algorithms.RemoveIf.execute(iterator, pred); } 
  
  /**
-   * Removes objects which match <code>test</code> from the sequence.
-	 * Removed objects are appended to <code>removed</code> Collection.  Returns <code>removed<code>.
+   * Partitions the supplied collections into two.  Objects matching the Predicate 
+	 * are removed from the collection and added to the results Collection.
+	 * Returns the result collection.
    */
-  static public java.util.Collection removeIf(java.util.Collection collection, Predicate pred, java.util.Collection removed) { return uk.co.jezuk.mango.algorithms.RemoveIf.execute(collection.iterator(), pred, removed); }
-  static public java.util.Collection removeIf(java.util.Collection collection, int start, int end, Predicate pred, java.util.Collection removed) { return uk.co.jezuk.mango.algorithms.RemoveIf.execute(Iterators.BoundedIterator(collection.iterator(), start, end), pred, removed); }
-  static public java.util.Collection removeIf(java.util.List list, int start, int end, Predicate pred, java.util.Collection removed) { return uk.co.jezuk.mango.algorithms.RemoveIf.execute(Iterators.BoundedIterator(list, start, end), pred, removed); }
-  static public java.util.Collection removeIf(java.util.Iterator iterator, Predicate pred, java.util.Collection removed) { return uk.co.jezuk.mango.algorithms.RemoveIf.execute(iterator, pred, removed); } 
+  static public java.util.Collection partition(java.util.Collection collection, Predicate pred, java.util.Collection results) { return uk.co.jezuk.mango.algorithms.Partition.execute(collection.iterator(), pred, results); }
+  static public java.util.Collection partition(java.util.Collection collection, int start, int end, Predicate pred, java.util.Collection results) { return uk.co.jezuk.mango.algorithms.Partition.execute(Iterators.BoundedIterator(collection.iterator(), start, end), pred, results); }
+  static public java.util.Collection partition(java.util.List list, int start, int end, Predicate pred, java.util.Collection results) { return uk.co.jezuk.mango.algorithms.Partition.execute(Iterators.BoundedIterator(list, start, end), pred, results); }
+  static public java.util.Collection partition(java.util.Iterator iterator, Predicate pred, java.util.Collection results) { return uk.co.jezuk.mango.algorithms.Partition.execute(iterator, pred, results); } 
 
   /**
    * Removes duplicate elements.  Whenever a consecutive groups of duplicate objects
