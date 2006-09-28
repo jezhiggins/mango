@@ -21,8 +21,8 @@ public class CountIf
 
     int c = 0;
     for(Iterator filter = new SelectingIterator(iterator, test); 
-	filter.hasNext();
-	filter.next(), ++c);
+				filter.hasNext();
+				filter.next(), ++c);
 
     return c;
   } // execute
