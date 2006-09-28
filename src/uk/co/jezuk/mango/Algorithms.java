@@ -109,6 +109,10 @@ public class Algorithms
   static public int findPosition(java.util.Collection collection, int start, int end, Object value) { return uk.co.jezuk.mango.algorithms.FindPosition.execute(Iterators.BoundedIterator(collection.iterator(), start, end), value); }
   static public int findPosition(java.util.List list, int start, int end, Object value) { return uk.co.jezuk.mango.algorithms.FindPosition.execute(Iterators.BoundedIterator(list, start, end), value); }
   static public int findPosition(java.util.Iterator iterator, Object value) { return uk.co.jezuk.mango.algorithms.FindPosition.execute(iterator, value); } 
+  static public int findPositionIf(java.util.Collection collection, Predicate pred) { return uk.co.jezuk.mango.algorithms.FindPositionIf.execute(collection.iterator(), pred); }
+  static public int findPositionIf(java.util.Collection collection, int start, int end, Predicate pred) { return uk.co.jezuk.mango.algorithms.FindPositionIf.execute(Iterators.BoundedIterator(collection.iterator(), start, end), pred); }
+  static public int findPositionIf(java.util.List list, int start, int end, Predicate pred) { return uk.co.jezuk.mango.algorithms.FindPositionIf.execute(Iterators.BoundedIterator(list, start, end), pred); }
+  static public int findPositionIf(java.util.Iterator iterator, Predicate pred) { return uk.co.jezuk.mango.algorithms.FindPositionIf.execute(iterator, pred); } 
   
   /**
    * Searchs the sequence traversed by the Iterator and returns the first
