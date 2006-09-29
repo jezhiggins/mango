@@ -13,28 +13,9 @@ public class SelectingIterator implements java.util.Iterator
   {
     iter_ = iterator;
     pred_ = predicate;
-
-    findNext();
   } // SelectingIterator
 
   public boolean hasNext()
-  {
-    return (next_ != null);
-  } // hasNext
-
-  public Object next()
-  {
-    Object current = next_;
-    findNext();
-    return current;
-  } // next
-
-  public void remove()
-  {
-    throw new UnsupportedOperationException("uk.co.jezuk.mango.SelectingIterator does not support the remove method");
-  } // remove
-
-  private void findNext()
   {
     next_ = null;
     while(iter_.hasNext() && next_ == null)
@@ -43,7 +24,18 @@ public class SelectingIterator implements java.util.Iterator
       if(pred_.test(candidate))
         next_ = candidate;
     } // while
-  } // findNext
+		return next_ != null;
+  } // hasNext
+
+  public Object next()
+  {
+    return next_;
+  } // next
+
+  public void remove()
+  {
+		iter_.remove();
+  } // remove
 
   ////////////////////////
   private java.util.Iterator iter_;
