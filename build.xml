@@ -74,6 +74,11 @@
     <gzip src="${distdir}/mango-src.tar" zipfile="${distdir}/mango-src.tar.gz"/>
     <delete file="${distdir}/mango-bin.tar"/>
     <delete file="${distdir}/mango-src.tar"/>
+    <tar tarfile="${distdir}/mango-javadoc.tar">
+      <tarfileset dir="${javadocdir}" includes="**/*"/>
+    </tar>
+    <gzip src="${distdir}/mango-javadoc.tar" zipfile="${distdir}/mango-javadoc.tar.gz"/>
+    <delete file="${distdir}/mango-javadoc.tar"/>
   </target>
 
   <target name="test" depends="compile">
