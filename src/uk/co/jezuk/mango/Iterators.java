@@ -126,6 +126,12 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
    */ 
   static public java.util.Iterator TransformIterator(java.util.Iterator iterator, UnaryFunction transform) { return new TransformIterator(iterator, transform); }
 
+  /**
+   * A <code>ReverseIterator</code> traverses a list from the end to the beginning, rather than the conventional
+   * beginning to end traversal your normal every day iterator performs.
+   */
+  static public java.util.Iterator ReverseIterator(java.util.List list) { return new ReverseIterator(list); }
+
   //////////////////////////////////
   private Iterators() { }
 } // Iterator
