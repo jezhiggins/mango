@@ -20,6 +20,8 @@ public class SingletonIterator implements java.util.Iterator
 
   public Object next()
   {
+    if(object_ == null)
+      throw new java.util.NoSuchElementException();
     Object o = object_;
     object_ = null;
     return o;
