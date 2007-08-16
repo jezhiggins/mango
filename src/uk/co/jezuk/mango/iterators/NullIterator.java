@@ -14,7 +14,7 @@ public class NullIterator implements java.util.Iterator
   
   public Object next()
   {
-    throw new UnsupportedOperationException("uk.co.jezuk.mango.NullIterator does not support the next method.  In fact it's probably a logic error that you called it at all.");
+    throw new java.util.NoSuchElementException("uk.co.jezuk.mango.NullIterator does not support the next method.  In fact it's probably a logic error that you called it at all.");
   } // next
   
   public void remove()
