@@ -5,6 +5,7 @@
   <property name="srctests"     value="tests"/>
   <property name="javadocdir"	value="javadoc"/>
   <property name="distdir"      value="dist"/>
+	<property name="junit.jar" value="lib/junit-3.8.2.jar"/>
 
   <target name="prepare">
     <mkdir dir="${targetdir}"/>
@@ -22,7 +23,7 @@
   <target name="compile" depends="prepare">
     <javac srcdir="${srcdir};${srctests}" 
            destdir="${targetdir}" 
-           classpath="${targetdir}"
+           classpath="${targetdir};${junit.jar}"
            debug="on" 
            optimize="off" 
            deprecation="on"/>
@@ -84,9 +85,10 @@
   <target name="test" depends="compile">
     <delete dir="${srctests}/results"/>
     <mkdir dir="${srctests}/results"/>
-    <junit>
+    <junit fork="true">
       <classpath>
-        <pathelement location="${targetdir}"/>
+				<pathelement location="${targetdir}"/>
+				<pathelement location="${junit.jar}"/>
       </classpath>
       <formatter type="plain"/>
       <batchtest todir="${srctests}/results">
