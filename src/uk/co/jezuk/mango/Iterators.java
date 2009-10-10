@@ -40,11 +40,6 @@ public class Iterators
   static public java.util.Iterator BoundedIterator(java.util.List list, int start, int end) { return new BoundedIterator(list, start, end); }
 
   /**
-   * @deprecated see {@link #SelectingIterator}   
-   */
-  static public java.util.Iterator PredicatedIterator(java.util.Iterator iterator, Predicate predicate) { return SelectingIterator(iterator, predicate); }
-
-  /**
    * A <code>SelectingIterator</code> enumerates only those elements of a collection
    * that match the supplied <code>Predicate</code>.
    * <p>

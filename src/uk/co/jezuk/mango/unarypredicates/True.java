@@ -1,9 +1,8 @@
 package uk.co.jezuk.mango.unarypredicates;
 
-/**
- * @version $Id$
- */
-public class True implements uk.co.jezuk.mango.Predicate
+import uk.co.jezuk.mango.Predicate;
+
+public class True<T> implements Predicate<T>
 {
-    public boolean test(Object x) { return true; }
+  public boolean test(T x) { return true; }
 } // True

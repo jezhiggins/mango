@@ -156,7 +156,7 @@ public class Adapt
 	} // if ...
 	  
 	try {
-	  return method_.invoke(arg, null);
+	  return method_.invoke(arg, (Object[])(null));
 	} // try
 	catch(Exception e) {
 	  throw new RuntimeException(e);

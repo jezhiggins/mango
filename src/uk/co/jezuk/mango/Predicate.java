@@ -8,8 +8,8 @@ package uk.co.jezuk.mango;
  * @author Jez Higgins, jez@jezuk.co.uk
  * @version $Id$
  */
-public interface Predicate
+public interface Predicate<T>
 {
-  abstract public boolean test(Object x);
+  abstract public boolean test(T x);
 } // Predicate
 
