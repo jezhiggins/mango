@@ -6,10 +6,9 @@ package uk.co.jezuk.mango;
  * It returns <code>true</code> if the conditions of the test are satisfied,
  * <code>false</code> otherwise
  * @author Jez Higgins, jez@jezuk.co.uk
- * @version $Id$
  */
-public interface BinaryPredicate
+public interface BinaryPredicate<T>
 {
-  abstract public boolean test(Object x, Object y);
+  public boolean test(T x, T y);
 } // BinaryPredicate
 

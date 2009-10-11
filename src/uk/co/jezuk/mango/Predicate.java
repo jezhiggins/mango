@@ -6,10 +6,9 @@ package uk.co.jezuk.mango;
  * <br>
  * Returns <code>true</code> if the condition the Predicate tests for is satisfied, <code>false</code> otherwise.
  * @author Jez Higgins, jez@jezuk.co.uk
- * @version $Id$
  */
 public interface Predicate<T>
 {
-  abstract public boolean test(T x);
+  public boolean test(T x);
 } // Predicate
 

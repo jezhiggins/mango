@@ -1,10 +1,9 @@
 package uk.co.jezuk.mango.iterators;
 
-/**
- *
- * @author  jez@jezuk.co.uk
- */
-public class NullIterator implements java.util.Iterator
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class NullIterator<T> implements Iterator<T>
 {
   /** Creates a new instance of NullIterator */
   public boolean hasNext()
@@ -12,9 +11,9 @@ public class NullIterator implements java.util.Iterator
     return false;
   } // hasNext
   
-  public Object next()
+  public T next()
   {
-    throw new java.util.NoSuchElementException("uk.co.jezuk.mango.NullIterator does not support the next method.  In fact it's probably a logic error that you called it at all.");
+    throw new NoSuchElementException("uk.co.jezuk.mango.NullIterator does not support the next method.  In fact it's probably a logic error that you called it at all.");
   } // next
   
   public void remove()
