@@ -2,7 +2,9 @@ package uk.co.jezuk.mango.unarypredicates;
 
 import uk.co.jezuk.mango.Predicate;
 
-public class False<T> implements Predicate<T>
+public enum False implements Predicate<Object>
 {
-  public boolean test(T x) { return false; }
+  INSTANCE;
+
+  public boolean test(Object x) { return false; }
 } // False

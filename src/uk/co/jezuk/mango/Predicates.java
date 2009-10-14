@@ -14,12 +14,27 @@ public class Predicates
   /**
    * A <code>Predicate</code> which always returns <code>true</code>
    */
-  static public <T> Predicate<T> True() { return new True<T>(); }
-
+  static public <T> Predicate<T> True() 
+  { 
+    return (Predicate<T>)True.INSTANCE; 
+  } // True
+ 
   /**
    * A <code>Predicate</code> which always returns <code>false</code>
    */
-  static public <T> Predicate<T> False() { return new False<T>(); }
+  static public <T> Predicate<T> False() 
+  { 
+    return (Predicate<T>)False.INSTANCE;
+  } // False
+
+  /** 
+   * A <code>Predicate</code> which returns a precomputed constant value
+   */
+  static public <T> Predicate<T> Constant(boolean constant)
+  {
+
+    return constant ? (Predicate<T>)True.INSTANCE : (Predicate<T>)False.INSTANCE;
+  } // Constant
 
   /**
    * A <code>Predicate</code> which is the logical negation of some other <code>Predicate</code>.  If <code>n</code>
@@ -33,14 +48,14 @@ public class Predicates
    * is an <code>And</code> object, constructed with <code>pred1</code> and <code>pred2</code>, then 
    * <code>a.test(x)</code> returns <code>pred1.test(x) && pred2.test(x)</code>
    */
-  static public <T> Predicate<T> And(Predicate<T> pred1, Predicate<T> pred2) { return new And(pred1, pred2); }
+  static public <T> Predicate<T> And(Predicate<T> pred1, Predicate<T> pred2) { return new And<T>(pred1, pred2); }
 
   /**
    * A <code>Predicate<T></code> which returns the logical OR of two other <code>Predicate<T></code>.  If <code>a</code>
    * is an <code>Or</code> object, constructed with <code>pred1</code> and <code>pred2</code>, then 
    * <code>a.test(x)</code> returns <code>pred1.test(x) || pred2.test(x)</code>
    */
-  static public <T> Predicate<T> Or(Predicate<T> pred1, Predicate<T> pred2) { return new Or(pred1, pred2); }
+  static public <T> Predicate<T> Or(Predicate<T> pred1, Predicate<T> pred2) { return new Or<T>(pred1, pred2); }
 
   //////////////////////////////////
   private Predicates() { }

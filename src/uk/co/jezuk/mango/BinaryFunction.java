@@ -8,8 +8,8 @@ package uk.co.jezuk.mango;
  * @author Jez Higgins, jez@jezuk.co.uk
  * @version $Id$
  */
-public interface BinaryFunction
+public interface BinaryFunction<T1, T2, R>
 {
-  abstract public Object fn(Object x, Object y);
+   public R fn(T1 x, T2 y);
 } // BinaryFunction
 
