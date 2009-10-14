@@ -12,25 +12,25 @@ public class BinaryOrTest  extends TestCase
 
   public void test1()
   {
-    BinaryPredicate o = Predicates.Or(new t(), new t());
+    BinaryPredicate o = BinaryPredicates.Or(new t(), new t());
     assertEquals(true, o.test(null, null));
   } // test1
 
   public void test2()
   {
-    BinaryPredicate o = Predicates.Or(new f(), new t());
+    BinaryPredicate o = BinaryPredicates.Or(new f(), new t());
     assertEquals(true, o.test(null, null));
   } // test2
 
   public void test3()
   {
-    BinaryPredicate o = Predicates.Or(new t(), new f());
+    BinaryPredicate o = BinaryPredicates.Or(new t(), new f());
     assertEquals(true, o.test(null, null));
   } // test3
 
   public void test4()
   {
-    BinaryPredicate o = Predicates.Or(new f(), new f());
+    BinaryPredicate o = BinaryPredicates.Or(new f(), new f());
     assertEquals(false, o.test(null, null));
   } // test4
 } // BinaryOrTest

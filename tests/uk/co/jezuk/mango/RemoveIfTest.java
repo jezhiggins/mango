@@ -21,7 +21,7 @@ public class RemoveIfTest  extends TestCase
 
   public void test1()
   {
-    Algorithms.removeIf(list, Bind.First(Predicates.LessThanEquals(), new Integer(7)));
+    Algorithms.removeIf(list, Bind.First(BinaryPredicates.LessThanEquals(), new Integer(7)));
 
     assertEquals(7, list.size());
     assertEquals(null, Algorithms.find(list, new Integer(7)));
@@ -31,7 +31,7 @@ public class RemoveIfTest  extends TestCase
 
   public void test2()
   {
-    Algorithms.removeIf(list, 1, 5, Bind.First(Predicates.LessThanEquals(), new Integer(7)));
+    Algorithms.removeIf(list, 1, 5, Bind.First(BinaryPredicates.LessThanEquals(), new Integer(7)));
 
     assertEquals(10, list.size());
     assertEquals(list.get(7), Algorithms.find(list, new Integer(7)));

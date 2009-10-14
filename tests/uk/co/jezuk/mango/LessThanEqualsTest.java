@@ -13,7 +13,7 @@ public class LessThanEqualsTest  extends TestCase
 
   protected void setUp() 
   {
-    p_ = Predicates.LessThanEquals();
+    p_ = BinaryPredicates.LessThanEquals();
   } // setUp
 
   public void test1()

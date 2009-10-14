@@ -18,26 +18,26 @@ public class FindIfTest  extends TestCase
 
   public void test1()
   {
-    assertEquals(list.get(2), Algorithms.findIf(list, Bind.First(Predicates.EqualTo(), new Integer(2))));
+    assertEquals(list.get(2), Algorithms.findIf(list, Bind.First(BinaryPredicates.EqualTo(), new Integer(2))));
   }
 
   public void test2()
   {
-    assertEquals(list.get(4), Algorithms.findIf(list, Bind.First(Predicates.EqualTo(), new Integer(4))));
+    assertEquals(list.get(4), Algorithms.findIf(list, Bind.First(BinaryPredicates.EqualTo(), new Integer(4))));
   } 
 
   public void test3()
   {
-    assertEquals(list.get(7), Algorithms.findIf(list, Bind.First(Predicates.EqualTo(), new Integer(7))));
+    assertEquals(list.get(7), Algorithms.findIf(list, Bind.First(BinaryPredicates.EqualTo(), new Integer(7))));
   }
 
   public void test4()
   {
-    assertEquals(null, Algorithms.findIf(list, Bind.First(Predicates.EqualTo(), new Integer(99))));
+    assertEquals(null, Algorithms.findIf(list, Bind.First(BinaryPredicates.EqualTo(), new Integer(99))));
   } 
 
   public void test5()
   {
-    assertEquals(null, Algorithms.findIf(list, Bind.First(Predicates.EqualTo(), new String("charles dickens"))));
+    assertEquals(null, Algorithms.findIf(list, Bind.First(BinaryPredicates.EqualTo(), new String("charles dickens"))));
   } // 
 } // FindIfTest

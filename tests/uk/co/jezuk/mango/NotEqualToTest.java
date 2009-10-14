@@ -13,7 +13,7 @@ public class NotEqualToTest  extends TestCase
 
   protected void setUp() 
   {
-    p_ = Predicates.NotEqualTo();
+    p_ = BinaryPredicates.NotEqualTo();
   } // setUp
  
   public void test1()

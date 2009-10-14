@@ -21,7 +21,7 @@ public class PartitionTest  extends TestCase
 
   public void test1()
   {
-    Collection removed = Algorithms.partition(list, Bind.First(Predicates.LessThanEquals(), new Integer(7)), new ArrayList());
+    Collection removed = Algorithms.partition(list, Bind.First(BinaryPredicates.LessThanEquals(), new Integer(7)), new ArrayList());
 
     assertEquals(7, list.size());
     assertEquals(null, Algorithms.find(list, new Integer(7)));
@@ -35,7 +35,7 @@ public class PartitionTest  extends TestCase
 
   public void test2()
   {
-    Collection removed = Algorithms.partition(list, 1, 5, Bind.First(Predicates.LessThanEquals(), new Integer(7)), new ArrayList());
+    Collection removed = Algorithms.partition(list, 1, 5, Bind.First(BinaryPredicates.LessThanEquals(), new Integer(7)), new ArrayList());
 
     assertEquals(10, list.size());
     assertEquals(list.get(7), Algorithms.find(list, new Integer(7)));

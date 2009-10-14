@@ -7,7 +7,7 @@ import uk.co.jezuk.mango.BinaryPredicate;
  * <code>x</code> and <code>y</code> must implement the <code>java.lang.Comparable<code> interface.
  * @author Jez Higgins, jez@jezuk.co.uk
  */
-public class LessThan<T1 extends Comparable<T2>, T2> 
+public class LessThan<T1, T2> 
   implements BinaryPredicate<T1, T2>
 {
   /**

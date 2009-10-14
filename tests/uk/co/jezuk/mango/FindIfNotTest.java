@@ -18,31 +18,31 @@ public class FindIfNotTest  extends TestCase
 
   public void test1()
   {
-    assertEquals(list.get(2), Algorithms.findIfNot(list, Bind.First(Predicates.GreaterThanEquals(), new Integer(1))));
+    assertEquals(list.get(2), Algorithms.findIfNot(list, Bind.First(BinaryPredicates.GreaterThanEquals(), new Integer(1))));
   } // test1
 
   public void test2()
   {
-    assertEquals(list.get(4), Algorithms.findIfNot(list, Bind.First(Predicates.GreaterThan(), new Integer(4))));
+    assertEquals(list.get(4), Algorithms.findIfNot(list, Bind.First(BinaryPredicates.GreaterThan(), new Integer(4))));
   } // test2
 
   public void test3()
   {
-    assertEquals(list.get(7), Algorithms.findIfNot(list, Bind.First(Predicates.GreaterThan(), new Integer(7))));
+    assertEquals(list.get(7), Algorithms.findIfNot(list, Bind.First(BinaryPredicates.GreaterThan(), new Integer(7))));
   } // test3
 
   public void test4()
   {
-    assertEquals(null, Algorithms.findIfNot(list, Bind.First(Predicates.GreaterThan(), new Integer(99))));
+    assertEquals(null, Algorithms.findIfNot(list, Bind.First(BinaryPredicates.GreaterThan(), new Integer(99))));
   } // test4
 
   public void test5() 
   {
-    assertEquals(null, Algorithms.findIfNot(list, Bind.First(Predicates.NotEqualTo(), new String("charles dickens"))));
+    assertEquals(null, Algorithms.findIfNot(list, Bind.First(BinaryPredicates.NotEqualTo(), new String("charles dickens"))));
   } // test5
 
   public void test6()
   {
-    assertEquals(list.get(0), Algorithms.findIfNot(list, Bind.First(Predicates.EqualTo(), new String("charles dickens"))));
+    assertEquals(list.get(0), Algorithms.findIfNot(list, Bind.First(BinaryPredicates.EqualTo(), new String("charles dickens"))));
   } // 
 } // FindIfNotTest

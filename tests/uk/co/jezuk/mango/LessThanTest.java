@@ -13,7 +13,7 @@ public class LessThanTest  extends TestCase
 
   protected void setUp() 
   {
-    p_ = Predicates.LessThan();
+    p_ = BinaryPredicates.LessThan();
   } // setUp
 
   public void test1()

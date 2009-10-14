@@ -13,7 +13,7 @@ public class GreaterThanEqualsTest  extends TestCase
 
   protected void setUp() 
   {
-    p_ = Predicates.GreaterThanEquals();
+    p_ = BinaryPredicates.GreaterThanEquals();
   } // setUp
 
   public void test1()

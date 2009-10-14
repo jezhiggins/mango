@@ -13,7 +13,7 @@ public class EqualToTest  extends TestCase
 
   protected void setUp() 
   {
-    p_ = Predicates.EqualTo();
+    p_ = BinaryPredicates.EqualTo();
   } // setUp
 
   public void test1()

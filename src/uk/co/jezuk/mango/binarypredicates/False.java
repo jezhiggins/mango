@@ -2,12 +2,14 @@ package uk.co.jezuk.mango.binarypredicates;
 
 import uk.co.jezuk.mango.BinaryPredicate;
 
-public class False<T1, T2> implements BinaryPredicate<T1, T2>
+public enum False implements BinaryPredicate<Object, Object>
 {
+  INSTANCE;
+
   /**
-   * @return <code>false</code>, always
+   * @return <code>true</code>, always
    */
-  public boolean test(T1 x, T2 y)
+  public boolean test(Object x, Object y)
   {
     return false;
   } // test

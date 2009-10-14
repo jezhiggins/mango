@@ -7,30 +7,27 @@ public class BinaryAndTest  extends TestCase
   public BinaryAndTest(String name) { super(name); }
   public static Test suite() { return new TestSuite(BinaryAndTest.class); }
 
-  private static class t implements BinaryPredicate<Object, Object> { public boolean test(Object x, Object y) { return true; } }
-  private static class f implements BinaryPredicate<Object, Object> { public boolean test(Object x, Object y) { return false; } }
-
   public void test1()
   {
-    BinaryPredicate<Object, Object> o = Predicates.And(new t(), new t());
+    BinaryPredicate<Object, Object> o = BinaryPredicates.And(BinaryPredicates.True(), BinaryPredicates.True());
     assertEquals(true, o.test(null, null));
   } // test1
 
   public void test2()
   {
-    BinaryPredicate o = Predicates.And(new f(), new t());
+    BinaryPredicate<Object, Object> o = BinaryPredicates.And(BinaryPredicates.False(), BinaryPredicates.True());
     assertEquals(false, o.test(null, null));
   } // test2
 
   public void test3()
   {
-    BinaryPredicate o = Predicates.And(new t(), new f());
+    BinaryPredicate<Object, Object> o = BinaryPredicates.And(BinaryPredicates.True(), BinaryPredicates.False());
     assertEquals(false, o.test(null, null));
   } // test3
 
   public void test4()
   {
-    BinaryPredicate o = Predicates.And(new f(), new f());
+    BinaryPredicate<Object, Object> o = BinaryPredicates.And(BinaryPredicates.False(), BinaryPredicates.False());
     assertEquals(false, o.test(null, null));
   } // test4
 } // BinaryAndTest
