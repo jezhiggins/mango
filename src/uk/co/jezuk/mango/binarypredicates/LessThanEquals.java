@@ -1,17 +1,19 @@
 package uk.co.jezuk.mango.binarypredicates;
 
+import uk.co.jezuk.mango.BinaryPredicate;
+
 /**
  * <code>BinaryPredicate</code> that returns true if <code>x</code> is less than or equal to <code>y</code>
  * <code>x</code> and <code>y</code> must implement the <code>java.lang.Comparable<code> interface.
  * @author Jez Higgins, jez@jezuk.co.uk
- * @version $Id$
  */
-public class LessThanEquals implements uk.co.jezuk.mango.BinaryPredicate
+public class LessThanEquals<T1 extends Comparable<T2>, T2> 
+  implements BinaryPredicate<T1, T2>
 {
   /**
    * @return <code>true</code> if <code>x.compareTo(y) &lt; 0</code> 
    */
-  public boolean test(Object x, Object y)
+  public boolean test(T1 x, T2 y)
   {
     if(x == null && y == null)
       return true;
@@ -20,7 +22,7 @@ public class LessThanEquals implements uk.co.jezuk.mango.BinaryPredicate
     if(y == null)
       return false;
 
-    return ((Comparable)x).compareTo(y) <= 0;
+    return ((Comparable<T2>)x).compareTo(y) <= 0;
   } // test
 } // LessThanEquals
 

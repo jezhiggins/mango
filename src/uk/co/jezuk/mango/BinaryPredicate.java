@@ -7,8 +7,8 @@ package uk.co.jezuk.mango;
  * <code>false</code> otherwise
  * @author Jez Higgins, jez@jezuk.co.uk
  */
-public interface BinaryPredicate<T>
+public interface BinaryPredicate<T1, T2>
 {
-  public boolean test(T x, T y);
+  public boolean test(T1 x, T2 y);
 } // BinaryPredicate
 
