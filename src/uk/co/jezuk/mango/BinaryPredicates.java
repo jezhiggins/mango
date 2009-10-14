@@ -27,6 +27,18 @@ public class BinaryPredicates
     return (BinaryPredicate<T1, T2>)False.INSTANCE;
   } // False
 
+  /** 
+   * A <code>BinaryPredicate</code> which returns a precomputed constant value
+   */
+  static public <T1, T2> BinaryPredicate<T1, T2> Constant(boolean constant)
+  {
+
+    return constant ? (BinaryPredicate<T1, T2>)True.INSTANCE : 
+                      (BinaryPredicate<T1, T2>)False.INSTANCE;
+  } // Constant
+
+
+
   /**
    * <code>BinaryPredicate</code> testing for equality.
    * <code>true</code> if <code>x.equals(y)</code> or <code>(x == null && y == null)</code>
