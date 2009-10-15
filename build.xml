@@ -27,7 +27,7 @@
            debug="on" 
            optimize="off" 
            deprecation="on">
-			<compilerarg value="-Xlint"/> 
+			<!--compilerarg value="-Xlint"/--> 
 		</javac>
   </target>
 

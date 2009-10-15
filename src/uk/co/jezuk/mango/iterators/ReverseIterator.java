@@ -1,13 +1,17 @@
 package uk.co.jezuk.mango.iterators;
 
+import java.util.Iterator;
+import java.util.ListIterator;
+import java.util.List;
+
 /**
  * @author Jez Higgins, jez@jezuk.co.uk
  */
-public class ReverseIterator implements java.util.Iterator
+public class ReverseIterator<T> implements Iterator<T>
 {
-  public ReverseIterator(java.util.List list)
+  public ReverseIterator(List<? super T> list)
   {
-    iter_ = list.listIterator(list.size());
+    iter_ = ((List<T>)list).listIterator(list.size());
   } // ReverseIterator
 
   public boolean hasNext()
@@ -15,7 +19,7 @@ public class ReverseIterator implements java.util.Iterator
     return iter_.hasPrevious();
   } // hasNext
 
-  public Object next()
+  public T next()
   {
     return iter_.previous();
   } // next
@@ -25,5 +29,5 @@ public class ReverseIterator implements java.util.Iterator
     iter_.remove();
   } // remove
 
-  private java.util.ListIterator iter_;
+  private ListIterator<T> iter_;
 } // class ReverseIterator

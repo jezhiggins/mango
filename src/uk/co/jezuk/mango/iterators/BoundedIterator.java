@@ -1,16 +1,18 @@
 package uk.co.jezuk.mango.iterators;
 
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * A <code>BoundedIterator</code> enumerates of a subset of a collection, in the
- * range [<code>start</code>, <code>end</code>).  A normal <code>java.util.Iterator</code> 
+ * range [<code>start</code>, <code>end</code>).  A normal <code>Iterator</code> 
  * traverses [0, collection.size()), so BoundedIterator allows you
  * to pick out a sub-set without using <code>list.subList()</code> 
  * or equivalent.
  * 
  * @author Jez Higgins, jez@jezuk.co.uk
- * @version $Id$
  */
-public class BoundedIterator implements java.util.Iterator
+public class BoundedIterator<T> implements Iterator<T>
 {
   /**
    * This form of <code>BoundedIterator</code> limits the range traversed by the 
@@ -19,9 +21,9 @@ public class BoundedIterator implements java.util.Iterator
    * reached, the traversal will stop prematurely.<p>
    * @throws java.lang.IndexOutOfBoundsException if start<0, end<0 or start>end
    */
-  public BoundedIterator(java.util.Iterator iterator, int start, int end)
+  public BoundedIterator(Iterator<? super T> iterator, int start, int end)
   {
-    iter_ = new iteratorWrapper(iterator, start, end);
+    iter_ = new iteratorWrapper<T>(iterator, start, end);
   } // BoundIterator
   
   /**
@@ -34,9 +36,9 @@ public class BoundedIterator implements java.util.Iterator
    * will be slower.
    * @throws java.lang.IndexOutOfBoundsException if start<0, end<0 or start>end
    */
-  public BoundedIterator(java.util.List list, int start, int end)
+  public BoundedIterator(List<? super T> list, int start, int end)
   {
-    iter_ = new listIterator(list, start, end);
+    iter_ = new listIterator<T>(list, start, end);
   } // BoundedIterator
 
   public boolean hasNext()
@@ -44,7 +46,7 @@ public class BoundedIterator implements java.util.Iterator
     return iter_.hasNext();
   } // hasNext
 
-  public Object next()
+  public T next()
   {
     return iter_.next();
   } // next
@@ -54,7 +56,7 @@ public class BoundedIterator implements java.util.Iterator
     iter_.remove();
   } // remove
 
-  private java.util.Iterator iter_;
+  private Iterator<T> iter_;
 
   ///////////////////////////////////////////////////
   static private void checkConstraints(int start, int end)
@@ -67,9 +69,9 @@ public class BoundedIterator implements java.util.Iterator
       throw new IndexOutOfBoundsException("start > end");
   } // checkConstraints
 
-  static private class iteratorWrapper implements java.util.Iterator
+  static private class iteratorWrapper<T> implements Iterator<T>
   {
-    iteratorWrapper(java.util.Iterator iterator, int start, int end)
+    iteratorWrapper(Iterator<? super T> iterator, int start, int end)
     {
       BoundedIterator.checkConstraints(start, end);
 
@@ -86,10 +88,10 @@ public class BoundedIterator implements java.util.Iterator
       return (index_ < end_);
     } // hasNext()
 
-    public Object next()
+    public T next()
     {
       ++index_;
-      return iter_.next();
+      return (T)iter_.next();
     } // next
 
     public void remove()
@@ -97,14 +99,14 @@ public class BoundedIterator implements java.util.Iterator
       iter_.remove();
     } // remove
 
-    private java.util.Iterator iter_;
+    private Iterator<? super T> iter_;
     private int index_;
     private int end_;
   } // iteratorWrapper
 
-  static private class listIterator implements java.util.Iterator
+  static private class listIterator<T> implements Iterator<T>
   {
-    listIterator(java.util.List list, int start, int end)
+    listIterator(List<? super T> list, int start, int end)
     {
       BoundedIterator.checkConstraints(start, end);
 
@@ -113,7 +115,7 @@ public class BoundedIterator implements java.util.Iterator
       end_ = end;
 
       if(end_ > list_.size())
-	end_ = list.size();
+        end_ = list.size();
     } // listIterator
 
     public boolean hasNext()
@@ -121,9 +123,9 @@ public class BoundedIterator implements java.util.Iterator
       return (index_ < end_);
     } // hasNext
 
-    public Object next()
+    public T next()
     {
-      return list_.get(index_++);
+      return (T)list_.get(index_++);
     } // next
 
     public void remove()
@@ -131,7 +133,7 @@ public class BoundedIterator implements java.util.Iterator
       list_.remove(index_ - 1);
     } // remove
 
-    private java.util.List list_;
+    private List<? super T> list_;
     private int index_;
     private int end_;
   } // listIterator

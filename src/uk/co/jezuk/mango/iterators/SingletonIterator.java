@@ -1,14 +1,16 @@
 package uk.co.jezuk.mango.iterators;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /**
  * Iterators over a single object 
  *
  * @author Jez Higgins, jez@jezuk.co.uk
- * @version $Id$
  */
-public class SingletonIterator implements java.util.Iterator
+public class SingletonIterator<T> implements Iterator<T>
 {
-  public SingletonIterator(Object object)
+  public SingletonIterator(T object)
   {
     object_ = object;
   } // SingletonIterator
@@ -18,11 +20,11 @@ public class SingletonIterator implements java.util.Iterator
     return (object_ != null);
   } // hasNext
 
-  public Object next()
+  public T next()
   {
     if(object_ == null)
       throw new java.util.NoSuchElementException();
-    Object o = object_;
+    T o = object_;
     object_ = null;
     return o;
   } // next
@@ -33,5 +35,5 @@ public class SingletonIterator implements java.util.Iterator
   } // remove
 
   //////////////////////
-  private Object object_;
+  private T object_;
 } // SingletonIterator

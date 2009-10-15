@@ -1,15 +1,16 @@
 package uk.co.jezuk.mango.iterators;
 
+import java.util.Iterator;
+
 /**
  * Iterators over an object array, allowing to be treated in a similar 
  * way to a collection.
  *
  * @author Jez Higgins, jez@jezuk.co.uk
- * @version $Id$
  */
-public class ArrayIterator implements java.util.Iterator
+public class ArrayIterator<T> implements Iterator<T>
 {
-  public ArrayIterator(Object[] array)
+  public ArrayIterator(T[] array)
   {
     array_ = array;
     index_ = 0;
@@ -20,7 +21,7 @@ public class ArrayIterator implements java.util.Iterator
     return (array_ != null) && (index_ != array_.length);
   } // hasNext
 
-  public Object next()
+  public T next()
   {
     return array_[index_++];
   } // next
@@ -31,6 +32,6 @@ public class ArrayIterator implements java.util.Iterator
   } // remove
 
   //////////////////////
-  private Object[] array_;
+  private T[] array_;
   private int index_;
 } // ArrayIterator

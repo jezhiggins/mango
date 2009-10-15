@@ -1,5 +1,8 @@
 package uk.co.jezuk.mango.iterators;
 
+import java.util.Iterator;
+import uk.co.jezuk.mango.Predicate;
+
 /**
  * A <code>SkippingIterator</code> enumerates a sequence,
  * stepping over the elements
@@ -7,13 +10,12 @@ package uk.co.jezuk.mango.iterators;
  * 
  * @see PredicatedIterator
  * @author Jez Higgins, jez@jezuk.co.uk
- * @version $Id$
  */
-public class SkippingIterator implements java.util.Iterator
+public class SkippingIterator<T> implements Iterator<T>
 {
-  public SkippingIterator(java.util.Iterator iterator, uk.co.jezuk.mango.Predicate predicate)
+  public SkippingIterator(Iterator<? super T> iterator, Predicate<T> predicate)
   {
-    iter_ = iterator;
+    iter_ = (Iterator<T>)iterator;
     pred_ = predicate;
 
     findNext();
@@ -24,16 +26,16 @@ public class SkippingIterator implements java.util.Iterator
     return (next_ != null);
   } // hasNext
 
-  public Object next()
+  public T next()
   {
-    Object current = next_;
+    T current = next_;
     findNext();
     return current;
   } // next
 
   public void remove()
   {
-    throw new UnsupportedOperationException("uk.co.jezuk.mango.SkippingIterator does not support the remove method");
+    throw new UnsupportedOperationException("SkippingIterator does not support the remove method");
   } // remove
 
   private void findNext()
@@ -41,16 +43,16 @@ public class SkippingIterator implements java.util.Iterator
     next_ = null;
     while(iter_.hasNext() && next_ == null)
     {
-      Object candidate = iter_.next();
+      T candidate = iter_.next();
       if(!pred_.test(candidate))
         next_ = candidate;
     } // while
   } // findNext
 
   ////////////////////////
-  private java.util.Iterator iter_;
-  private uk.co.jezuk.mango.Predicate pred_;
-  private Object next_;
+  private Iterator<T> iter_;
+  private Predicate<T> pred_;
+  private T next_;
 } // SkippingIterator
 
 

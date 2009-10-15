@@ -3,15 +3,16 @@ package uk.co.jezuk.mango.iterators;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class NullIterator<T> implements Iterator<T>
+public enum NullIterator implements Iterator<Object>
 {
-  /** Creates a new instance of NullIterator */
+  INSTANCE;
+
   public boolean hasNext()
   {
     return false;
   } // hasNext
   
-  public T next()
+  public Object next()
   {
     throw new NoSuchElementException("uk.co.jezuk.mango.NullIterator does not support the next method.  In fact it's probably a logic error that you called it at all.");
   } // next

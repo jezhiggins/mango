@@ -1,5 +1,7 @@
 package uk.co.jezuk.mango.algorithms;
 
+import java.util.Iterator;
+
 /**
  * <code>Count</code> computes the number of elements in the sequence that 
  * are equal to <code>value</code>.  <br>
@@ -7,11 +9,10 @@ package uk.co.jezuk.mango.algorithms;
  * The objects in the sequence and <code>value</code> must be comparable using
  * <code>Object.equals</code> (unless <code>value</code> is <code>null</code>).
  * @see CountIf
- * @version $Id$
  */
 public class Count
 {
-  static public int execute(java.util.Iterator iterator, Object value)
+  static public int execute(Iterator iterator, Object value)
   {
     if(iterator == null)
       return 0;  
@@ -22,18 +23,18 @@ public class Count
     int c = 0;
     while(iterator.hasNext())
       if(value.equals(iterator.next()))
-	++c;
+        ++c;
 
     return c;
   } // execute
 
-  static private int execute_null(java.util.Iterator iterator)
+  static private int execute_null(Iterator iterator)
   {
     int c = 0;
       
     while(iterator.hasNext())
       if(iterator.next() == null)
-	++c;
+        ++c;
     return c;
   } // executer_null
 

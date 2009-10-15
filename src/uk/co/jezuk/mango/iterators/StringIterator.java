@@ -1,10 +1,12 @@
 package uk.co.jezuk.mango.iterators;
 
+import java.util.Iterator;
+
 /**
  *
  * @author  jez@jezuk.co.uk
  */
-public class StringIterator implements java.util.Iterator
+public class StringIterator implements Iterator<String>
 {
 	public StringIterator(String s)
 	{
@@ -18,7 +20,7 @@ public class StringIterator implements java.util.Iterator
     return (pos_ != -1);
   } // hasNext
   
-  public Object next()
+  public String next()
   {
 		String c = s_.substring(pos_, pos_+1);
 		if(++pos_ == s_.length())

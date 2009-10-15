@@ -1,12 +1,14 @@
 package uk.co.jezuk.mango;
 
+import java.util.Iterator;
+import java.util.List;
+
 import uk.co.jezuk.mango.iterators.*;
 
 /**
  * The Mango Library Iterator classes. 
  *
  * @author Jez Higgins, jez@jezuk.co.uk
- * @version $Id$
  */
 public class Iterators
 {
@@ -14,30 +16,45 @@ public class Iterators
    * A <code>StringIterator</code> iterators over a String, returning each character in turn as a <code>String</code> of length 1.
 	 * e.g. StringIterator("123") will return "1", "2", "3"
    */
-	static public java.util.Iterator StringIterator(String s) { return new uk.co.jezuk.mango.iterators.StringIterator(s); }
+	static public Iterator<String> StringIterator(String s) 
+  { 
+    return new StringIterator(s); 
+  } // StringIterator
 
   /**
    * A <code>NullIterator</code> iterates over nothing.  That is, <code>hasNext</code>
    * always returns <code>false</code>.
    */
-  static public java.util.Iterator NullIterator() { return new uk.co.jezuk.mango.iterators.NullIterator(); }
+  static public <T> Iterator<T> NullIterator() 
+  { 
+    return (Iterator<T>)NullIterator.INSTANCE;
+  } // NullIterator
   
   /**
    * A <code>BoundedIterator</code> enumerates of a subset of a collection, in the
    * range [<code>start</code>, <code>end</code>).  
    * <p>
-   * A conventional <code>java.util.Iterator</code>, obtained by a call to say 
+   * A conventional <code>Iterator</code>, obtained by a call to say 
    * <code>java.util.List.iterator()</code>, travels the entire sequence of the
    * <code>java.util.Collection</code> it points to. It starts at the beginning 
    * and keeps on going until you hit the end or get bored.
    * <p>
    * A BoundedIterator enumerates of a subset of a collection, in the range [start, end) - 
-   * a normal <code>java.util.Iterator</code> traverses [0, collection.size()). A 
+   * a normal <code>Iterator</code> traverses [0, collection.size()). A 
    * <code>BoundedIterator</code> therefore allows you to pick out a sub-set without
    * using <code>list.subList()</code> or equivalent.
    */
-  static public java.util.Iterator BoundedIterator(java.util.Iterator iterator, int start, int end) { return new BoundedIterator(iterator, start, end); }
-  static public java.util.Iterator BoundedIterator(java.util.List list, int start, int end) { return new BoundedIterator(list, start, end); }
+  static public <T> Iterator<T> BoundedIterator(Iterator<? super T> iterator, 
+                                                int start, int end) 
+  { 
+    return new BoundedIterator<T>(iterator, start, end); 
+  } // BoundedIterator
+
+  static public <T> Iterator<T> BoundedIterator(List<? super T> list, 
+                                                int start, int end) 
+  { 
+    return new BoundedIterator<T>(list, start, end); 
+  } // BoundedIterator
 
   /**
    * A <code>SelectingIterator</code> enumerates only those elements of a collection
@@ -58,10 +75,14 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
                                            }
                                        });</pre>
    * <p>
-   * A <code>SelectingIterator</code> implements the <code>java.util.Iterator</code> interface, 
+   * A <code>SelectingIterator</code> implements the <code>Iterator</code> interface, 
    * and is constructed by wrapping around an existing iterator. 
    */
-  static public java.util.Iterator SelectingIterator(java.util.Iterator iterator, Predicate predicate) { return new SelectingIterator(iterator, predicate); }
+  static public <T> Iterator<T> SelectingIterator(Iterator<? super T> iterator, 
+                                                  Predicate<T> predicate) 
+  { 
+    return new SelectingIterator<T>(iterator, predicate); 
+  } // SelectingIterator
 
   /**
    * A <code>SkippingIterator</code> enumerates a sequence,
@@ -72,25 +93,35 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
    * 
    * @see #SelectingIterator
    */ 
-  static public java.util.Iterator SkippingIterator(java.util.Iterator iterator, Predicate predicate) { return new SkippingIterator(iterator, predicate); }
+  static public <T> Iterator<T> SkippingIterator(Iterator<? super T> iterator, 
+                                                 Predicate<T> predicate) 
+  { 
+    return new SkippingIterator<T>(iterator, predicate); 
+  } // SkippingIterator
 
   /** 
    * Iterates over an array of objects.
    * <p>
-   * An <code>ArrayIterator</code> puts a <code>java.util.Iterator</code> face on an 
+   * An <code>ArrayIterator</code> puts a <code>Iterator</code> face on an 
    * object array, allowing it be treated as you would a <code>java.util.Collection.</code>
    */
-  static public java.util.Iterator ArrayIterator(Object[] array) { return new ArrayIterator(array); }
+  static public <T> Iterator<T> ArrayIterator(T[] array) 
+  { 
+    return new ArrayIterator<T>(array); 
+  } // ArrayIterator
 
   /** 
    * Iterates over a single object.
    * <p>
    * Usually an iterator moves over some sequence. A <code>SingletonIterator</code> treats a 
    * single object as it if it were a list containing one object. Since <code>SingletonIterator</code>
-   * implements the <code>java.util.Iterator</code> interface, it provides a convienent way of
+   * implements the <code>Iterator</code> interface, it provides a convienent way of
    * passing a single object to an algorithm or other iterator consumer.
    */
-  static public java.util.Iterator SingletonIterator(Object object) { return new SingletonIterator(object); }
+  static public <T> Iterator<T> SingletonIterator(T object) 
+  { 
+    return new SingletonIterator<T>(object); 
+  } // SingletonIterator
 
   /**
    * A <code>TransfromIterator</code> applies a <code>{@link UnaryFunction}</code> to 
@@ -119,13 +150,20 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
        ...
      </pre> 
    */ 
-  static public java.util.Iterator TransformIterator(java.util.Iterator iterator, UnaryFunction transform) { return new TransformIterator(iterator, transform); }
+  static public <T, R> Iterator<R> TransformIterator(Iterator<? super T> iterator, 
+                                                     UnaryFunction<T, R> transform) 
+  { 
+    return new TransformIterator<T, R>(iterator, transform); 
+  } // TransformIterator
 
   /**
    * A <code>ReverseIterator</code> traverses a list from the end to the beginning, rather than the conventional
    * beginning to end traversal your normal every day iterator performs.
    */
-  static public java.util.Iterator ReverseIterator(java.util.List list) { return new ReverseIterator(list); }
+  static public <T> Iterator<T> ReverseIterator(List<? super T> list) 
+  { 
+    return new ReverseIterator<T>(list); 
+  } // ReverseIterator
 
   //////////////////////////////////
   private Iterators() { }

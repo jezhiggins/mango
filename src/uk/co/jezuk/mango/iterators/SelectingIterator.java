@@ -1,17 +1,19 @@
 package uk.co.jezuk.mango.iterators;
 
+import java.util.Iterator;
+import uk.co.jezuk.mango.Predicate;
+
 /**
  * A <code>SelectingIterator</code> enumerates only those elements of a collection
  * that match the supplied <code>Predicate</code>.
  * 
  * @author Jez Higgins, jez@jezuk.co.uk
- * @version $Id$
  */
-public class SelectingIterator implements java.util.Iterator
+public class SelectingIterator<T> implements Iterator<T>
 {
-  public SelectingIterator(java.util.Iterator iterator, uk.co.jezuk.mango.Predicate predicate)
+  public SelectingIterator(Iterator<? super T> iterator, Predicate<T> predicate)
   {
-    iter_ = iterator;
+    iter_ = (Iterator<T>)iterator;
     pred_ = predicate;
   } // SelectingIterator
 
@@ -20,14 +22,14 @@ public class SelectingIterator implements java.util.Iterator
     next_ = null;
     while(iter_.hasNext() && next_ == null)
     {
-      Object candidate = iter_.next();
+      T candidate = iter_.next();
       if(pred_.test(candidate))
         next_ = candidate;
     } // while
 		return next_ != null;
   } // hasNext
 
-  public Object next()
+  public T next()
   {
     return next_;
   } // next
@@ -38,9 +40,9 @@ public class SelectingIterator implements java.util.Iterator
   } // remove
 
   ////////////////////////
-  private java.util.Iterator iter_;
-  private uk.co.jezuk.mango.Predicate pred_;
-  private Object next_;
+  private Iterator<T> iter_;
+  private Predicate<T> pred_;
+  private T next_;
 } // SelectingIterator
 
 

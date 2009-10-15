@@ -1,5 +1,6 @@
 package uk.co.jezuk.mango.algorithms;
 
+import uk.co.jezuk.mango.Predicate;
 import uk.co.jezuk.mango.iterators.SelectingIterator;
 import java.util.Iterator;
 /**
@@ -10,11 +11,10 @@ import java.util.Iterator;
  * is <code>true</code>.
  * @see Count
  * @see CountIfNot
- * @version $Id$
  */
-public class CountIf
+public class CountIf<T>
 {
-  static public int execute(java.util.Iterator iterator, uk.co.jezuk.mango.Predicate test)
+  static public int execute(Iterator iterator, Predicate test)
   {
     if((iterator == null) || (test == null))
       return 0;  
