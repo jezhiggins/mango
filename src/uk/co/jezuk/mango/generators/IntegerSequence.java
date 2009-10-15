@@ -1,12 +1,13 @@
 package uk.co.jezuk.mango.generators;
 
+import uk.co.jezuk.mango.Generator;
+
 /**
  * Returns seed, seed+1, seed+2 ... on successive calls to fn()
  * Sequence begins at 0 if no seed value is given.
  * @author Jez Higgins, jez@jezuk.co.uk
- * @version $Id$
  */
-public class IntegerSequence implements uk.co.jezuk.mango.Generator
+public class IntegerSequence implements Generator<Integer>
 {
   public IntegerSequence()
   {
@@ -23,7 +24,7 @@ public class IntegerSequence implements uk.co.jezuk.mango.Generator
     seed_ = seed.intValue();
   } // IntegerSequence
 
-  public Object fn()
+  public Integer fn()
   {
     return new Integer(seed_++);
   } // fn

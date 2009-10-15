@@ -9,7 +9,7 @@ public class IntegerSequenceTest  extends TestCase
 
   public void test1()
   {
-    Generator gen = Generators.IntegerSequence();
+    Generator<Integer> gen = Generators.IntegerSequence();
     assertEquals(new Integer(0), gen.fn());
     assertEquals(new Integer(1), gen.fn());
     assertEquals(new Integer(2), gen.fn());
@@ -19,7 +19,7 @@ public class IntegerSequenceTest  extends TestCase
 
   public void test2()
   {
-    Generator gen = Generators.IntegerSequence(5);
+    Generator<Integer> gen = Generators.IntegerSequence(5);
     assertEquals(new Integer(5), gen.fn());
     assertEquals(new Integer(6), gen.fn());
     assertEquals(new Integer(7), gen.fn());
@@ -29,7 +29,7 @@ public class IntegerSequenceTest  extends TestCase
 
   public void test3()
   {
-    Generator gen = Generators.IntegerSequence(new Integer(5));
+    Generator<Integer> gen = Generators.IntegerSequence(new Integer(5));
     assertEquals(new Integer(5), gen.fn());
     assertEquals(new Integer(6), gen.fn());
     assertEquals(new Integer(7), gen.fn());

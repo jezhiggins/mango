@@ -6,7 +6,6 @@ import uk.co.jezuk.mango.generators.*;
  * The Mango Library Generators Library.
  *
  * @author Jez Higgins, jez@jezuk.co.uk
- * @version $Id$
  */
 public class Generators
 {
@@ -15,7 +14,7 @@ public class Generators
    * on successive calls to fn().
    * Sequence begins at 0 if no seed value is given.
    */
-  static public Generator IntegerSequence() { return new IntegerSequence(); }
-  static public Generator IntegerSequence(int seed) { return new IntegerSequence(seed); }
-  static public Generator IntegerSequence(Integer seed) { return new IntegerSequence(seed); }
+  static public Generator<Integer> IntegerSequence() { return new IntegerSequence(); }
+  static public Generator<Integer> IntegerSequence(int seed) { return new IntegerSequence(seed); }
+  static public Generator<Integer> IntegerSequence(Integer seed) { return new IntegerSequence(seed); }
 } // class Generators
