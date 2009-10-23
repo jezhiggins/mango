@@ -11,10 +11,10 @@ import uk.co.jezuk.mango.UnaryFunction;
  */
 public class TransformIterator<T, R> implements Iterator<R>
 {
-  public TransformIterator(Iterator<? super T> iterator, 
-                           UnaryFunction<T, R> transform)
+  public TransformIterator(Iterator<? extends T> iterator, 
+                           UnaryFunction<T, ? extends R> transform)
   {
-    iter_ = (Iterator<T>)iterator;
+    iter_ = iterator;
     transform_ = transform;
   } // TransformIterator
 
@@ -34,8 +34,8 @@ public class TransformIterator<T, R> implements Iterator<R>
   } // remove
 
   ////////////////////////
-  private Iterator<T> iter_;
-  private UnaryFunction<T, R> transform_;
+  private Iterator<? extends T> iter_;
+  private UnaryFunction<T, ? extends R> transform_;
 } // TransformIterator
 
 

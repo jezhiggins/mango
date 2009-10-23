@@ -44,13 +44,13 @@ public class Iterators
    * <code>BoundedIterator</code> therefore allows you to pick out a sub-set without
    * using <code>list.subList()</code> or equivalent.
    */
-  static public <T> Iterator<T> BoundedIterator(Iterator<? super T> iterator, 
+  static public <T> Iterator<T> BoundedIterator(Iterator<? extends T> iterator, 
                                                 int start, int end) 
   { 
     return new BoundedIterator<T>(iterator, start, end); 
   } // BoundedIterator
 
-  static public <T> Iterator<T> BoundedIterator(List<? super T> list, 
+  static public <T> Iterator<T> BoundedIterator(List<? extends T> list, 
                                                 int start, int end) 
   { 
     return new BoundedIterator<T>(list, start, end); 
@@ -78,7 +78,7 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
    * A <code>SelectingIterator</code> implements the <code>Iterator</code> interface, 
    * and is constructed by wrapping around an existing iterator. 
    */
-  static public <T> Iterator<T> SelectingIterator(Iterator<? super T> iterator, 
+  static public <T> Iterator<T> SelectingIterator(Iterator<? extends T> iterator, 
                                                   Predicate<T> predicate) 
   { 
     return new SelectingIterator<T>(iterator, predicate); 
@@ -93,7 +93,7 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
    * 
    * @see #SelectingIterator
    */ 
-  static public <T> Iterator<T> SkippingIterator(Iterator<? super T> iterator, 
+  static public <T> Iterator<T> SkippingIterator(Iterator<? extends T> iterator, 
                                                  Predicate<T> predicate) 
   { 
     return new SkippingIterator<T>(iterator, predicate); 
@@ -150,8 +150,8 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
        ...
      </pre> 
    */ 
-  static public <T, R> Iterator<R> TransformIterator(Iterator<? super T> iterator, 
-                                                     UnaryFunction<T, R> transform) 
+  static public <T, R> Iterator<R> TransformIterator(Iterator<? extends T> iterator, 
+                                                     UnaryFunction<T, ? extends R> transform) 
   { 
     return new TransformIterator<T, R>(iterator, transform); 
   } // TransformIterator
@@ -160,7 +160,7 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
    * A <code>ReverseIterator</code> traverses a list from the end to the beginning, rather than the conventional
    * beginning to end traversal your normal every day iterator performs.
    */
-  static public <T> Iterator<T> ReverseIterator(List<? super T> list) 
+  static public <T> Iterator<T> ReverseIterator(List<? extends T> list) 
   { 
     return new ReverseIterator<T>(list); 
   } // ReverseIterator

@@ -21,7 +21,7 @@ public class BoundedIterator<T> implements Iterator<T>
    * reached, the traversal will stop prematurely.<p>
    * @throws java.lang.IndexOutOfBoundsException if start<0, end<0 or start>end
    */
-  public BoundedIterator(Iterator<? super T> iterator, int start, int end)
+  public BoundedIterator(Iterator<? extends T> iterator, int start, int end)
   {
     iter_ = new iteratorWrapper<T>(iterator, start, end);
   } // BoundIterator
@@ -36,7 +36,7 @@ public class BoundedIterator<T> implements Iterator<T>
    * will be slower.
    * @throws java.lang.IndexOutOfBoundsException if start<0, end<0 or start>end
    */
-  public BoundedIterator(List<? super T> list, int start, int end)
+  public BoundedIterator(List<? extends T> list, int start, int end)
   {
     iter_ = new listIterator<T>(list, start, end);
   } // BoundedIterator
@@ -71,7 +71,7 @@ public class BoundedIterator<T> implements Iterator<T>
 
   static private class iteratorWrapper<T> implements Iterator<T>
   {
-    iteratorWrapper(Iterator<? super T> iterator, int start, int end)
+    iteratorWrapper(Iterator<? extends T> iterator, int start, int end)
     {
       BoundedIterator.checkConstraints(start, end);
 
@@ -99,14 +99,14 @@ public class BoundedIterator<T> implements Iterator<T>
       iter_.remove();
     } // remove
 
-    private Iterator<? super T> iter_;
+    private Iterator<? extends T> iter_;
     private int index_;
     private int end_;
   } // iteratorWrapper
 
   static private class listIterator<T> implements Iterator<T>
   {
-    listIterator(List<? super T> list, int start, int end)
+    listIterator(List<? extends T> list, int start, int end)
     {
       BoundedIterator.checkConstraints(start, end);
 
@@ -133,7 +133,7 @@ public class BoundedIterator<T> implements Iterator<T>
       list_.remove(index_ - 1);
     } // remove
 
-    private List<? super T> list_;
+    private List<? extends T> list_;
     private int index_;
     private int end_;
   } // listIterator

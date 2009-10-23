@@ -14,14 +14,17 @@ import java.util.Iterator;
  */
 public class Transform
 {
-  public static Collection execute(Iterator iterator, UnaryFunction fn, Collection results)
+  public static <T, R, C extends Collection<R>> 
+				 C execute(Iterator<? extends T> iterator, 
+					   UnaryFunction<T, ? extends R> fn, 
+					   C results)
   {
     if(iterator == null || fn == null || results == null)
       return results;
 
     while(iterator.hasNext())
     {
-      Object o = fn.fn(iterator.next());
+      R o = fn.fn(iterator.next());
       if(o != null)
       {
 	if(o instanceof Collection)

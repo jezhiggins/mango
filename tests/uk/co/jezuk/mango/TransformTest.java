@@ -18,57 +18,62 @@ public class TransformTest extends TestCase
 
   public void test1()
   {
-    ArrayList in = new ArrayList();
-    in.add(new Integer(1));
-    in.add(new Integer(2));
-    in.add(new Integer(3));
-    List out = (List)Algorithms.transform(in.iterator(), new Square(), new ArrayList());
+    List<Integer> in = new ArrayList<Integer>();
+    in.add(1);
+    in.add(2);
+    in.add(3);
+    List<Integer> out = Algorithms.transform(in.iterator(), new Square());
     assertEquals(3, out.size());
-    assertEquals(1, ((Integer)out.get(0)).intValue());
-    assertEquals(4, ((Integer)out.get(1)).intValue());
-    assertEquals(9, ((Integer)out.get(2)).intValue());
+    assertEquals(1, out.get(0).intValue());
+    assertEquals(4, out.get(1).intValue());
+    assertEquals(9, out.get(2).intValue());
   } // test1
     
-  public void test2()
+  public class Square implements UnaryFunction<Integer, Integer>
   {
-    ArrayList in = new ArrayList();
-    in.add("A");
-    in.add("B");
-    in.add("C");
-    List out = (List)Algorithms.transform(in.iterator(), new Duplicator(), new ArrayList());
-    assertEquals(6, out.size());
-    assertEquals("A", out.get(0));
-    assertEquals("A", out.get(1));
-    assertEquals("B", out.get(2));
-    assertEquals("B", out.get(3));
-    assertEquals("C", out.get(4));
-    assertEquals("C", out.get(5));
-  } // test2
-
-  public class Square implements UnaryFunction
-  {
-    public Object fn(Object x)
+    public Integer fn(Integer x)
     {
-      if(x instanceof Integer)
-	return new Integer(((Integer)x).intValue() * ((Integer)x).intValue());
-      return null; 
+      return x * x;
     } // fn
   } // Square
 
-  public class Duplicator implements UnaryFunction
+  public void test2()
   {
-    public Object fn(Object x)
+    List<String> in = new ArrayList<String>();
+    in.add("A");
+    in.add("B");
+    in.add("C");
+    List<String> out = Algorithms.transform(in.iterator(), new Duplicator());
+    assertEquals(3, out.size());
+    assertEquals("AA", out.get(0));
+    assertEquals("BB", out.get(1));
+    assertEquals("CC", out.get(2));
+  } // test2
+
+  public class Duplicator implements UnaryFunction<String, String>
+  {
+    public String fn(String x)
     {
-      if(x instanceof String)
-      {
-      	ArrayList ret = new ArrayList();
-       	ret.add(new String((String)x));
-       	ret.add(new String((String)x));
-       	return ret;
-      } // if ...
-      return null;
+      return x+x;
     } // fn
   } // Duplicator
+
+  public void test3()
+  {
+      List<Foo> fooList = new ArrayList<Foo>();
+      fooList.add(new Foo());
+      fooList.add(new Foo());
+      List<Bar> out = Algorithms.transform(fooList, new Bazifier());
+      assertEquals(2, out.size());
+  }
+
+  class Foo { }
+  class Bar { }
+  class Baz extends Bar { }
+  class Bazifier implements UnaryFunction<Foo, Bar>
+  {
+      public Baz fn(Foo foo) { return new Baz(); }
+  } // an
 } // TransformTest
 
 

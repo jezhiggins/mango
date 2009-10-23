@@ -11,7 +11,7 @@ import uk.co.jezuk.mango.Predicate;
  */
 public class SelectingIterator<T> implements Iterator<T>
 {
-  public SelectingIterator(Iterator<? super T> iterator, Predicate<T> predicate)
+  public SelectingIterator(Iterator<? extends T> iterator, Predicate<T> predicate)
   {
     iter_ = (Iterator<T>)iterator;
     pred_ = predicate;
@@ -26,7 +26,7 @@ public class SelectingIterator<T> implements Iterator<T>
       if(pred_.test(candidate))
         next_ = candidate;
     } // while
-		return next_ != null;
+    return next_ != null;
   } // hasNext
 
   public T next()

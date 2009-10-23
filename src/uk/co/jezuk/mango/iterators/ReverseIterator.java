@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class ReverseIterator<T> implements Iterator<T>
 {
-  public ReverseIterator(List<? super T> list)
+  public ReverseIterator(List<? extends T> list)
   {
     iter_ = ((List<T>)list).listIterator(list.size());
   } // ReverseIterator

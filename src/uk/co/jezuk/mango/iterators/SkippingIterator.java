@@ -13,7 +13,7 @@ import uk.co.jezuk.mango.Predicate;
  */
 public class SkippingIterator<T> implements Iterator<T>
 {
-  public SkippingIterator(Iterator<? super T> iterator, Predicate<T> predicate)
+  public SkippingIterator(Iterator<? extends T> iterator, Predicate<T> predicate)
   {
     iter_ = (Iterator<T>)iterator;
     pred_ = predicate;
