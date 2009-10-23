@@ -63,14 +63,23 @@ public class TransformTest extends TestCase
       List<Foo> fooList = new ArrayList<Foo>();
       fooList.add(new Foo());
       fooList.add(new Foo());
-      List<Bar> out = Algorithms.transform(fooList, new Bazifier());
+      List<Baz> out = Algorithms.transform(fooList, new Bazifier());
+      assertEquals(2, out.size());
+  }
+
+  public void test5()
+  {
+      List<Foo> fooList = new ArrayList<Foo>();
+      fooList.add(new Foo());
+      fooList.add(new Foo());
+      List<Bar> out = Algorithms.transform(fooList, new Bazifier(), new ArrayList<Bar>());
       assertEquals(2, out.size());
   }
 
   class Foo { }
   class Bar { }
   class Baz extends Bar { }
-  class Bazifier implements UnaryFunction<Foo, Bar>
+  class Bazifier implements UnaryFunction<Foo, Baz>
   {
       public Baz fn(Foo foo) { return new Baz(); }
   } // an

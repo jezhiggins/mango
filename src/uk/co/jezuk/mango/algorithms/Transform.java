@@ -14,9 +14,9 @@ import java.util.Iterator;
  */
 public class Transform
 {
-  public static <T, R, C extends Collection<R>> 
+  public static <T, R, C extends Collection<? super R>> 
 				 C execute(Iterator<? extends T> iterator, 
-					   UnaryFunction<T, ? extends R> fn, 
+					   UnaryFunction<T, R> fn, 
 					   C results)
   {
     if(iterator == null || fn == null || results == null)
