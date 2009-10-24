@@ -6,8 +6,8 @@ import java.util.Comparator;
 public class Unique
 {
   @SuppressWarnings("unchecked")
-  static public <T> void execute(Iterator<? extends T> iterator, 
-                                 Comparator<? extends T> comparator)
+  static public <T> void execute(Iterator<T> iterator, 
+                                 Comparator<? super T> comparator)
   {
     if(!iterator.hasNext())
       return;
@@ -16,7 +16,7 @@ public class Unique
     while(iterator.hasNext())
     {
       T next = iterator.next();
-      if(match((Comparator<T>)comparator, prev, next))
+      if(match(comparator, prev, next))
         iterator.remove();
       else
         prev = next;

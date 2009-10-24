@@ -64,47 +64,47 @@ public class Algorithms
    * collection, then each member of that collection is added to 
    * <code>results</code>.
    */
-    static public <T, R> List<R> transform(Collection<? extends T> collection, 
-					    UnaryFunction<T, R> fn)
-    { return Transform.execute(collection.iterator(), fn, new ArrayList<R>()); }
-    static public <T, R, C extends Collection<? super R>>
-				   C transform(Collection<? extends T> collection, 
-					       UnaryFunction<T, R> fn,
-					       C results) 
-    { return Transform.execute(collection.iterator(), fn, results); }
-    static public <T, R> List<R> transform(Collection<? extends T> collection,
-					   int start, 
-					   int end,
-					   UnaryFunction<T, R> fn)
-    { return Transform.execute(Iterators.BoundedIterator(collection.iterator(), start, end), fn, new ArrayList<R>()); }
-    static public <T, R, C extends Collection<? super R>>
-				   C transform(Collection<? extends T> collection, 
-					       int start, 
-					       int end, 
-					       UnaryFunction<T, R> fn, 
-					       C results) 
-    { return Transform.execute(Iterators.BoundedIterator(collection.iterator(), start, end), fn, results); }
-    static public <T, R> List<R> transform(List<? extends T> collection,
-					   int start, 
-					   int end,
-					   UnaryFunction<T, R> fn)
-    { return Transform.execute(Iterators.BoundedIterator(collection, start, end), fn, new ArrayList<R>()); }
-    static public <T, R, C extends Collection<? super R>>
-				   C transform(List<? extends T> list, 
-					       int start, 
-					       int end, 
-					       UnaryFunction<T, R> fn, 
-					       C results) 
-    { return Transform.execute(Iterators.BoundedIterator(list, start, end), fn, results); }
-    static public <T, R> List<R> transform(Iterator<? extends T> iterator,
-					   UnaryFunction<T, R> fn)
-    { return Transform.execute(iterator, fn, new ArrayList<R>()); } 
-    static public <T, R, C extends Collection<? super R>>
-				   C transform(Iterator<? extends T> iterator, 
-					       UnaryFunction<T, R> fn, 
-					       C results) 
-    { return Transform.execute(iterator, fn, results); } 
-
+  static public <T, R> List<R> transform(Collection<T> collection, 
+                                         UnaryFunction<? super T, R> fn)
+  { return Transform.execute(collection.iterator(), fn, new ArrayList<R>()); }
+  static public <T, R, C extends Collection<? super R>>
+                         C transform(Collection<T> collection, 
+                                     UnaryFunction<? super T, R> fn,
+                                     C results) 
+  { return Transform.execute(collection.iterator(), fn, results); }
+  static public <T, R> List<R> transform(Collection<T> collection,
+                                         int start, 
+                                         int end,
+                                         UnaryFunction<? super T, R> fn)
+  { return Transform.execute(Iterators.BoundedIterator(collection.iterator(), start, end), fn, new ArrayList<R>()); }
+  static public <T, R, C extends Collection<? super R>>
+                         C transform(Collection<T> collection, 
+                                     int start, 
+                                     int end, 
+                                     UnaryFunction<? super T, R> fn, 
+                                     C results) 
+  { return Transform.execute(Iterators.BoundedIterator(collection.iterator(), start, end), fn, results); }
+  static public <T, R> List<R> transform(List<T> collection,
+                                         int start, 
+                                         int end,
+                                         UnaryFunction<? super T, R> fn)
+  { return Transform.execute(Iterators.BoundedIterator(collection, start, end), fn, new ArrayList<R>()); }
+  static public <T, R, C extends Collection<? super R>>
+                         C transform(List<T> list, 
+                                     int start, 
+                                     int end, 
+                                     UnaryFunction<? super T, R> fn, 
+                                     C results) 
+  { return Transform.execute(Iterators.BoundedIterator(list, start, end), fn, results); }
+  static public <T, R> List<R> transform(Iterator<T> iterator,
+                                         UnaryFunction<? super T, R> fn)
+  { return Transform.execute(iterator, fn, new ArrayList<R>()); } 
+  static public <T, R, C extends Collection<? super R>>
+                         C transform(Iterator<T> iterator, 
+                                     UnaryFunction<? super T, R> fn, 
+                                     C results) 
+  { return Transform.execute(iterator, fn, results); } 
+  
   /**
    * <code>Count</code> computes the number of elements in the sequence that 
    * are equal to <code>value</code>.  <br>
@@ -205,10 +205,10 @@ public class Algorithms
   /**
    * Removes objects which match <code>test</code> from the sequence.
    */
-  static public void removeIf(Collection collection, Predicate pred) { RemoveIf.execute(collection.iterator(), pred); }
-  static public void removeIf(Collection collection, int start, int end, Predicate pred) { RemoveIf.execute(Iterators.BoundedIterator(collection.iterator(), start, end), pred); }
-  static public void removeIf(List list, int start, int end, Predicate pred) { RemoveIf.execute(Iterators.BoundedIterator(list, start, end), pred); }
-  static public void removeIf(Iterator iterator, Predicate pred) { RemoveIf.execute(iterator, pred); } 
+  static public <T> void removeIf(Collection<T> collection, Predicate<? super T> pred) { RemoveIf.execute(collection.iterator(), pred); }
+  static public <T> void removeIf(Collection<T> collection, int start, int end, Predicate<? super T> pred) { RemoveIf.execute(Iterators.BoundedIterator(collection.iterator(), start, end), pred); }
+  static public <T> void removeIf(List<T> list, int start, int end, Predicate<? super T> pred) { RemoveIf.execute(Iterators.BoundedIterator(list, start, end), pred); }
+  static public <T> void removeIf(Iterator<T> iterator, Predicate<? super T> pred) { RemoveIf.execute(iterator, pred); } 
  
  /**
    * Partitions the supplied collections into two.  Objects matching the Predicate 
@@ -232,10 +232,10 @@ public class Algorithms
     static public <T> void unique(Collection<T> collection, int start, int end) { Unique.execute(Iterators.BoundedIterator(collection.iterator(), start, end), null); }
     static public <T> void unique(List<T> list, int start, int end) { Unique.execute(Iterators.BoundedIterator(list, start, end), null); } 
     static public <T> void unique(Iterator<T> iterator) { Unique.execute(iterator, null);	} 
-    static public <T> void unique(Collection<? extends T> collection, Comparator<T> comparator) { Unique.execute(collection.iterator(), comparator);	} 
-    static public <T> void unique(Collection<? extends T> collection, int start, int end, Comparator<T> comparator) { Unique.execute(Iterators.BoundedIterator(collection.iterator(), start, end), comparator);	} 
-    static public <T> void unique(List<? extends T> list, int start, int end, Comparator<T> comparator) { Unique.execute(Iterators.BoundedIterator(list, start, end), comparator); } 
-    static public <T> void unique(Iterator<? extends T> iterator, Comparator<T> comparator) { Unique.execute(iterator, comparator); } 
+    static public <T> void unique(Collection<T> collection, Comparator<? super T> comparator) { Unique.execute(collection.iterator(), comparator);	} 
+    static public <T> void unique(Collection<T> collection, int start, int end, Comparator<? super T> comparator) { Unique.execute(Iterators.BoundedIterator(collection.iterator(), start, end), comparator);	} 
+    static public <T> void unique(List<T> list, int start, int end, Comparator<? super T> comparator) { Unique.execute(Iterators.BoundedIterator(list, start, end), comparator); } 
+    static public <T> void unique(Iterator<T> iterator, Comparator<? super T> comparator) { Unique.execute(iterator, comparator); } 
   
     private Algorithms() { } // prevent instantiation
 } // public class Algorithms

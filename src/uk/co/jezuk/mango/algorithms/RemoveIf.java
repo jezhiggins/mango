@@ -1,18 +1,19 @@
 package uk.co.jezuk.mango.algorithms;
 
-/**
- * @version $Id$
- */
+import java.util.Iterator;
+import uk.co.jezuk.mango.Predicate;
+
 public class RemoveIf
 {
-  static public void execute(java.util.Iterator iterator, uk.co.jezuk.mango.Predicate test)
+  static public <T> void execute(Iterator<T> iterator, 
+                                 Predicate<? super T> test)
 	{
     if((iterator == null) || (test == null))
       return;  
 
     while(iterator.hasNext())
     {
-      Object obj = iterator.next();
+      T obj = iterator.next();
       if(test.test(obj))
 				iterator.remove();
     } // while ...

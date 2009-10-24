@@ -15,9 +15,9 @@ import java.util.Iterator;
 public class Transform
 {
   public static <T, R, C extends Collection<? super R>> 
-				 C execute(Iterator<? extends T> iterator, 
-					   UnaryFunction<T, R> fn, 
-					   C results)
+				 C execute(Iterator<T> iterator, 
+                   UnaryFunction<? super T, R> fn, 
+                   C results)
   {
     if(iterator == null || fn == null || results == null)
       return results;
@@ -27,10 +27,10 @@ public class Transform
       R o = fn.fn(iterator.next());
       if(o != null)
       {
-	if(o instanceof Collection)
+        if(o instanceof Collection)
           results.addAll((Collection)o);
-	else
-	  results.add(o);
+        else
+          results.add(o);
       } // if(o != null)
     } // while ...
     return results;
