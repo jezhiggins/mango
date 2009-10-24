@@ -6,12 +6,15 @@ import java.util.ArrayList;
 
 public class SymmetricDifference
 {
-	static public Collection execute(Iterator iter, Collection coll, Collection results)
+	static public <T, C extends Collection<? super T>>
+         C execute(Iterator<? extends T> iter, 
+                   Collection<? extends T> coll, 
+                   C results)
 	{
-		Collection intersection = new ArrayList();
+		Collection<T> intersection = new ArrayList<T>();
 		while(iter.hasNext())
 		{
-			Object o = iter.next();
+			T o = iter.next();
 			if(!coll.contains(o))
 				results.add(o);
 			else
@@ -20,16 +23,19 @@ public class SymmetricDifference
 		iter = coll.iterator();
 		while(iter.hasNext())
 		{
-			Object o = iter.next();
+			T o = iter.next();
 			if(!intersection.contains(o))
 				results.add(o);
 		} // while
 		return results;
 	} // execute
 
-	static public Collection execute(Iterator iter, Iterator iter2, Collection results)
+	static public <T, C extends Collection<? super T>>
+         C execute(Iterator<? extends T> iter, 
+                   Iterator<? extends T> iter2, 
+                   C results)
 	{
-		Collection coll = new ArrayList();
+		Collection<T> coll = new ArrayList<T>();
 		while(iter2.hasNext())
 			coll.add(iter2.next());
 		return execute(iter, coll, results);

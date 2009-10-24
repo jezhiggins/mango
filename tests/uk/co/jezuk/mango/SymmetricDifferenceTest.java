@@ -12,7 +12,7 @@ public class SymmetricDifferenceTest extends TestCase
 
 	public void test1()
 	{
-		List l1 = new java.util.ArrayList();
+		List<String> l1 = new ArrayList<String>();
 		Algorithms.symmetricDifference(l1, l1, l1);
 
 		assertEquals(0, l1.size());
@@ -20,43 +20,40 @@ public class SymmetricDifferenceTest extends TestCase
 
 	public void test2()
 	{
-		List l1 = new java.util.ArrayList();
+		List<String> l1 = new ArrayList<String>();
 		l1.add("1");
 		l1.add("2");
 		l1.add("3");
-		List i = new java.util.ArrayList();
-		Algorithms.symmetricDifference(l1, l1, i);
+		List<String> i = Algorithms.symmetricDifference(l1, l1);
 		
 		assertEquals(0, i.size());
 	} // test2
 
 	public void test3()
 	{
-		List l1 = new java.util.ArrayList();
+		List<String> l1 = new ArrayList<String>();
 		l1.add("1");
 		l1.add("2");
 		l1.add("3");
-		List l2 = new java.util.ArrayList();
+		List<String> l2 = new ArrayList<String>();
 		l2.add("1");
 		l2.add("2");
 		l2.add("3");
-		List i = new java.util.ArrayList();
-		Algorithms.symmetricDifference(l1, l2, i);
+		List<String> i = Algorithms.symmetricDifference(l1, l2);
 		
 		assertEquals(0, i.size());
 	} // test3
 
 	public void test4()
 	{
-		List l1 = new java.util.ArrayList();
+		List<String> l1 = new ArrayList<String>();
 		l1.add("1");
 		l1.add("2");
 		l1.add("3");
-		List l2 = new java.util.ArrayList();
+		List<String> l2 = new ArrayList<String>();
 		l2.add("1");
 		l2.add("3");
-		List i = new java.util.ArrayList();
-		Algorithms.symmetricDifference(l1, l2, i);
+		List<String> i = Algorithms.symmetricDifference(l1, l2);
 		
 		assertEquals(1, i.size());
 		assertEquals("2", i.get(0));
@@ -64,14 +61,13 @@ public class SymmetricDifferenceTest extends TestCase
 
 	public void test5()
 	{
-		List l1 = new java.util.ArrayList();
+		List<String> l1 = new ArrayList<String>();
 		l1.add("1");
 		l1.add("2");
 		l1.add("3");
-		List l2 = new java.util.ArrayList();
+		List<String> l2 = new ArrayList<String>();
 		l2.add("2");
-		List i = new java.util.ArrayList();
-		Algorithms.symmetricDifference(l1, l2, i);
+		List<String> i = Algorithms.symmetricDifference(l1, l2);
 		
 		assertEquals(2, i.size());
 		assertEquals("1", i.get(0));
@@ -80,15 +76,14 @@ public class SymmetricDifferenceTest extends TestCase
 
 	public void test6()
 	{
-		List l1 = new java.util.ArrayList();
+		List<String> l1 = new ArrayList<String>();
 		l1.add("1");
 		l1.add("2");
 		l1.add("3");
-		List l2 = new java.util.ArrayList();
+		List<String> l2 = new ArrayList<String>();
 		l2.add("2");
 		l2.add("1");
-		List i = new java.util.ArrayList();
-		Algorithms.symmetricDifference(l1, l2, i);
+		List<String> i = Algorithms.symmetricDifference(l1, l2);
 		
 		assertEquals(1, i.size());
 		assertEquals("3", i.get(0));
@@ -96,15 +91,14 @@ public class SymmetricDifferenceTest extends TestCase
 
 	public void test7()
 	{
-		List l1 = new java.util.ArrayList();
+		List<String> l1 = new ArrayList<String>();
 		l1.add("1");
 		l1.add("3");
-		List l2 = new java.util.ArrayList();
+		List<String> l2 = new ArrayList<String>();
 		l2.add("1");
 		l2.add("2");
 		l2.add("3");
-		List i = new java.util.ArrayList();
-		Algorithms.symmetricDifference(l1, l2, i);
+		List<String> i = Algorithms.symmetricDifference(l1, l2);
 		
 		assertEquals(1, i.size());
 		assertEquals("2", i.get(0));
@@ -112,14 +106,13 @@ public class SymmetricDifferenceTest extends TestCase
 
 	public void test8()
 	{
-		List l1 = new java.util.ArrayList();
+		List<String> l1 = new ArrayList<String>();
 		l1.add("2");
-		List l2 = new java.util.ArrayList();
+		List<String> l2 = new ArrayList<String>();
 		l2.add("1");
 		l2.add("2");
 		l2.add("3");
-		List i = new java.util.ArrayList();
-		Algorithms.symmetricDifference(l1, l2, i);
+		List<String> i = Algorithms.symmetricDifference(l1, l2);
 		
 		assertEquals(2, i.size());
 		assertEquals("1", i.get(0));
@@ -128,16 +121,15 @@ public class SymmetricDifferenceTest extends TestCase
 
 	public void test9()
 	{
-		List l1 = new java.util.ArrayList();
+		List<String> l1 = new ArrayList<String>();
 		l1.add("1");
 		l1.add("2");
 		l1.add("3");
-		List l2 = new java.util.ArrayList();
+		List<String> l2 = new ArrayList<String>();
 		l2.add("4");
 		l2.add("5");
 		l2.add("6");
-		List i = new java.util.ArrayList();
-		Algorithms.symmetricDifference(l1, l2, i);
+		List<String> i = Algorithms.symmetricDifference(l1, l2);
 		
 		assertEquals(6, i.size());
 		assertEquals("1", i.get(0));
