@@ -1,20 +1,19 @@
 package uk.co.jezuk.mango.algorithms;
 
-/**
- * @version $Id$
- */
+import java.util.Iterator;
+
 public class Remove
 {
-  static public void execute(java.util.Iterator iterator, Object value)
+  static public <T> void execute(Iterator<? extends T> iterator, T value)
   {
     if(iterator == null)
       return;  
 
     while(iterator.hasNext())
     {
-      Object obj = iterator.next();
+      T obj = iterator.next();
       if((value == null && obj == null) || value.equals(obj))
-	iterator.remove();
+        iterator.remove();
     } // while ...
   } // execute
 

@@ -197,10 +197,10 @@ public class Algorithms
   /**
    * Removes objects equal to <code>value</code> from the sequence.
    */
-  static public void remove(Collection collection, Object value) { Remove.execute(collection.iterator(), value); }
-  static public void remove(Collection collection, int start, int end, Object value) { Remove.execute(Iterators.BoundedIterator(collection.iterator(), start, end), value); }
-  static public void remove(List list, int start, int end, Object value) { Remove.execute(Iterators.BoundedIterator(list, start, end), value); }
-  static public void remove(Iterator iterator, Object value) { Remove.execute(iterator, value); } 
+  static public <T> void remove(Collection<? extends T> collection, T value) { Remove.execute(collection.iterator(), value); }
+  static public <T> void remove(Collection<? extends T> collection, int start, int end, T value) { Remove.execute(Iterators.BoundedIterator(collection.iterator(), start, end), value); }
+  static public <T> void remove(List<? extends T> list, int start, int end, T value) { Remove.execute(Iterators.BoundedIterator(list, start, end), value); }
+  static public <T> void remove(Iterator<? extends T> iterator, T value) { Remove.execute(iterator, value); } 
   
   /**
    * Removes objects which match <code>test</code> from the sequence.
