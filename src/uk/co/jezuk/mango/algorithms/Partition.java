@@ -1,18 +1,23 @@
 package uk.co.jezuk.mango.algorithms;
 
-/**
- * @version $Id: Partition.java 60 2002-06-12 13:47:08Z jez $
- */
+import java.util.Iterator;
+import java.util.Collection;
+
+import uk.co.jezuk.mango.Predicate;
+
 public class Partition
 {
-  static public java.util.Collection execute(java.util.Iterator iterator, uk.co.jezuk.mango.Predicate test, java.util.Collection results)
+  static public <T, C extends Collection<? super T>> 
+                      C execute(Iterator<T> iterator, 
+                                Predicate<? super T> test, 
+                                C results)
   {
     if((iterator == null) || (test == null))
       return results;  
 
     while(iterator.hasNext())
     {
-      Object obj = iterator.next();
+      T obj = iterator.next();
       if(test.test(obj))
 			{
 				iterator.remove();

@@ -3,25 +3,26 @@ package uk.co.jezuk.mango;
 import junit.framework.*;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.ArrayList;
 
 public class PartitionTest  extends TestCase
 {
-  java.util.List list;
+  List<Integer> list;
 
   public PartitionTest(String name) { super(name); }
   public static Test suite() { return new TestSuite(PartitionTest.class); }
 
   protected void setUp()
   {
-    list = new java.util.ArrayList();
+    list = new ArrayList<Integer>();
     for(int i = 0; i < 10; ++i)
-      list.add(new Integer(i));
+      list.add(i);
   } // setUp
 
   public void test1()
   {
-    Collection removed = Algorithms.partition(list, Bind.First(BinaryPredicates.LessThanEquals(), new Integer(7)), new ArrayList());
+    Collection<Integer> removed = Algorithms.partition(list, Bind.First(BinaryPredicates.LessThanEquals(), new Integer(7)));
 
     assertEquals(7, list.size());
     assertEquals(null, Algorithms.find(list, new Integer(7)));
@@ -35,7 +36,7 @@ public class PartitionTest  extends TestCase
 
   public void test2()
   {
-    Collection removed = Algorithms.partition(list, 1, 5, Bind.First(BinaryPredicates.LessThanEquals(), new Integer(7)), new ArrayList());
+    Collection<Integer> removed = Algorithms.partition(list, 1, 5, Bind.First(BinaryPredicates.LessThanEquals(), new Integer(7)));
 
     assertEquals(10, list.size());
     assertEquals(list.get(7), Algorithms.find(list, new Integer(7)));

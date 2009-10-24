@@ -215,10 +215,46 @@ public class Algorithms
 	 * are removed from the collection and added to the results Collection.
 	 * Returns the result collection.
    */
-  static public Collection partition(Collection collection, Predicate pred, Collection results) { return Partition.execute(collection.iterator(), pred, results); }
-  static public Collection partition(Collection collection, int start, int end, Predicate pred, Collection results) { return Partition.execute(Iterators.BoundedIterator(collection.iterator(), start, end), pred, results); }
-  static public Collection partition(List list, int start, int end, Predicate pred, Collection results) { return Partition.execute(Iterators.BoundedIterator(list, start, end), pred, results); }
-  static public Collection partition(Iterator iterator, Predicate pred, Collection results) { return Partition.execute(iterator, pred, results); } 
+  static public <T> List<T> partition(Collection<T> collection, 
+                                      Predicate<? super T> pred)
+  { return Partition.execute(collection.iterator(), pred, new ArrayList<T>()); }
+  static public <T, C extends Collection<? super T>>
+                      C partition(Collection<T> collection, 
+                                  Predicate<? super T> pred, 
+                                  C results) 
+  { return Partition.execute(collection.iterator(), pred, results); }
+  static public <T> List <T> partition(Collection<T> collection, 
+                                       int start, 
+                                       int end, 
+                                       Predicate<? super T> pred)
+  { return Partition.execute(Iterators.BoundedIterator(collection.iterator(), start, end), pred, new ArrayList<T>()); }
+  static public <T, C extends Collection<? super T>>
+                      C partition(Collection<T> collection, 
+                                  int start, 
+                                  int end, 
+                                  Predicate<? super T> pred, 
+                                  C results) 
+  { return Partition.execute(Iterators.BoundedIterator(collection.iterator(), start, end), pred, results); }
+  static public <T> List<T> partition(List<T> list, 
+                                      int start, 
+                                      int end, 
+                                      Predicate<? super T> pred)
+  { return Partition.execute(Iterators.BoundedIterator(list, start, end), pred, new ArrayList<T>()); }
+  static public <T, C extends Collection<? super T>>
+                      C partition(List<T> list, 
+                                  int start, 
+                                  int end, 
+                                  Predicate<? super T> pred, 
+                                  C results) 
+  { return Partition.execute(Iterators.BoundedIterator(list, start, end), pred, results); }
+  static public <T> List<T> partition(Iterator<T> iterator, 
+                                      Predicate<? super T> pred)
+  { return Partition.execute(iterator, pred, new ArrayList<T>()); } 
+  static public <T, C extends Collection<? super T>>
+                      C partition(Iterator<T> iterator, 
+                                  Predicate<? super T> pred, 
+                                  C results) 
+  { return Partition.execute(iterator, pred, results); } 
 
   /**
    * Removes duplicate elements.  Whenever a consecutive groups of duplicate objects
