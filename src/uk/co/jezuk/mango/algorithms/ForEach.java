@@ -1,21 +1,24 @@
 package uk.co.jezuk.mango.algorithms;
 
+import java.util.Iterator;
+import uk.co.jezuk.mango.UnaryFunction;
+
 /**
  * The algorithm ForEach applies the function <code>fn</code> to
  * each element in the <code>iterator</code> sequence. 
- * @version $Id$
  */
 public class ForEach
 {
-    static public void execute(java.util.Iterator iterator, uk.co.jezuk.mango.UnaryFunction fn)
-    {
-	if(iterator == null || fn == null)
+  static public <T, R> void execute(Iterator<T> iterator, 
+                                    UnaryFunction<? super T, R> fn)
+  {
+    if(iterator == null || fn == null)
 	    return;
-
-	while(iterator.hasNext())
+    
+    while(iterator.hasNext())
 	    fn.fn(iterator.next());
-    } // execute
+  } // execute
 
-    //////////////////////////////////
-    private ForEach() { }
+  //////////////////////////////////
+  private ForEach() { }
 } // ForEach

@@ -72,10 +72,22 @@ public class Algorithms
    * The algorithm ForEach applies the function <code>fn</code> to
    * each element in the <code>iterator</code> sequence. 
    */
-  static public void forEach(Collection collection, UnaryFunction fn) { ForEach.execute(collection.iterator(), fn); }
-  static public void forEach(Collection collection, int start, int end, UnaryFunction fn) { ForEach.execute(Iterators.BoundedIterator(collection.iterator(), start, end), fn); }
-  static public void forEach(List list, int start, int end, UnaryFunction fn) { ForEach.execute(Iterators.BoundedIterator(list, start, end), fn); }
-  static public void forEach(Iterator iterator, UnaryFunction fn) { ForEach.execute(iterator, fn); } 
+  static public <T, R> void forEach(Collection<T> collection, 
+                                    UnaryFunction<? super T, R> fn) 
+  { ForEach.execute(collection.iterator(), fn); }
+  static public <T, R> void forEach(Collection<T> collection, 
+                                    int start, 
+                                    int end, 
+                                    UnaryFunction<? super T, R> fn) 
+  { ForEach.execute(Iterators.BoundedIterator(collection.iterator(), start, end), fn); }
+  static public <T, R> void forEach(List<T> list, 
+                                    int start, 
+                                    int end, 
+                                    UnaryFunction<? super T, R> fn) 
+  { ForEach.execute(Iterators.BoundedIterator(list, start, end), fn); }
+  static public <T, R> void forEach(Iterator<T> iterator, 
+                                    UnaryFunction<? super T, R> fn) 
+  { ForEach.execute(iterator, fn); } 
 
   /**
    * The algorithm Transform applies the function <code>fn</code> to
