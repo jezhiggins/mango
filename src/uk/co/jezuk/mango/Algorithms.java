@@ -15,34 +15,55 @@ import uk.co.jezuk.mango.algorithms.*;
  */
 public class Algorithms
 {
-	/**
+  /**
    * Algorithm intersection finds the common elements in both collections
-	 * See http://en.wikipedia.org/wiki/Intersection_(set_theory)
-	 */
-	static public Collection intersection(Collection coll1, Collection coll2, Collection results) { return Intersection.execute(coll1.iterator(), coll2, results); }
-	static public Collection intersection(Iterator iter1, Collection coll2, Collection results) { return Intersection.execute(iter1, coll2, results); }
-	static public Collection intersection(Iterator iter1, Iterator iter2, Collection results) { return Intersection.execute(iter1, iter2, results); }
+   * See http://en.wikipedia.org/wiki/Intersection_(set_theory)
+   */
+  static public <T> List<T> intersection(Collection<? extends T> coll1, 
+					 Collection<? extends T> coll2)
+    { return Intersection.execute(coll1.iterator(), coll2, new ArrayList<T>()); }
+  static public <T, C extends Collection<? super T>>
+			      C intersection(Collection<? extends T> coll1, 
+					     Collection<? extends T> coll2, 
+					     C results) 
+  { return Intersection.execute(coll1.iterator(), coll2, results); }
+  static public <T> List<T> intersection(Iterator<? extends T> iter1, 
+					 Collection<? extends T> coll2)
+    { return Intersection.execute(iter1, coll2, new ArrayList<T>()); }
+  static public <T, C extends Collection<? super T>> 
+			      C intersection(Iterator<? extends T> iter1, 
+					     Collection<? extends T> coll2, 
+					     C results) 
+  { return Intersection.execute(iter1, coll2, results); }
+  static public <T> List<T> intersection(Iterator<? extends T> iter1, 
+					 Iterator<? extends T> iter2)
+  { return Intersection.execute(iter1, iter2, new ArrayList<T>()); }
+  static public <T, C extends Collection<? super T>>
+			      C intersection(Iterator<? extends T> iter1, 
+					     Iterator<? extends T> iter2, 
+					     C results)
+  { return Intersection.execute(iter1, iter2, results); }
 
-	/**
+  /**
    * Algorithm symmetricDifference returns the elements that are on coll1 
-	 * and not in coll2, and those elements in coll2 that are not in coll1.
-	 * See http://en.wikipedia.org/wiki/Symmetric_difference
-	 */
-	static public <T> List<T> symmetricDifference(Collection<? extends T> coll1, 
+   * and not in coll2, and those elements in coll2 that are not in coll1.
+   * See http://en.wikipedia.org/wiki/Symmetric_difference
+   */
+  static public <T> List<T> symmetricDifference(Collection<? extends T> coll1, 
                                                 Collection<? extends T> coll2)
   { return SymmetricDifference.execute(coll1.iterator(), coll2, new ArrayList<T>()); }
-	static public <T, C extends Collection<? super T>> C symmetricDifference(Collection<? extends T> coll1, 
+  static public <T, C extends Collection<? super T>> C symmetricDifference(Collection<? extends T> coll1, 
                                                                            Collection<? extends T> coll2, 
                                                                            C results) 
   { return SymmetricDifference.execute(coll1.iterator(), coll2, results); }
-	static public <T> List<T> symmetricDifference(Iterator<? extends T> iter1, 
+  static public <T> List<T> symmetricDifference(Iterator<? extends T> iter1, 
                                                 Collection<? extends T> coll2) 
   { return SymmetricDifference.execute(iter1, coll2, new ArrayList<T>()); }
-	static public <T, C extends Collection<? super T>> C  symmetricDifference(Iterator<? extends T> iter1, 
+  static public <T, C extends Collection<? super T>> C  symmetricDifference(Iterator<? extends T> iter1, 
                                                                             Collection<? extends T> coll2, 
                                                                             C results) 
   { return SymmetricDifference.execute(iter1, coll2, results); }
-	static public <T> List<T> symmetricDifference(Iterator<? extends T> iter1, 
+  static public <T> List<T> symmetricDifference(Iterator<? extends T> iter1, 
                                                 Iterator<? extends T> iter2)
   { return SymmetricDifference.execute(iter1, iter2, new ArrayList<T>()); }
 
