@@ -86,33 +86,31 @@ public class AdaptTest  extends TestCase
 
   public void test8()
   {
-    Function fn = Adapt.Compose(new AppendX(), new AppendX());
+    Function<String, String> fn = Functions.Compose(new AppendX(), new AppendX());
     assertEquals("helloXX", fn.fn("hello"));
   } // test8
 
   public void test9()
   {
-    BinaryFunction fn = Adapt.Compose(new Concat(), new AppendX(), new AppendX());
+    BinaryFunction<String, String, String> fn = 
+	BinaryFunctions.Compose(new Concat(), new AppendX(), new AppendX());
     assertEquals("helloXworldX", fn.fn("hello", "world"));
   } // test9
 		
-  static public class Concat implements BinaryFunction
+  static public class Concat implements BinaryFunction<String, String, String>
   {
-    public Object fn(Object x, Object y)
+    public String fn(String x, String y)
     {
-      String s1 = (String)x;
-      String s2 = (String)y;
-      return s1+s2;
+      return x+y;
     } // fn
   } // Concat
   
 
-  static public class AppendX implements Function
+  static public class AppendX implements Function<String, String>
   {
-    public Object fn(Object x)
+    public String fn(String x)
     {
-      String s = (String)x;
-      return s+'X';
+      return x+'X';
     } 
   } // AppendX
     
