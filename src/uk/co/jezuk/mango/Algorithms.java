@@ -182,10 +182,22 @@ public class Algorithms
    * The objects in the sequence and <code>value</code> must be comparable using
    * <code>Object.equals</code> (unless <code>value</code> is <code>null</code>).
    */
-  static public Object find(Collection collection, Object value) { return Find.execute(collection.iterator(), value); }
-  static public Object find(Collection collection, int start, int end, Object value) { return Find.execute(Iterators.BoundedIterator(collection.iterator(), start, end), value); }
-  static public Object find(List list, int start, int end, Object value) { return Find.execute(Iterators.BoundedIterator(list, start, end), value); }
-  static public Object find(Iterator iterator, Object value) { return Find.execute(iterator, value); } 
+  static public <T> T find(Collection<? extends T> collection, 
+                           T value) 
+  { return Find.execute(collection.iterator(), value); }
+  static public <T> T find(Collection<? extends T> collection, 
+                           int start, 
+                           int end, 
+                           T value) 
+  { return Find.execute(Iterators.BoundedIterator(collection.iterator(), start, end), value); }
+  static public <T> T find(List<? extends T> list, 
+                           int start, 
+                           int end, 
+                           T value) 
+  { return Find.execute(Iterators.BoundedIterator(list, start, end), value); }
+  static public <T> T find(Iterator<? extends T> iterator, 
+                           T value) 
+  { return Find.execute(iterator, value); } 
   
   /**
    * Searchs the sequence travesed by the Iterator for the given value.
@@ -235,10 +247,22 @@ public class Algorithms
    * is not found.  The iterator will have been advanced to the next object 
    * in the sequence.
    */
-  static public Object findIf(Collection collection, Predicate test) { return FindIf.execute(collection.iterator(), test); }
-  static public Object findIf(Collection collection, int start, int end, Predicate test) { return FindIf.execute(Iterators.BoundedIterator(collection.iterator(), start, end), test); }
-  static public Object findIf(List list, int start, int end, Predicate test) { return FindIf.execute(Iterators.BoundedIterator(list, start, end), test); }
-  static public Object findIf(Iterator iterator, Predicate test) { return FindIf.execute(iterator, test); } 
+  static public <T> T findIf(Collection<T> collection, 
+                             Predicate<? super T> test) 
+  { return FindIf.execute(collection.iterator(), test); }
+  static public <T> T findIf(Collection<T> collection, 
+                             int start, 
+                             int end, 
+                             Predicate<? super T> test) 
+  { return FindIf.execute(Iterators.BoundedIterator(collection.iterator(), start, end), test); }
+  static public <T> T findIf(List<T> list, 
+                             int start, 
+                             int end, 
+                             Predicate<? super T> test) 
+  { return FindIf.execute(Iterators.BoundedIterator(list, start, end), test); }
+  static public <T> T findIf(Iterator<T> iterator, 
+                             Predicate<? super T> test) 
+  { return FindIf.execute(iterator, test); } 
 
   /**
    * Searchs the sequence traversed by the Iterator and returns the first
@@ -246,10 +270,10 @@ public class Algorithms
    * The iterator will have been advanced to the next object 
    * in the sequence.
    */
-  static public Object findIfNot(Collection collection, Predicate test) { return FindIfNot.execute(collection.iterator(), test); }
-  static public Object findIfNot(Collection collection, int start, int end, Predicate test) { return FindIfNot.execute(Iterators.BoundedIterator(collection.iterator(), start, end), test); }
-  static public Object findIfNot(List list, int start, int end, Predicate test) { return FindIfNot.execute(Iterators.BoundedIterator(list, start, end), test); }
-  static public Object findIfNot(Iterator iterator, Predicate test) { return FindIfNot.execute(iterator, test); } 
+  static public <T> T findIfNot(Collection<T> collection, Predicate<? super T> test) { return FindIfNot.execute(collection.iterator(), test); }
+  static public <T> T findIfNot(Collection<T> collection, int start, int end, Predicate<? super T> test) { return FindIfNot.execute(Iterators.BoundedIterator(collection.iterator(), start, end), test); }
+  static public <T> T findIfNot(List<T> list, int start, int end, Predicate<? super T> test) { return FindIfNot.execute(Iterators.BoundedIterator(list, start, end), test); }
+  static public <T> T findIfNot(Iterator<T> iterator, Predicate<? super T> test) { return FindIfNot.execute(iterator, test); } 
 
   /**
    * Removes objects equal to <code>value</code> from the sequence.
