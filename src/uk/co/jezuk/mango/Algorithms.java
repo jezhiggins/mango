@@ -199,10 +199,22 @@ public class Algorithms
   static public int findPosition(Collection collection, int start, int end, Object value) { return FindPosition.execute(Iterators.BoundedIterator(collection.iterator(), start, end), value); }
   static public int findPosition(List list, int start, int end, Object value) { return FindPosition.execute(Iterators.BoundedIterator(list, start, end), value); }
   static public int findPosition(Iterator iterator, Object value) { return FindPosition.execute(iterator, value); } 
-  static public int findPositionIf(Collection collection, Predicate pred) { return FindPositionIf.execute(collection.iterator(), pred); }
-  static public int findPositionIf(Collection collection, int start, int end, Predicate pred) { return FindPositionIf.execute(Iterators.BoundedIterator(collection.iterator(), start, end), pred); }
-  static public int findPositionIf(List list, int start, int end, Predicate pred) { return FindPositionIf.execute(Iterators.BoundedIterator(list, start, end), pred); }
-  static public int findPositionIf(Iterator iterator, Predicate pred) { return FindPositionIf.execute(iterator, pred); } 
+  static public <T> int findPositionIf(Collection<T> collection, 
+                                       Predicate<? super T> pred) 
+  { return FindPositionIf.execute(collection.iterator(), pred); }
+  static public <T> int findPositionIf(Collection<T> collection, 
+                                       int start, 
+                                       int end, 
+                                       Predicate<? super T> pred) 
+  { return FindPositionIf.execute(Iterators.BoundedIterator(collection.iterator(), start, end), pred); }
+  static public <T> int findPositionIf(List<T> list, 
+                                       int start, 
+                                       int end, 
+                                       Predicate<? super T> pred) 
+  { return FindPositionIf.execute(Iterators.BoundedIterator(list, start, end), pred); }
+  static public <T> int findPositionIf(Iterator<T> iterator, 
+                                       Predicate<? super T> pred) 
+  { return FindPositionIf.execute(iterator, pred); } 
   
   /**
    * Searchs the sequence traversed by the Iterator and returns the first
