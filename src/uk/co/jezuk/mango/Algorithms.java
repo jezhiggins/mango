@@ -195,10 +195,22 @@ public class Algorithms
    * The objects in the sequence and <code>value</code> must be comparable using
    * <code>Object.equals</code> (unless <code>value</code> is <code>null</code>).
    */
-  static public int findPosition(Collection collection, Object value) { return FindPosition.execute(collection.iterator(), value); }
-  static public int findPosition(Collection collection, int start, int end, Object value) { return FindPosition.execute(Iterators.BoundedIterator(collection.iterator(), start, end), value); }
-  static public int findPosition(List list, int start, int end, Object value) { return FindPosition.execute(Iterators.BoundedIterator(list, start, end), value); }
-  static public int findPosition(Iterator iterator, Object value) { return FindPosition.execute(iterator, value); } 
+  static public <T> int findPosition(Collection<? extends T> collection, 
+                                     T value) 
+  { return FindPosition.execute(collection.iterator(), value); }
+  static public <T> int findPosition(Collection<? extends T> collection, 
+                                     int start, 
+                                     int end, 
+                                     T value) 
+  { return FindPosition.execute(Iterators.BoundedIterator(collection.iterator(), start, end), value); }
+  static public <T> int findPosition(List<? extends T> list, 
+                                     int start, 
+                                     int end, 
+                                     T value) 
+  { return FindPosition.execute(Iterators.BoundedIterator(list, start, end), value); }
+  static public <T> int findPosition(Iterator<? extends T> iterator, 
+                                     T value) 
+  { return FindPosition.execute(iterator, value); } 
   static public <T> int findPositionIf(Collection<T> collection, 
                                        Predicate<? super T> pred) 
   { return FindPositionIf.execute(collection.iterator(), pred); }
