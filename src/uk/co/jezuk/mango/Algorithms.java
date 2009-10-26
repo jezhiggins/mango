@@ -145,10 +145,22 @@ public class Algorithms
    * The objects in the sequence and <code>value</code> must be comparable using
    * <code>Object.equals</code> (unless <code>value</code> is <code>null</code>).
    */
-  static public int count(Collection collection, Object value) { return Count.execute(collection.iterator(), value); }
-  static public int count(Collection collection, int start, int end, Object value) { return Count.execute(Iterators.BoundedIterator(collection.iterator(), start, end), value); }
-  static public int count(List list, int start, int end, Object value) { return Count.execute(Iterators.BoundedIterator(list, start, end), value); }
-  static public int count(Iterator iterator, Object value) { return Count.execute(iterator, value); } 
+  static public <T> int count(Collection<? extends T> collection, 
+                              T value) 
+  { return Count.execute(collection.iterator(), value); }
+  static public <T> int count(Collection<? extends T> collection, 
+                              int start, 
+                              int end, 
+                              T value) 
+  { return Count.execute(Iterators.BoundedIterator(collection.iterator(), start, end), value); }
+  static public <T> int count(List<? extends T> list, 
+                              int start, 
+                              int end, 
+                              T value) 
+  { return Count.execute(Iterators.BoundedIterator(list, start, end), value); }
+  static public <T> int count(Iterator<? extends T> iterator, 
+                              T value) 
+  { return Count.execute(iterator, value); } 
   
   /**
    * <code>CountIf</code> is similar to <code>Count</code>, but more general.
@@ -157,10 +169,22 @@ public class Algorithms
    * <code>CountIf</code> computes the number of objects such that <code>test.test(o)</code>
    * is <code>true</code>.
    */ 
-  static public int countIf(Collection collection, Predicate test) { return CountIf.execute(collection.iterator(), test); }
-  static public int countIf(Collection collection, int start, int end, Predicate test) { return CountIf.execute(Iterators.BoundedIterator(collection.iterator(), start, end), test); }
-  static public int countIf(List list, int start, int end, Predicate test) { return CountIf.execute(Iterators.BoundedIterator(list, start, end), test); }
-  static public int countIf(Iterator iterator, Predicate test) { return CountIf.execute(iterator, test); } 
+  static public <T> int countIf(Collection<T> collection, 
+                                Predicate<? super T> test) 
+  { return CountIf.execute(collection.iterator(), test); }
+  static public <T> int countIf(Collection<T> collection, 
+                                int start, 
+                                int end, 
+                                Predicate<? super T> test)
+  { return CountIf.execute(Iterators.BoundedIterator(collection.iterator(), start, end), test); }
+  static public <T> int countIf(List<T> list, 
+                                int start, 
+                                int end, 
+                                Predicate<? super T> test) 
+  { return CountIf.execute(Iterators.BoundedIterator(list, start, end), test); }
+  static public <T> int countIf(Iterator<T> iterator, 
+                                Predicate<? super T> test) 
+  { return CountIf.execute(iterator, test); } 
   
   /**
    * <code>CountIfNot</code> is the complement of <code>CountIf</code>.
@@ -169,10 +193,22 @@ public class Algorithms
    * <code>CountIfNot</code> computes the number of objects such that <code>test.test(o)</code>
    * is <code>false</code>.
    */ 
-  static public int countIfNot(Collection collection, Predicate test) { return CountIfNot.execute(collection.iterator(), test); }
-  static public int countIfNot(Collection collection, int start, int end, Predicate test) { return CountIfNot.execute(Iterators.BoundedIterator(collection.iterator(), start, end), test); }
-  static public int countIfNot(List list, int start, int end, Predicate test) { return CountIfNot.execute(Iterators.BoundedIterator(list, start, end), test); }
-  static public int countIfNot(Iterator iterator, Predicate test) { return CountIfNot.execute(iterator, test); } 
+  static public <T> int countIfNot(Collection<T> collection, 
+                                   Predicate<? super T> test) 
+  { return CountIfNot.execute(collection.iterator(), test); }
+  static public <T> int countIfNot(Collection<T> collection, 
+                                   int start, 
+                                   int end, 
+                                   Predicate<? super T> test) 
+  { return CountIfNot.execute(Iterators.BoundedIterator(collection.iterator(), start, end), test); }
+  static public <T> int countIfNot(List<T> list, 
+                                   int start, 
+                                   int end, 
+                                   Predicate<? super T> test) 
+  { return CountIfNot.execute(Iterators.BoundedIterator(list, start, end), test); }
+  static public <T> int countIfNot(Iterator<T> iterator, 
+                                   Predicate<? super T> test) 
+  { return CountIfNot.execute(iterator, test); } 
   
   /**
    * Searchs the sequence travesed by the Iterator for the given value.

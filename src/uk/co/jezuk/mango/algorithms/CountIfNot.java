@@ -1,6 +1,9 @@
 package uk.co.jezuk.mango.algorithms;
 
 import uk.co.jezuk.mango.iterators.SkippingIterator;
+
+import uk.co.jezuk.mango.Predicate;
+
 import java.util.Iterator;
 
 /**
@@ -11,19 +14,19 @@ import java.util.Iterator;
  * is <code>false</code>.
  * @see Count
  * @see CountIf
- * @version $Id$
  */
 public class CountIfNot
 {
-  static public int execute(java.util.Iterator iterator, uk.co.jezuk.mango.Predicate test)
+  static public <T> int execute(Iterator<T> iterator, 
+                                Predicate<? super T> test)
   {
     if((iterator == null) || (test == null))
       return 0;  
 
     int c = 0;
-    for(Iterator filter = new SkippingIterator(iterator, test); 
-	filter.hasNext();
-	filter.next(), ++c);
+    for(Iterator<T> filter = new SkippingIterator(iterator, test); 
+        filter.hasNext();
+        filter.next(), ++c);
 
     return c;
   } // execute

@@ -12,7 +12,8 @@ import java.util.Iterator;
  */
 public class Count
 {
-  static public int execute(Iterator iterator, Object value)
+  static public <T> int execute(Iterator<? extends T> iterator, 
+                                T value)
   {
     if(iterator == null)
       return 0;  
@@ -28,7 +29,7 @@ public class Count
     return c;
   } // execute
 
-  static private int execute_null(Iterator iterator)
+  static private <T> int execute_null(Iterator<T> iterator)
   {
     int c = 0;
       

@@ -12,18 +12,19 @@ import java.util.Iterator;
  * @see Count
  * @see CountIfNot
  */
-public class CountIf<T>
+public class CountIf
 {
-  static public int execute(Iterator iterator, Predicate test)
+  static public <T> int execute(Iterator<T> iterator, 
+                                Predicate<? super T> test)
   {
     if((iterator == null) || (test == null))
       return 0;  
 
     int c = 0;
-    for(Iterator filter = new SelectingIterator(iterator, test); 
+    for(Iterator<T> filter = new SelectingIterator(iterator, test); 
 				filter.hasNext();
 				filter.next(), ++c);
-
+    
     return c;
   } // execute
 
