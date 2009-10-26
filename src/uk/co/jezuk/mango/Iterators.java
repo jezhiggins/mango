@@ -150,8 +150,8 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
        ...
      </pre> 
    */ 
-  static public <T, R> Iterator<R> TransformIterator(Iterator<? extends T> iterator, 
-                                                     Function<T, ? extends R> transform) 
+  static public <T, R> Iterator<R> TransformIterator(Iterator<T> iterator, 
+                                                     Function<? super T, R> transform) 
   { 
     return new TransformIterator<T, R>(iterator, transform); 
   } // TransformIterator

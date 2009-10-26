@@ -11,8 +11,8 @@ import uk.co.jezuk.mango.Function;
  */
 public class TransformIterator<T, R> implements Iterator<R>
 {
-  public TransformIterator(Iterator<? extends T> iterator, 
-                           Function<T, ? extends R> transform)
+  public TransformIterator(Iterator<T> iterator, 
+                           Function<? super T, R> transform)
   {
     iter_ = iterator;
     transform_ = transform;
@@ -34,8 +34,8 @@ public class TransformIterator<T, R> implements Iterator<R>
   } // remove
 
   ////////////////////////
-  private Iterator<? extends T> iter_;
-  private Function<T, ? extends R> transform_;
+  private Iterator<T> iter_;
+  private Function<? super T, R> transform_;
 } // TransformIterator
 
 
