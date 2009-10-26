@@ -1,10 +1,10 @@
 package uk.co.jezuk.mango.iterators;
 
 import java.util.Iterator;
-import uk.co.jezuk.mango.UnaryFunction;
+import uk.co.jezuk.mango.Function;
 
 /**
- * A <code>TransfromIterator</code> applies a <code>UnaryFunction</code> to 
+ * A <code>TransfromIterator</code> applies a <code>Function</code> to 
  * each element in the sequence, returning the the function result at each step.
  * 
  * @author Jez Higgins, jez@jezuk.co.uk
@@ -12,7 +12,7 @@ import uk.co.jezuk.mango.UnaryFunction;
 public class TransformIterator<T, R> implements Iterator<R>
 {
   public TransformIterator(Iterator<? extends T> iterator, 
-                           UnaryFunction<T, ? extends R> transform)
+                           Function<T, ? extends R> transform)
   {
     iter_ = iterator;
     transform_ = transform;
@@ -35,7 +35,7 @@ public class TransformIterator<T, R> implements Iterator<R>
 
   ////////////////////////
   private Iterator<? extends T> iter_;
-  private UnaryFunction<T, ? extends R> transform_;
+  private Function<T, ? extends R> transform_;
 } // TransformIterator
 
 

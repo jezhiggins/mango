@@ -8,15 +8,15 @@ package uk.co.jezuk.mango;
 public class Bind
 {
   /**
-   * Adapts a <code>BinaryFunction</code> into a <code>UnaryFunction</code>.
+   * Adapts a <code>BinaryFunction</code> into a <code>Function</code>.
    * If <code>f</code> is an object implementing <code>BinaryFunction</code>, then
    * <code>Bind.First(f, C).fn(arg)</code> returns <code>f(C, arg)</code>.<p>
    * Intuitively, you can think of this as "binding" the first argument of a 
-   * <code>BinaryFunction</code> to a constant, thus giving a <code>UnaryFunction</code>.
+   * <code>BinaryFunction</code> to a constant, thus giving a <code>Function</code>.
    */
-  static public UnaryFunction First(final BinaryFunction f, final Object c)
+  static public Function First(final BinaryFunction f, final Object c)
   {
-    return new UnaryFunction() {
+    return new Function() {
 	private BinaryFunction fn_;
 	private Object c_;
 	{ fn_ = f; c_ = c; }
@@ -40,15 +40,15 @@ public class Bind
   } // First
 
   /**
-   * Adapts a <code>BinaryFunction</code> into a <code>UnaryFunction</code>.
+   * Adapts a <code>BinaryFunction</code> into a <code>Function</code>.
    * If <code>f</code> is an object implementing <code>BinaryFunction</code>, then
    * <code>Bind.Second(f, C).fn(arg)</code> returns <code>f(arg, C)</code>.<p>
    * Intuitively, you can think of this as "binding" the second argument of a 
-   * <code>BinaryFunction</code> to a constant, thus giving a <code>UnaryFunction</code>.
+   * <code>BinaryFunction</code> to a constant, thus giving a <code>Function</code>.
    */
-  static public UnaryFunction Second(final BinaryFunction f, final Object c)
+  static public Function Second(final BinaryFunction f, final Object c)
   {
-    return new UnaryFunction() {
+    return new Function() {
 	private BinaryFunction fn_;
 	private Object c_;
 	{ fn_ = f; c_ = c; }

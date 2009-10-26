@@ -73,20 +73,20 @@ public class Algorithms
    * each element in the <code>iterator</code> sequence. 
    */
   static public <T, R> void forEach(Collection<T> collection, 
-                                    UnaryFunction<? super T, R> fn) 
+                                    Function<? super T, R> fn) 
   { ForEach.execute(collection.iterator(), fn); }
   static public <T, R> void forEach(Collection<T> collection, 
                                     int start, 
                                     int end, 
-                                    UnaryFunction<? super T, R> fn) 
+                                    Function<? super T, R> fn) 
   { ForEach.execute(Iterators.BoundedIterator(collection.iterator(), start, end), fn); }
   static public <T, R> void forEach(List<T> list, 
                                     int start, 
                                     int end, 
-                                    UnaryFunction<? super T, R> fn) 
+                                    Function<? super T, R> fn) 
   { ForEach.execute(Iterators.BoundedIterator(list, start, end), fn); }
   static public <T, R> void forEach(Iterator<T> iterator, 
-                                    UnaryFunction<? super T, R> fn) 
+                                    Function<? super T, R> fn) 
   { ForEach.execute(iterator, fn); } 
 
   /**
@@ -98,43 +98,43 @@ public class Algorithms
    * <code>results</code>.
    */
   static public <T, R> List<R> transform(Collection<T> collection, 
-                                         UnaryFunction<? super T, R> fn)
+                                         Function<? super T, R> fn)
   { return Transform.execute(collection.iterator(), fn, new ArrayList<R>()); }
   static public <T, R, C extends Collection<? super R>>
                          C transform(Collection<T> collection, 
-                                     UnaryFunction<? super T, R> fn,
+                                     Function<? super T, R> fn,
                                      C results) 
   { return Transform.execute(collection.iterator(), fn, results); }
   static public <T, R> List<R> transform(Collection<T> collection,
                                          int start, 
                                          int end,
-                                         UnaryFunction<? super T, R> fn)
+                                         Function<? super T, R> fn)
   { return Transform.execute(Iterators.BoundedIterator(collection.iterator(), start, end), fn, new ArrayList<R>()); }
   static public <T, R, C extends Collection<? super R>>
                          C transform(Collection<T> collection, 
                                      int start, 
                                      int end, 
-                                     UnaryFunction<? super T, R> fn, 
+                                     Function<? super T, R> fn, 
                                      C results) 
   { return Transform.execute(Iterators.BoundedIterator(collection.iterator(), start, end), fn, results); }
   static public <T, R> List<R> transform(List<T> collection,
                                          int start, 
                                          int end,
-                                         UnaryFunction<? super T, R> fn)
+                                         Function<? super T, R> fn)
   { return Transform.execute(Iterators.BoundedIterator(collection, start, end), fn, new ArrayList<R>()); }
   static public <T, R, C extends Collection<? super R>>
                          C transform(List<T> list, 
                                      int start, 
                                      int end, 
-                                     UnaryFunction<? super T, R> fn, 
+                                     Function<? super T, R> fn, 
                                      C results) 
   { return Transform.execute(Iterators.BoundedIterator(list, start, end), fn, results); }
   static public <T, R> List<R> transform(Iterator<T> iterator,
-                                         UnaryFunction<? super T, R> fn)
+                                         Function<? super T, R> fn)
   { return Transform.execute(iterator, fn, new ArrayList<R>()); } 
   static public <T, R, C extends Collection<? super R>>
                          C transform(Iterator<T> iterator, 
-                                     UnaryFunction<? super T, R> fn, 
+                                     Function<? super T, R> fn, 
                                      C results) 
   { return Transform.execute(iterator, fn, results); } 
   

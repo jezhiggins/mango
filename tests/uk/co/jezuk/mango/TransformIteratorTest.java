@@ -16,7 +16,7 @@ public class TransformIteratorTest  extends TestCase
       list.add(new Integer(i));
   } // setUp
 
-  class DoubleUp implements UnaryFunction
+  class DoubleUp implements Function
   {
     public Object fn(Object obj)
     {

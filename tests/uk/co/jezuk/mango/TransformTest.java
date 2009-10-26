@@ -29,7 +29,7 @@ public class TransformTest extends TestCase
     assertEquals(9, out.get(2).intValue());
   } // test1
     
-  public class Square implements UnaryFunction<Integer, Integer>
+  public class Square implements Function<Integer, Integer>
   {
     public Integer fn(Integer x)
     {
@@ -50,7 +50,7 @@ public class TransformTest extends TestCase
     assertEquals("CC", out.get(2));
   } // test2
 
-  public class Duplicator implements UnaryFunction<String, String>
+  public class Duplicator implements Function<String, String>
   {
     public String fn(String x)
     {
@@ -79,7 +79,7 @@ public class TransformTest extends TestCase
   class Foo { }
   class Bar { }
   class Baz extends Bar { }
-  class Bazifier implements UnaryFunction<Foo, Baz>
+  class Bazifier implements Function<Foo, Baz>
   {
       public Baz fn(Foo foo) { return new Baz(); }
   } // an

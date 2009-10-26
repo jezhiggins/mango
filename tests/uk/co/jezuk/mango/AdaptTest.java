@@ -86,7 +86,7 @@ public class AdaptTest  extends TestCase
 
   public void test8()
   {
-    UnaryFunction fn = Adapt.Compose(new AppendX(), new AppendX());
+    Function fn = Adapt.Compose(new AppendX(), new AppendX());
     assertEquals("helloXX", fn.fn("hello"));
   } // test8
 
@@ -107,7 +107,7 @@ public class AdaptTest  extends TestCase
   } // Concat
   
 
-  static public class AppendX implements UnaryFunction
+  static public class AppendX implements Function
   {
     public Object fn(Object x)
     {
