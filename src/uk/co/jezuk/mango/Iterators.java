@@ -124,7 +124,7 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
   } // SingletonIterator
 
   /**
-   * A <code>TransfromIterator</code> applies a <code>{@link UnaryFunction}</code> to 
+   * A <code>TransfromIterator</code> applies a <code>{@link Function}</code> to 
    * each element in the sequence, returning the the function result at each step.
    * <p>
    * Say you have a list of some complex type, and you want to find on by name.
@@ -150,8 +150,8 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
        ...
      </pre> 
    */ 
-  static public <T, R> Iterator<R> TransformIterator(Iterator<? extends T> iterator, 
-                                                     UnaryFunction<T, ? extends R> transform) 
+  static public <T, R> Iterator<R> TransformIterator(Iterator<T> iterator, 
+                                                     Function<? super T, R> transform) 
   { 
     return new TransformIterator<T, R>(iterator, transform); 
   } // TransformIterator

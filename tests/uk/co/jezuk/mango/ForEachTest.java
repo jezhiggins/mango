@@ -19,7 +19,7 @@ public class ForEachTest  extends TestCase
       list.add(i);
   } // setUp
 
-  private class Print implements UnaryFunction<Number, Object> 
+  private class Print implements Function<Number, Object> 
   {
     public Object fn(Number o)
     {

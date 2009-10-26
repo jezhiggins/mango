@@ -1,8 +1,10 @@
 package uk.co.jezuk.mango.algorithms;
 
 import uk.co.jezuk.mango.iterators.SelectingIterator;
+
 import java.util.Iterator;
 
+import uk.co.jezuk.mango.Predicate;
 
 /**
  * Searchs the sequence traversed by the Iterator and returns the first
@@ -12,16 +14,16 @@ import java.util.Iterator;
  * in the sequence.
  * @see Find
  * @see FindNotIf
- * @version $Id$
  */
 public class FindIf
 {
-  static public Object execute(java.util.Iterator iterator, uk.co.jezuk.mango.Predicate test)
+  static public <T> T execute(Iterator<T> iterator, 
+                              Predicate<? super T> test)
   {
     if((iterator == null) || (test == null))
       return null;  
 
-    Iterator filter = new SelectingIterator(iterator, test);
+    Iterator<T> filter = new SelectingIterator(iterator, test);
     return filter.hasNext() ? filter.next() : null;
   } // execute
 

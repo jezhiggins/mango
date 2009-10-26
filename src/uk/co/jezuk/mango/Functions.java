@@ -1,21 +1,21 @@
 package uk.co.jezuk.mango;
 
-import uk.co.jezuk.mango.unaryfunctions.*;
+import uk.co.jezuk.mango.functions.*;
 
 /**
- * The Mango Library Unary and Binary Functions
+ * The Mango Library Unary Functions
  * 
  * @author Jez Higgins, jez@jezuk.co.uk
  */
 public class Functions
 {
-	////////////////////////////////////////////////////
-	// Unary Functions
+  ////////////////////////////////////////////////////
+  // Unary Functions
   /**
-	 * The identity function.  Takes a single argument, and returns it unchanged.
-	 */
-	static public <T> UnaryFunction<T, T> Identity() 
+   * The identity function.  Takes a single argument, and returns it unchanged.
+   */
+  static public <T> Function<T, T> Identity() 
   { 
-    return (UnaryFunction<T, T>)Identity.INSTANCE; 
+    return (Function<T, T>)Identity.INSTANCE; 
   } // Identity
 } // class Functions

@@ -1,5 +1,7 @@
 package uk.co.jezuk.mango.algorithms;
 
+import java.util.Iterator;
+
 /**
  * Searchs the sequence travesed by the Iterator for the given value.
  * Returns the <code>Object</code>, or <code>null</code> if the value
@@ -9,20 +11,19 @@ package uk.co.jezuk.mango.algorithms;
  * <code>Object.equals</code> (unless <code>value</code> is <code>null</code>).
  * @see FindIf
  * @see FindNotIf
- * @version $Id$
  */
 public class Find
 {
-  static public Object execute(java.util.Iterator iterator, Object value)
+  static public <T> T execute(Iterator<? extends T> iterator, T value)
   {
     if((iterator == null) || (value == null))
       return null;  
 
     while(iterator.hasNext())
     {
-      Object obj = iterator.next();
+      T obj = iterator.next();
       if(value.equals(obj))
-	return obj;
+        return obj;
     } // while ...
 
     return null;

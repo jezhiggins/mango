@@ -12,14 +12,14 @@ public class Adapt
 {
   /**
    * Compose is a unary function adaptor.  If <code>f</code> and <code>g</code>
-   * are <code>UnaryFunctions</code>, then <code>Compose</code> creates a new
+   * are <code>Functions</code>, then <code>Compose</code> creates a new
    * function <code>h</code>, where <code>h(x)</code> is equal to <code>f(g(x))</code>.
    */
-  static public UnaryFunction Compose(UnaryFunction f, UnaryFunction g)
+  static public Function Compose(Function f, Function g)
   {
-    final UnaryFunction ff = f;
-    final UnaryFunction gg = g;
-    return new UnaryFunction() {
+    final Function ff = f;
+    final Function gg = g;
+    return new Function() {
 	public Object fn(Object x)
 	{
 	  return ff.fn(gg.fn(x));
@@ -29,15 +29,15 @@ public class Adapt
 
   /**
    * Compose is a function adaptor.  If <code>f</code> is a <code>BinaryFunction</code>
-   * and <code>g1</code> and <code>g2</code> are <code>UnaryFunctions</code>, then Compose
+   * and <code>g1</code> and <code>g2</code> are <code>Functions</code>, then Compose
    * returns a new <code>BinaryFunction</code> <code>h</code> such that <code>h(x, y)</code>
    * is <code>f(g1(x), g2(y))</code>
    */
-  static public BinaryFunction Compose(BinaryFunction f, UnaryFunction g1, UnaryFunction g2)
+  static public BinaryFunction Compose(BinaryFunction f, Function g1, Function g2)
   {
     final BinaryFunction ff = f;
-    final UnaryFunction gg1 = g1;
-    final UnaryFunction gg2 = g2;
+    final Function gg1 = g1;
+    final Function gg2 = g2;
     return new BinaryFunction() {
 	public Object fn(Object x, Object y)
 	{
@@ -47,7 +47,7 @@ public class Adapt
   } // Compose
 
   /**
-   * Adapts member functions as <code>UnaryFunction</code> objects, allowing them
+   * Adapts member functions as <code>Function</code> objects, allowing them
    * to be passed to algorithms.
    * <br>
    * e.g. to print all the elements in a list<br>
@@ -60,20 +60,20 @@ public class Adapt
    * RuntimeException.  If multiple methods have the correct name, and take a single
    * parameter one of them will be called, but you can't determine which.
    */
-  static public UnaryFunction Method(final Object obj, String methodName)
+  static public Function Method(final Object obj, String methodName)
   {
     return wrapMethod(obj.getClass(), obj, methodName);
   } // Method 
 
   /**
-   * Adapts static member functions as <code>UnaryFunction</code> objects, allowing them
+   * Adapts static member functions as <code>Function</code> objects, allowing them
    * to be passed to algorithms.
    * <p>
    * If the named method is not found, or its signature is incorrect throws a
    * RuntimeException.  If multiple methods have the correct name, and take a single
    * parameter one of them will be called, but you can't determine which.
    */
-  static public UnaryFunction Method(final Class klass, String methodName)
+  static public Function Method(final Class klass, String methodName)
   {
     return wrapMethod(klass, null, methodName);
   } // Method
@@ -94,14 +94,14 @@ public class Adapt
       private int argCount_;
   } // UnaryMethodNamed
 
-  static private UnaryFunction wrapMethod(final Class klass, final Object obj, String methodName)
+  static private Function wrapMethod(final Class klass, final Object obj, String methodName)
   {
     Method[] methods = klass.getMethods();
     final Method m = (Method)Algorithms.findIf(java.util.Arrays.asList(methods).iterator(), new UnaryMethodNamed(methodName, 1));
     if(m == null)
       throw new RuntimeException(new NoSuchMethodException());
 
-    return new UnaryFunction() {
+    return new Function() {
       private Object obj_;
       private Method method_;
       { obj_ = obj; method_ = m; }
@@ -115,12 +115,12 @@ public class Adapt
 	  throw new RuntimeException(e);
 	} // catch
       } // fn
-    }; // UnaryFunction
+    }; // Function
   } // wrapMethod
 
   /**
-   * Creates a <code>UnaryFunction</code> which will call a method on the
-   * object passed as the argument to <code>UnaryFunction.fn</code> method.
+   * Creates a <code>Function</code> which will call a method on the
+   * object passed as the argument to <code>Function.fn</code> method.
    * <br>
    * e.g. to print all the elements in a list<br>
    * <code>interface Something { void persist(); }<br>
@@ -135,11 +135,11 @@ public class Adapt
    * <p>
    * If the named method is not found, or its signature is incorrect throws a
    * RuntimeException.  
-   * @see UnaryFunction
+   * @see Function
    */
-  static public UnaryFunction ArgumentMethod(final String methodName)
+  static public Function ArgumentMethod(final String methodName)
   {
-    return new UnaryFunction() {
+    return new Function() {
       private String methodName_;
       private Class lastClass_;
       private Method method_;
@@ -162,7 +162,7 @@ public class Adapt
 	  throw new RuntimeException(e);
 	} // catch
       } // fn
-    }; // UnaryFunction
+    }; // Function
   } // ArgumentMethod
 
   //////////////////////////////////////////

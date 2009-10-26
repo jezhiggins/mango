@@ -1,6 +1,6 @@
 package uk.co.jezuk.mango.algorithms;
 
-import uk.co.jezuk.mango.UnaryFunction;
+import uk.co.jezuk.mango.Function;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -16,8 +16,8 @@ public class Transform
 {
   public static <T, R, C extends Collection<? super R>> 
 				 C execute(Iterator<T> iterator, 
-                   UnaryFunction<? super T, R> fn, 
-                   C results)
+                                           Function<? super T, R> fn, 
+                                           C results)
   {
     if(iterator == null || fn == null || results == null)
       return results;

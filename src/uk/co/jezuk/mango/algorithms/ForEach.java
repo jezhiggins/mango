@@ -1,7 +1,7 @@
 package uk.co.jezuk.mango.algorithms;
 
 import java.util.Iterator;
-import uk.co.jezuk.mango.UnaryFunction;
+import uk.co.jezuk.mango.Function;
 
 /**
  * The algorithm ForEach applies the function <code>fn</code> to
@@ -10,7 +10,7 @@ import uk.co.jezuk.mango.UnaryFunction;
 public class ForEach
 {
   static public <T, R> void execute(Iterator<T> iterator, 
-                                    UnaryFunction<? super T, R> fn)
+                                    Function<? super T, R> fn)
   {
     if(iterator == null || fn == null)
 	    return;

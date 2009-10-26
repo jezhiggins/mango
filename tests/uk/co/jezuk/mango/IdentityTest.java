@@ -9,7 +9,7 @@ public class IdentityTest  extends TestCase
 
   public void test1()
   {
-    UnaryFunction i = Functions.Identity();
+    Function i = Functions.Identity();
     assertEquals(this, i.fn(this));
 		assertEquals(null, i.fn(null));
 		assertEquals("hello", i.fn("hello"));

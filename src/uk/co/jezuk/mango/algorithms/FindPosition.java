@@ -1,5 +1,7 @@
 package uk.co.jezuk.mango.algorithms;
 
+import java.util.Iterator;
+
 /**
  * Searchs the sequence travesed by the Iterator for the given value.
  * Returns the index of the value in the collection, or <code>-1</code>
@@ -8,11 +10,10 @@ package uk.co.jezuk.mango.algorithms;
  * The objects in the sequence and <code>value</code> must be comparable using
  * <code>Object.equals</code>.
  * @see Find
- * @version $Id: Find.java 93 2004-05-25 20:34:19Z jez $
  */
 public class FindPosition
 {
-  static public int execute(java.util.Iterator iterator, Object value)
+  static public <T> int execute(Iterator<? extends T> iterator, T value)
   {
     if(iterator == null)
       return -1;
@@ -20,7 +21,7 @@ public class FindPosition
 		int count = 0;
     while(iterator.hasNext())
     {
-      Object obj = iterator.next();
+      T obj = iterator.next();
       if(value.equals(obj))
 				return count;
 			++count;

@@ -73,20 +73,20 @@ public class Algorithms
    * each element in the <code>iterator</code> sequence. 
    */
   static public <T, R> void forEach(Collection<T> collection, 
-                                    UnaryFunction<? super T, R> fn) 
+                                    Function<? super T, R> fn) 
   { ForEach.execute(collection.iterator(), fn); }
   static public <T, R> void forEach(Collection<T> collection, 
                                     int start, 
                                     int end, 
-                                    UnaryFunction<? super T, R> fn) 
+                                    Function<? super T, R> fn) 
   { ForEach.execute(Iterators.BoundedIterator(collection.iterator(), start, end), fn); }
   static public <T, R> void forEach(List<T> list, 
                                     int start, 
                                     int end, 
-                                    UnaryFunction<? super T, R> fn) 
+                                    Function<? super T, R> fn) 
   { ForEach.execute(Iterators.BoundedIterator(list, start, end), fn); }
   static public <T, R> void forEach(Iterator<T> iterator, 
-                                    UnaryFunction<? super T, R> fn) 
+                                    Function<? super T, R> fn) 
   { ForEach.execute(iterator, fn); } 
 
   /**
@@ -98,43 +98,43 @@ public class Algorithms
    * <code>results</code>.
    */
   static public <T, R> List<R> transform(Collection<T> collection, 
-                                         UnaryFunction<? super T, R> fn)
+                                         Function<? super T, R> fn)
   { return Transform.execute(collection.iterator(), fn, new ArrayList<R>()); }
   static public <T, R, C extends Collection<? super R>>
                          C transform(Collection<T> collection, 
-                                     UnaryFunction<? super T, R> fn,
+                                     Function<? super T, R> fn,
                                      C results) 
   { return Transform.execute(collection.iterator(), fn, results); }
   static public <T, R> List<R> transform(Collection<T> collection,
                                          int start, 
                                          int end,
-                                         UnaryFunction<? super T, R> fn)
+                                         Function<? super T, R> fn)
   { return Transform.execute(Iterators.BoundedIterator(collection.iterator(), start, end), fn, new ArrayList<R>()); }
   static public <T, R, C extends Collection<? super R>>
                          C transform(Collection<T> collection, 
                                      int start, 
                                      int end, 
-                                     UnaryFunction<? super T, R> fn, 
+                                     Function<? super T, R> fn, 
                                      C results) 
   { return Transform.execute(Iterators.BoundedIterator(collection.iterator(), start, end), fn, results); }
   static public <T, R> List<R> transform(List<T> collection,
                                          int start, 
                                          int end,
-                                         UnaryFunction<? super T, R> fn)
+                                         Function<? super T, R> fn)
   { return Transform.execute(Iterators.BoundedIterator(collection, start, end), fn, new ArrayList<R>()); }
   static public <T, R, C extends Collection<? super R>>
                          C transform(List<T> list, 
                                      int start, 
                                      int end, 
-                                     UnaryFunction<? super T, R> fn, 
+                                     Function<? super T, R> fn, 
                                      C results) 
   { return Transform.execute(Iterators.BoundedIterator(list, start, end), fn, results); }
   static public <T, R> List<R> transform(Iterator<T> iterator,
-                                         UnaryFunction<? super T, R> fn)
+                                         Function<? super T, R> fn)
   { return Transform.execute(iterator, fn, new ArrayList<R>()); } 
   static public <T, R, C extends Collection<? super R>>
                          C transform(Iterator<T> iterator, 
-                                     UnaryFunction<? super T, R> fn, 
+                                     Function<? super T, R> fn, 
                                      C results) 
   { return Transform.execute(iterator, fn, results); } 
   
@@ -145,10 +145,22 @@ public class Algorithms
    * The objects in the sequence and <code>value</code> must be comparable using
    * <code>Object.equals</code> (unless <code>value</code> is <code>null</code>).
    */
-  static public int count(Collection collection, Object value) { return Count.execute(collection.iterator(), value); }
-  static public int count(Collection collection, int start, int end, Object value) { return Count.execute(Iterators.BoundedIterator(collection.iterator(), start, end), value); }
-  static public int count(List list, int start, int end, Object value) { return Count.execute(Iterators.BoundedIterator(list, start, end), value); }
-  static public int count(Iterator iterator, Object value) { return Count.execute(iterator, value); } 
+  static public <T> int count(Collection<? extends T> collection, 
+                              T value) 
+  { return Count.execute(collection.iterator(), value); }
+  static public <T> int count(Collection<? extends T> collection, 
+                              int start, 
+                              int end, 
+                              T value) 
+  { return Count.execute(Iterators.BoundedIterator(collection.iterator(), start, end), value); }
+  static public <T> int count(List<? extends T> list, 
+                              int start, 
+                              int end, 
+                              T value) 
+  { return Count.execute(Iterators.BoundedIterator(list, start, end), value); }
+  static public <T> int count(Iterator<? extends T> iterator, 
+                              T value) 
+  { return Count.execute(iterator, value); } 
   
   /**
    * <code>CountIf</code> is similar to <code>Count</code>, but more general.
@@ -157,10 +169,22 @@ public class Algorithms
    * <code>CountIf</code> computes the number of objects such that <code>test.test(o)</code>
    * is <code>true</code>.
    */ 
-  static public int countIf(Collection collection, Predicate test) { return CountIf.execute(collection.iterator(), test); }
-  static public int countIf(Collection collection, int start, int end, Predicate test) { return CountIf.execute(Iterators.BoundedIterator(collection.iterator(), start, end), test); }
-  static public int countIf(List list, int start, int end, Predicate test) { return CountIf.execute(Iterators.BoundedIterator(list, start, end), test); }
-  static public int countIf(Iterator iterator, Predicate test) { return CountIf.execute(iterator, test); } 
+  static public <T> int countIf(Collection<T> collection, 
+                                Predicate<? super T> test) 
+  { return CountIf.execute(collection.iterator(), test); }
+  static public <T> int countIf(Collection<T> collection, 
+                                int start, 
+                                int end, 
+                                Predicate<? super T> test)
+  { return CountIf.execute(Iterators.BoundedIterator(collection.iterator(), start, end), test); }
+  static public <T> int countIf(List<T> list, 
+                                int start, 
+                                int end, 
+                                Predicate<? super T> test) 
+  { return CountIf.execute(Iterators.BoundedIterator(list, start, end), test); }
+  static public <T> int countIf(Iterator<T> iterator, 
+                                Predicate<? super T> test) 
+  { return CountIf.execute(iterator, test); } 
   
   /**
    * <code>CountIfNot</code> is the complement of <code>CountIf</code>.
@@ -169,10 +193,22 @@ public class Algorithms
    * <code>CountIfNot</code> computes the number of objects such that <code>test.test(o)</code>
    * is <code>false</code>.
    */ 
-  static public int countIfNot(Collection collection, Predicate test) { return CountIfNot.execute(collection.iterator(), test); }
-  static public int countIfNot(Collection collection, int start, int end, Predicate test) { return CountIfNot.execute(Iterators.BoundedIterator(collection.iterator(), start, end), test); }
-  static public int countIfNot(List list, int start, int end, Predicate test) { return CountIfNot.execute(Iterators.BoundedIterator(list, start, end), test); }
-  static public int countIfNot(Iterator iterator, Predicate test) { return CountIfNot.execute(iterator, test); } 
+  static public <T> int countIfNot(Collection<T> collection, 
+                                   Predicate<? super T> test) 
+  { return CountIfNot.execute(collection.iterator(), test); }
+  static public <T> int countIfNot(Collection<T> collection, 
+                                   int start, 
+                                   int end, 
+                                   Predicate<? super T> test) 
+  { return CountIfNot.execute(Iterators.BoundedIterator(collection.iterator(), start, end), test); }
+  static public <T> int countIfNot(List<T> list, 
+                                   int start, 
+                                   int end, 
+                                   Predicate<? super T> test) 
+  { return CountIfNot.execute(Iterators.BoundedIterator(list, start, end), test); }
+  static public <T> int countIfNot(Iterator<T> iterator, 
+                                   Predicate<? super T> test) 
+  { return CountIfNot.execute(iterator, test); } 
   
   /**
    * Searchs the sequence travesed by the Iterator for the given value.
@@ -182,10 +218,22 @@ public class Algorithms
    * The objects in the sequence and <code>value</code> must be comparable using
    * <code>Object.equals</code> (unless <code>value</code> is <code>null</code>).
    */
-  static public Object find(Collection collection, Object value) { return Find.execute(collection.iterator(), value); }
-  static public Object find(Collection collection, int start, int end, Object value) { return Find.execute(Iterators.BoundedIterator(collection.iterator(), start, end), value); }
-  static public Object find(List list, int start, int end, Object value) { return Find.execute(Iterators.BoundedIterator(list, start, end), value); }
-  static public Object find(Iterator iterator, Object value) { return Find.execute(iterator, value); } 
+  static public <T> T find(Collection<? extends T> collection, 
+                           T value) 
+  { return Find.execute(collection.iterator(), value); }
+  static public <T> T find(Collection<? extends T> collection, 
+                           int start, 
+                           int end, 
+                           T value) 
+  { return Find.execute(Iterators.BoundedIterator(collection.iterator(), start, end), value); }
+  static public <T> T find(List<? extends T> list, 
+                           int start, 
+                           int end, 
+                           T value) 
+  { return Find.execute(Iterators.BoundedIterator(list, start, end), value); }
+  static public <T> T find(Iterator<? extends T> iterator, 
+                           T value) 
+  { return Find.execute(iterator, value); } 
   
   /**
    * Searchs the sequence travesed by the Iterator for the given value.
@@ -195,14 +243,38 @@ public class Algorithms
    * The objects in the sequence and <code>value</code> must be comparable using
    * <code>Object.equals</code> (unless <code>value</code> is <code>null</code>).
    */
-  static public int findPosition(Collection collection, Object value) { return FindPosition.execute(collection.iterator(), value); }
-  static public int findPosition(Collection collection, int start, int end, Object value) { return FindPosition.execute(Iterators.BoundedIterator(collection.iterator(), start, end), value); }
-  static public int findPosition(List list, int start, int end, Object value) { return FindPosition.execute(Iterators.BoundedIterator(list, start, end), value); }
-  static public int findPosition(Iterator iterator, Object value) { return FindPosition.execute(iterator, value); } 
-  static public int findPositionIf(Collection collection, Predicate pred) { return FindPositionIf.execute(collection.iterator(), pred); }
-  static public int findPositionIf(Collection collection, int start, int end, Predicate pred) { return FindPositionIf.execute(Iterators.BoundedIterator(collection.iterator(), start, end), pred); }
-  static public int findPositionIf(List list, int start, int end, Predicate pred) { return FindPositionIf.execute(Iterators.BoundedIterator(list, start, end), pred); }
-  static public int findPositionIf(Iterator iterator, Predicate pred) { return FindPositionIf.execute(iterator, pred); } 
+  static public <T> int findPosition(Collection<? extends T> collection, 
+                                     T value) 
+  { return FindPosition.execute(collection.iterator(), value); }
+  static public <T> int findPosition(Collection<? extends T> collection, 
+                                     int start, 
+                                     int end, 
+                                     T value) 
+  { return FindPosition.execute(Iterators.BoundedIterator(collection.iterator(), start, end), value); }
+  static public <T> int findPosition(List<? extends T> list, 
+                                     int start, 
+                                     int end, 
+                                     T value) 
+  { return FindPosition.execute(Iterators.BoundedIterator(list, start, end), value); }
+  static public <T> int findPosition(Iterator<? extends T> iterator, 
+                                     T value) 
+  { return FindPosition.execute(iterator, value); } 
+  static public <T> int findPositionIf(Collection<T> collection, 
+                                       Predicate<? super T> pred) 
+  { return FindPositionIf.execute(collection.iterator(), pred); }
+  static public <T> int findPositionIf(Collection<T> collection, 
+                                       int start, 
+                                       int end, 
+                                       Predicate<? super T> pred) 
+  { return FindPositionIf.execute(Iterators.BoundedIterator(collection.iterator(), start, end), pred); }
+  static public <T> int findPositionIf(List<T> list, 
+                                       int start, 
+                                       int end, 
+                                       Predicate<? super T> pred) 
+  { return FindPositionIf.execute(Iterators.BoundedIterator(list, start, end), pred); }
+  static public <T> int findPositionIf(Iterator<T> iterator, 
+                                       Predicate<? super T> pred) 
+  { return FindPositionIf.execute(iterator, pred); } 
   
   /**
    * Searchs the sequence traversed by the Iterator and returns the first
@@ -211,10 +283,22 @@ public class Algorithms
    * is not found.  The iterator will have been advanced to the next object 
    * in the sequence.
    */
-  static public Object findIf(Collection collection, Predicate test) { return FindIf.execute(collection.iterator(), test); }
-  static public Object findIf(Collection collection, int start, int end, Predicate test) { return FindIf.execute(Iterators.BoundedIterator(collection.iterator(), start, end), test); }
-  static public Object findIf(List list, int start, int end, Predicate test) { return FindIf.execute(Iterators.BoundedIterator(list, start, end), test); }
-  static public Object findIf(Iterator iterator, Predicate test) { return FindIf.execute(iterator, test); } 
+  static public <T> T findIf(Collection<T> collection, 
+                             Predicate<? super T> test) 
+  { return FindIf.execute(collection.iterator(), test); }
+  static public <T> T findIf(Collection<T> collection, 
+                             int start, 
+                             int end, 
+                             Predicate<? super T> test) 
+  { return FindIf.execute(Iterators.BoundedIterator(collection.iterator(), start, end), test); }
+  static public <T> T findIf(List<T> list, 
+                             int start, 
+                             int end, 
+                             Predicate<? super T> test) 
+  { return FindIf.execute(Iterators.BoundedIterator(list, start, end), test); }
+  static public <T> T findIf(Iterator<T> iterator, 
+                             Predicate<? super T> test) 
+  { return FindIf.execute(iterator, test); } 
 
   /**
    * Searchs the sequence traversed by the Iterator and returns the first
@@ -222,10 +306,10 @@ public class Algorithms
    * The iterator will have been advanced to the next object 
    * in the sequence.
    */
-  static public Object findIfNot(Collection collection, Predicate test) { return FindIfNot.execute(collection.iterator(), test); }
-  static public Object findIfNot(Collection collection, int start, int end, Predicate test) { return FindIfNot.execute(Iterators.BoundedIterator(collection.iterator(), start, end), test); }
-  static public Object findIfNot(List list, int start, int end, Predicate test) { return FindIfNot.execute(Iterators.BoundedIterator(list, start, end), test); }
-  static public Object findIfNot(Iterator iterator, Predicate test) { return FindIfNot.execute(iterator, test); } 
+  static public <T> T findIfNot(Collection<T> collection, Predicate<? super T> test) { return FindIfNot.execute(collection.iterator(), test); }
+  static public <T> T findIfNot(Collection<T> collection, int start, int end, Predicate<? super T> test) { return FindIfNot.execute(Iterators.BoundedIterator(collection.iterator(), start, end), test); }
+  static public <T> T findIfNot(List<T> list, int start, int end, Predicate<? super T> test) { return FindIfNot.execute(Iterators.BoundedIterator(list, start, end), test); }
+  static public <T> T findIfNot(Iterator<T> iterator, Predicate<? super T> test) { return FindIfNot.execute(iterator, test); } 
 
   /**
    * Removes objects equal to <code>value</code> from the sequence.
