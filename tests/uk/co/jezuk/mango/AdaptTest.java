@@ -2,24 +2,28 @@ package uk.co.jezuk.mango;
 
 import junit.framework.*;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class AdaptTest  extends TestCase
 {
-  java.util.List list;
+  List<Integer> list;
 
   public AdaptTest(String name) { super(name); }
   public static Test suite() { return new TestSuite(AdaptTest.class); }
 
   protected void setUp()
   {
-    list = new java.util.ArrayList();
+    list = new ArrayList<Integer>();
     for(int i = 0; i < 10; ++i)
-      list.add(new Integer(i));
+      list.add(i);
   } // setUp
 
   public void test1()
   {
     System.out.println("test1");
     Algorithms.forEach(list, Adapt.Method(System.out, "println"));
+    Algorithms.forEach(list, Adapt.Method(System.out, "println", Integer.class, Void.class));
   } // 
 
   public void test2()
@@ -64,8 +68,14 @@ public class AdaptTest  extends TestCase
   public void test6()
   {
     System.out.println("test6");
-    Algorithms.forEach(list, Adapt.Method(this.getClass(), "staticMethod"));
+    Algorithms.forEach(list, Adapt.Method(this.getClass(), "staticOverloadedMethod", Integer.class));
+    Algorithms.forEach(list, Adapt.Method(AdaptTest.class, "staticOverloadedMethod", Integer.class, Void.class));
   } // test6
+
+  public void test6a()
+  {
+    Adapt.Method(this.getClass(), "staticOverloadedMethod", String.class).fn("Hello");
+  } // test6a
 
   class Something
   {
@@ -77,8 +87,8 @@ public class AdaptTest  extends TestCase
   public void test7()
   {
     System.out.println("test7");
-    java.util.List l = new java.util.ArrayList();
-    for(int i = 0; i < 10000; ++i)
+    List l = new ArrayList<Something>();
+    for(int i = 0; i < 10; ++i)
 	l.add(new Something(i));
 
     Algorithms.forEach(l, Adapt.ArgumentMethod("print"));
@@ -113,10 +123,20 @@ public class AdaptTest  extends TestCase
       return x+'X';
     } 
   } // AppendX
-    
 
-  static public void staticMethod(Object o)
+  static public void staticMethod(int o)
   {
     System.out.println(o);
   } // staticMethod
+
+  static public void staticOverloadedMethod(int o)
+  {
+    System.out.println(o);
+  } // staticOverloadedMethod
+
+  static public void staticOverloadedMethod(String o)
+  {
+    System.out.println(o);
+  } // staticOverloadedMethod
+    
 } // AdaptTest
