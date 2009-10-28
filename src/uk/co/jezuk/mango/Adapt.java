@@ -28,18 +28,18 @@ public class Adapt
    */
   static public Function Method(final Object obj, final String methodName)
   {
-    return wrapMethod(obj.getClass(), obj, methodName, Object.class);
+    return wrapMethod(obj.getClass(), obj, methodName, null);
   } // Method 
   static public <T, Void> Function<T, Void> Method(final Object obj, 
-					     final String methodName,
-					     final Class<T> argType)
+                                                   final String methodName,
+                                                   final Class<T> argType)
   {
     return (Function<T, Void>)wrapMethod(obj.getClass(), obj, methodName, argType);
   } // Method
   static public <T, R> Function<T, R> Method(final Object obj, 
-					     final String methodName,
-					     final Class<T> argType, 
-					     final Class<R> returnType)
+                                             final String methodName,
+                                             final Class<T> argType, 
+                                             final Class<R> returnType)
   {
     return (Function<T, R>)wrapMethod(obj.getClass(), obj, methodName, argType);
   } // Method
@@ -74,15 +74,16 @@ public class Adapt
   ////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////
   static private Function wrapMethod(final Class<?> klass, 
-				     final Object obj, 
-				     final String methodName, 
-				     final Class<?> argClass)
+                                     final Object obj, 
+                                     final String methodName, 
+                                     final Class<?> argClass)
   {
     final List<Method> methods = Arrays.asList(klass.getMethods());
-    Method m = Algorithms.findIf(methods, new UnaryMethodNamed(methodName, argClass));
-    if(m == null)
-      m = Algorithms.findIf(methods, new UnaryMethodNamed(methodName, Object.class));
-    if(m == null)
+    
+    Predicate<Method> methodTest = new UnaryMethodNamed(methodName, argClass != null ? argClass : Object.class);
+
+    Method m = Algorithms.findIf(methods, methodTest);
+    if((m == null) && (argClass == null))
       m = Algorithms.findIf(methods, new AnyUnaryMethodNamed(methodName));
     if(m == null)
       throw new RuntimeException(new NoSuchMethodException(methodName + "(" + argClass + ")"));
@@ -96,15 +97,14 @@ public class Adapt
       { 
         Object[] args = new Object[]{ arg };
         try {
-	  return method_.invoke(obj_, args);
+          return method_.invoke(obj_, args);
         } // try
-	catch(IllegalArgumentException e)
-	{
-	    throw new RuntimeException("Passed " + arg.getClass() + " to " + method_.getName() + "(" + method_.getParameterTypes()[0] + ")", e);
-	} // catch 
-	catch(Exception e) {
-	  throw new RuntimeException(e);
-	} // catch
+        catch(IllegalArgumentException e) {
+          throw new RuntimeException("Passed " + arg.getClass() + " to " + method_.getName() + "(" + method_.getParameterTypes()[0] + ")", e);
+        } // catch 
+        catch(Exception e) {
+          throw new RuntimeException(e);
+        } // catch
       } // fn
     }; // Function
   } // wrapMethod
@@ -115,13 +115,13 @@ public class Adapt
     {
       name_ = name;
     } // NullaryMethodNamed
-
+    
     public boolean test(final Method m)
     {
       return (m.getName().equals(name_) &&
-	     (m.getParameterTypes().length == 0));
+              (m.getParameterTypes().length == 0));
     } // test
-
+    
     private final String name_;
   } // class NullaryMethodNamed
 
@@ -138,7 +138,7 @@ public class Adapt
       if(!m.getName().equals(name_))
         return false;
       if(m.getParameterTypes().length != 1)
-	return false;
+        return false;
       if(!m.getParameterTypes()[0].equals(argClass_))
         return false;
       return true;
@@ -160,7 +160,7 @@ public class Adapt
       if(!m.getName().equals(name_))
         return false;
       if(m.getParameterTypes().length != 1)
-	return false;
+        return false;
       return true;
     } // test
 
@@ -195,24 +195,59 @@ public class Adapt
       { methodName_ = methodName; }
       public Object fn(Object arg) 
       { 
-	if(!arg.getClass().equals(lastClass_))
-	{
-	  lastClass_ = arg.getClass();
-	  List<Method> methods = Arrays.asList(lastClass_.getMethods());
-	  method_ = (Method)Algorithms.findIf(methods, new NullaryMethodNamed(methodName));
-	  if(method_ == null)
-	    throw new RuntimeException(new NoSuchMethodException(methodName + "()"));
-	} // if ...
+        if(!arg.getClass().equals(lastClass_))
+        {
+          lastClass_ = arg.getClass();
+          List<Method> methods = Arrays.asList(lastClass_.getMethods());
+          method_ = (Method)Algorithms.findIf(methods, new NullaryMethodNamed(methodName));
+          if(method_ == null)
+            throw new RuntimeException(new NoSuchMethodException(methodName + "()"));
+        } // if ...
 	  
-	try {
-	  return method_.invoke(arg, (Object[])(null));
-	} // try
-	catch(Exception e) {
-	  throw new RuntimeException(e);
-	} // catch
+        try {
+          return method_.invoke(arg, (Object[])(null));
+        } // try
+        catch(Exception e) {
+          throw new RuntimeException(e);
+        } // catch
       } // fn
     }; // Function
   } // ArgumentMethod
+
+  static public <T, Void> Function<T, Void> ArgumentMethod(final String methodName,
+                                                           final Class<T> argType)
+  {
+    return (Function<T, Void>)wrapArgumentMethod(methodName, argType);
+  } // ArgumentMethod
+  static public <T, R> Function<T, R> ArgumentMethod(final String methodName,
+                                                     final Class<T> argType,
+                                                     final Class<R> returnType)
+  {
+    return (Function<T, R>)wrapArgumentMethod(methodName, argType);
+  } // ArgumentMethod
+
+  static private Function wrapArgumentMethod(final String methodName,
+                                             final Class<?> argType)
+  {
+    final List<Method> methods = Arrays.asList(argType.getMethods());
+    final Method method = Algorithms.findIf(methods, new NullaryMethodNamed(methodName));
+    if(method == null)
+      throw new RuntimeException(new NoSuchMethodException(methodName + "()"));
+                  
+    return new Function() {
+      private final Method method_;
+      { method_ = method; }
+      public Object fn(Object arg)
+      {
+        try {
+          return method_.invoke(arg, (Object[])(null));
+        } // try
+        catch(Exception e) {
+          throw new RuntimeException(e);
+        } // catch
+      } // fn
+    }; // new Function
+  } // wrapArgumentMethod        
 
   //////////////////////////////////////////
   private Adapt() { }

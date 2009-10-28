@@ -23,7 +23,7 @@ public class AdaptTest  extends TestCase
   {
     System.out.println("test1");
     Algorithms.forEach(list, Adapt.Method(System.out, "println"));
-    Algorithms.forEach(list, Adapt.Method(System.out, "println", Integer.class, Void.class));
+    Algorithms.forEach(list, Adapt.Method(System.out, "println", int.class, Void.class));
   } // 
 
   public void test2()
@@ -68,8 +68,8 @@ public class AdaptTest  extends TestCase
   public void test6()
   {
     System.out.println("test6");
-    Algorithms.forEach(list, Adapt.Method(this.getClass(), "staticOverloadedMethod", Integer.class));
-    Algorithms.forEach(list, Adapt.Method(AdaptTest.class, "staticOverloadedMethod", Integer.class, Void.class));
+    Algorithms.forEach(list, Adapt.Method(this.getClass(), "staticOverloadedMethod", int.class));
+    Algorithms.forEach(list, Adapt.Method(AdaptTest.class, "staticOverloadedMethod", int.class, Void.class));
   } // test6
 
   public void test6a()
@@ -89,9 +89,11 @@ public class AdaptTest  extends TestCase
     System.out.println("test7");
     List l = new ArrayList<Something>();
     for(int i = 0; i < 10; ++i)
-	l.add(new Something(i));
+      l.add(new Something(i));
 
     Algorithms.forEach(l, Adapt.ArgumentMethod("print"));
+    Algorithms.forEach(l, Adapt.ArgumentMethod("print", Something.class));
+    Algorithms.forEach(l, Adapt.ArgumentMethod("print", Something.class, void.class));
   } // test7
 
   public void test8()
@@ -103,9 +105,40 @@ public class AdaptTest  extends TestCase
   public void test9()
   {
     BinaryFunction<String, String, String> fn = 
-	BinaryFunctions.Compose(new Concat(), new AppendX(), new AppendX());
+      BinaryFunctions.Compose(new Concat(), new AppendX(), new AppendX());
     assertEquals("helloXworldX", fn.fn("hello", "world"));
   } // test9
+
+  public void test10()
+  {
+    try { 
+      // bad name
+      Adapt.ArgumentMethod("fruit").fn("fruit");
+      fail();
+    }
+    catch(RuntimeException re) { }
+  } // test10
+
+  public void test11()
+  {
+    try { 
+      // method not on type
+      Algorithms.forEach(list, Adapt.ArgumentMethod("fruit"), Something.class);
+      fail();
+    }
+    catch(RuntimeException re) { }
+  } // test11
+
+  public void test12()
+  {
+    try { 
+      // bad return type
+      Algorithms.forEach(list, Adapt.ArgumentMethod("print"), Something.class, long.class);
+      fail();
+    }
+    catch(RuntimeException re) { }
+  } // test11
+
 		
   static public class Concat implements BinaryFunction<String, String, String>
   {

@@ -3,7 +3,7 @@ package uk.co.jezuk.mango;
 /**
  * The Mango Library Binary Functions
  *
- * @auther Jez Higgins, jez@jezuk.co.uk
+ * @author Jez Higgins, jez@jezuk.co.uk
  */
 public class BinaryFunctions
 {
