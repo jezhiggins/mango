@@ -2,16 +2,19 @@ package uk.co.jezuk.mango;
 
 import junit.framework.*;
 
-public class FindTest  extends TestCase
+import java.util.List;
+import java.util.ArrayList;
+
+public class FindTest extends TestCase
 {
-  java.util.List list;
+ List<Integer> list;
 
   public FindTest(String name) { super(name); }
   public static Test suite() { return new TestSuite(FindTest.class); }
 
   protected void setUp()
   {
-    list = new java.util.ArrayList();
+    list = new ArrayList<Integer>();
     for(int i = 0; i < 10; ++i)
       list.add(new Integer(i));
   } // setUp

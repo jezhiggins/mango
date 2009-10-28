@@ -2,37 +2,40 @@ package uk.co.jezuk.mango;
 
 import junit.framework.*;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class TransformIteratorTest  extends TestCase
 {
-  java.util.List list;
+  List<Integer> list;
 
   public TransformIteratorTest(String name) { super(name); }
   public static Test suite() { return new TestSuite(TransformIteratorTest.class); }
 
   protected void setUp()
   {
-    list = new java.util.ArrayList();
+    list = new ArrayList<Integer>();
     for(int i = 0; i < 10; ++i)
-      list.add(new Integer(i));
+	list.add(i);
   } // setUp
 
-  class DoubleUp implements Function
+  class DoubleUp implements Function<Integer, Integer>
   {
-    public Object fn(Object obj)
+    public Integer fn(Integer i)
     {
-      Integer i = (Integer)obj;
-      return new Integer(i.intValue() * 2);
+      return (i * 2);
     } // test
   }
   
   public void test1()
   {
-    java.util.Iterator iter = Iterators.TransformIterator(list.iterator(), new DoubleUp());
+    Iterator<Integer> iter = Iterators.TransformIterator(list.iterator(), new DoubleUp());
 
     int i = 0;
     while(iter.hasNext())
     {
-      Integer n = (Integer)iter.next();
+      Integer n = iter.next();
       assertEquals(n.intValue(), i);
       i += 2;
     } // while ...
@@ -49,25 +52,25 @@ public class TransformIteratorTest  extends TestCase
 
   public void test2()
   {
-    list = new java.util.ArrayList();
-    list.add(new NameObject("hawkeye pierce"));
-    list.add(new NameObject("sacremento"));
-    list.add(new NameObject("GOBBLE"));
-    list.add(new NameObject("SINGLETON"));
-    list.add(new NameObject("BILBO"));
+    List<NameObject> slist = new ArrayList<NameObject>();
+    slist.add(new NameObject("hawkeye pierce"));
+    slist.add(new NameObject("sacremento"));
+    slist.add(new NameObject("GOBBLE"));
+    slist.add(new NameObject("SINGLETON"));
+    slist.add(new NameObject("BILBO"));
     NameObject theOneIWant = new NameObject("CORGAN");
-    list.add(theOneIWant);
-    list.add(new NameObject("ERNEST"));
-    list.add(new NameObject("DAVID"));
-    list.add(new NameObject("BILLY"));
-    list.add(new NameObject("SCAGGS"));
-    list.add(new NameObject("CHARLES"));
-    list.add(new NameObject("SIMEON"));
+    slist.add(theOneIWant);
+    slist.add(new NameObject("ERNEST"));
+    slist.add(new NameObject("DAVID"));
+    slist.add(new NameObject("BILLY"));
+    slist.add(new NameObject("SCAGGS"));
+    slist.add(new NameObject("CHARLES"));
+    slist.add(new NameObject("SIMEON"));
 
     // find the object called CORGAN
-    String found = (String)Algorithms.find(Iterators.TransformIterator(list.iterator(), 
-					      Adapt.ArgumentMethod("getName")),
-					      new String("CORGAN"));
+    String found = Algorithms.find(Iterators.TransformIterator(slist.iterator(), 
+							       Adapt.ArgumentMethod("getName", NameObject.class, String.class)),
+				   new String("CORGAN"));
     assertEquals("CORGAN", found);
   } // test2
 } // 

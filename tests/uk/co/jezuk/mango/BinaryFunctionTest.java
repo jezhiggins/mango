@@ -2,35 +2,38 @@ package uk.co.jezuk.mango;
 
 import junit.framework.*;
 
+import java.util.List;
+import java.util.ArrayList;
+
+import java.io.PrintStream;
+
 public class BinaryFunctionTest  extends TestCase
 {
-  java.util.List list;
+  List<Integer> list;
 
   public BinaryFunctionTest(String name) { super(name); }
   public static Test suite() { return new TestSuite(BinaryFunctionTest.class); }
 
   protected void setUp()
   {
-    list = new java.util.ArrayList();
+    list = new ArrayList<Integer>();
     for(int i = 0; i < 10; ++i)
-      list.add(new Integer(i));
+      list.add(i);
   } // setUp
 
-  private class Print2ndTo1st implements BinaryFunction
+    private class Print2ndTo1st implements BinaryFunction<PrintStream, Integer, Void>
   {
-    public Object fn(Object o1, Object o2)
+    public Void fn(PrintStream ps, Integer i)
     {
-      java.io.PrintStream ps = (java.io.PrintStream)o1;
-      ps.println(o2.toString());
+      ps.println(i);
       return null;
     } 
   } // Print2nd
-  private class Print1stTo2nd implements BinaryFunction
+  private class Print1stTo2nd implements BinaryFunction<Integer, PrintStream, Void>
   {
-    public Object fn(Object o1, Object o2)
+    public Void fn(Integer i, PrintStream ps)
     {
-      java.io.PrintStream ps = (java.io.PrintStream)o2;
-      ps.println(o1.toString());
+      ps.println(i);
       return null;
     } 
   }

@@ -9,18 +9,14 @@ public class BinaryNotTest  extends TestCase
 
   public void test1()
   {
-    BinaryPredicate t = BinaryPredicates.Not(BinaryPredicates.EqualTo());
-    assertEquals(false, t.test(new Integer(7), new Integer(7)));
-    assertEquals(false, t.test(t, t));
-    assertEquals(false, t.test(new String("brainfart"), new String("brainfart")));
+    BinaryPredicate<String, String> t = BinaryPredicates.Not(BinaryPredicates.<String, String>EqualTo());
+    assertEquals(false, t.test("brainfart", "brainfart"));
   } // test1
 
   public void test2()
   {
-    BinaryPredicate t = BinaryPredicates.Not(BinaryPredicates.EqualTo());
-    assertEquals(true, t.test(t, new Integer(7)));
-    assertEquals(true, t.test(t, null));
-    assertEquals(true, t.test(new String("brainfart"), new String("brainfart and chips")));
+    BinaryPredicate<String, String> t = BinaryPredicates.Not(BinaryPredicates.<String, String>EqualTo());
+    assertEquals(true, t.test("brainfart", "brainfart and chips"));
   } // test2
 
 } // BianryNotTest

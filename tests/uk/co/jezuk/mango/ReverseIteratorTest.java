@@ -2,23 +2,27 @@ package uk.co.jezuk.mango;
 
 import junit.framework.*;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class ReverseIteratorTest extends TestCase
 {
-  java.util.List list;
+  List<Integer> list;
 
   public ReverseIteratorTest(String name) { super(name); }
   public static Test suite() { return new TestSuite(ReverseIteratorTest.class); }
 
   protected void setUp()
   {
-    list = new java.util.ArrayList();
+    list = new ArrayList<Integer>();
     for(int i = 0; i < 10; ++i)
-      list.add(new Integer(i));
+      list.add(i);
   } // setUp
 
   public void test1()
   {
-    java.util.Iterator iter = Iterators.ReverseIterator(list);
+    Iterator<Integer> iter = Iterators.ReverseIterator(list);
     for(int i = 9; i >= 0; --i)
     {
       assertTrue(iter.hasNext());

@@ -13,6 +13,7 @@ public class LessThanEquals<T1, T2>
   /**
    * @return <code>true</code> if <code>x.compareTo(y) &lt; 0</code> 
    */
+  @SuppressWarnings("unchecked")
   public boolean test(T1 x, T2 y)
   {
     if(x == null && y == null)

@@ -24,7 +24,7 @@ public class CountIfNot
       return 0;  
 
     int c = 0;
-    for(Iterator<T> filter = new SkippingIterator(iterator, test); 
+    for(Iterator<T> filter = new SkippingIterator<T>(iterator, test); 
         filter.hasNext();
         filter.next(), ++c);
 

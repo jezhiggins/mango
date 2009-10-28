@@ -28,20 +28,22 @@ public class Adapt
    */
   static public Function Method(final Object obj, final String methodName)
   {
-    return wrapMethod(obj.getClass(), obj, methodName, null);
+      return wrapMethod(obj.getClass(), obj, methodName, null, null);
   } // Method 
+  @SuppressWarnings("unchecked")
   static public <T, Void> Function<T, Void> Method(final Object obj, 
-                                                   final String methodName,
-                                                   final Class<T> argType)
+						   final String methodName,
+						   final Class<T> argType)
   {
-    return (Function<T, Void>)wrapMethod(obj.getClass(), obj, methodName, argType);
+      return (Function<T, Void>)wrapMethod(obj.getClass(), obj, methodName, argType, null);
   } // Method
+  @SuppressWarnings("unchecked")
   static public <T, R> Function<T, R> Method(final Object obj, 
                                              final String methodName,
                                              final Class<T> argType, 
                                              final Class<R> returnType)
   {
-    return (Function<T, R>)wrapMethod(obj.getClass(), obj, methodName, argType);
+      return (Function<T, R>)wrapMethod(obj.getClass(), obj, methodName, argType, returnType);
   } // Method
 
 
@@ -55,20 +57,22 @@ public class Adapt
    */
   static public Function Method(final Class klass, final String methodName)
   {
-    return wrapMethod(klass, null, methodName, Object.class);
+    return wrapMethod(klass, null, methodName, null, null);
   } // Method
+  @SuppressWarnings("unchecked")
   static public <T, Void> Function<T, Void> Method(final Class klass, 
 						   final String methodName,
 						   final Class<T> argType)
   {
-    return wrapMethod(klass, null, methodName, argType);
+    return wrapMethod(klass, null, methodName, argType, null);
   } // Method
+  @SuppressWarnings("unchecked")
   static public <T, R> Function<T, R> Method(final Class klass, 
-					     final String methodName,
-					     final Class<T> argType,
-					     final Class<R> returnType)
+						     final String methodName,
+						     final Class<T> argType,
+						     final Class<R> returnType)
   {
-    return wrapMethod(klass, null, methodName, argType);
+    return wrapMethod(klass, null, methodName, argType, returnType);
   } // Method
 
   ////////////////////////////////////////////////////////////
@@ -76,17 +80,21 @@ public class Adapt
   static private Function wrapMethod(final Class<?> klass, 
                                      final Object obj, 
                                      final String methodName, 
-                                     final Class<?> argClass)
+                                     final Class<?> argType,
+				     final Class<?> returnType)
   {
     final List<Method> methods = Arrays.asList(klass.getMethods());
     
-    Predicate<Method> methodTest = new UnaryMethodNamed(methodName, argClass != null ? argClass : Object.class);
+    Predicate<Method> methodTest = new UnaryMethodNamed(methodName, argType != null ? argType : Object.class);
 
     Method m = Algorithms.findIf(methods, methodTest);
-    if((m == null) && (argClass == null))
+    if((m == null) && (argType == null))
       m = Algorithms.findIf(methods, new AnyUnaryMethodNamed(methodName));
     if(m == null)
-      throw new RuntimeException(new NoSuchMethodException(methodName + "(" + argClass + ")"));
+      throw new RuntimeException(new NoSuchMethodException(methodName + "(" + argType + ")"));
+
+    verifyReturnType(m, returnType);
+
     final Method method = m;
 
     return new Function() {
@@ -109,6 +117,16 @@ public class Adapt
     }; // Function
   } // wrapMethod
 
+  static private void verifyReturnType(final Method m, final Class<?> returnType)
+  {
+    if((returnType == null) ||
+       (returnType.equals(void.class)) ||
+       (returnType.equals(Void.class)))
+      return;  // not interested in return type
+    if(!returnType.isAssignableFrom(m.getReturnType()))
+      throw new RuntimeException(new NoSuchMethodException(m.getName() + " has return type " + m.getReturnType() + ", but wanted " + returnType));
+  } // verifyReturnType
+
   static private class NullaryMethodNamed implements Predicate<Method>
   {
     NullaryMethodNamed(final String name)
@@ -127,10 +145,10 @@ public class Adapt
 
   static private class UnaryMethodNamed implements Predicate<Method>
   {
-    UnaryMethodNamed(final String name, final Class<?> argClass) 
+    UnaryMethodNamed(final String name, final Class<?> argType) 
     { 
       name_ = name; 
-      argClass_ = argClass;
+      argType_ = argType;
     } // UnaryMethodNamed
 
     public boolean test(final Method m)
@@ -139,13 +157,13 @@ public class Adapt
         return false;
       if(m.getParameterTypes().length != 1)
         return false;
-      if(!m.getParameterTypes()[0].equals(argClass_))
+      if(!m.getParameterTypes()[0].equals(argType_))
         return false;
       return true;
     } // test
 
     private final String name_;
-    private final Class<?> argClass_;
+    private final Class<?> argType_;
   } // UnaryMethodNamed
 
   static private class AnyUnaryMethodNamed implements Predicate<Method>
@@ -199,7 +217,7 @@ public class Adapt
         {
           lastClass_ = arg.getClass();
           List<Method> methods = Arrays.asList(lastClass_.getMethods());
-          method_ = (Method)Algorithms.findIf(methods, new NullaryMethodNamed(methodName));
+          method_ = Algorithms.findIf(methods, new NullaryMethodNamed(methodName));
           if(method_ == null)
             throw new RuntimeException(new NoSuchMethodException(methodName + "()"));
         } // if ...
@@ -214,25 +232,29 @@ public class Adapt
     }; // Function
   } // ArgumentMethod
 
+  @SuppressWarnings("unchecked")
   static public <T, Void> Function<T, Void> ArgumentMethod(final String methodName,
                                                            final Class<T> argType)
   {
-    return (Function<T, Void>)wrapArgumentMethod(methodName, argType);
+      return (Function<T, Void>)wrapArgumentMethod(methodName, argType, null);
   } // ArgumentMethod
+  @SuppressWarnings("unchecked")
   static public <T, R> Function<T, R> ArgumentMethod(final String methodName,
-                                                     final Class<T> argType,
-                                                     final Class<R> returnType)
+						     final Class<T> argType,
+						     final Class<R> returnType)
   {
-    return (Function<T, R>)wrapArgumentMethod(methodName, argType);
+      return (Function<T, R>)wrapArgumentMethod(methodName, argType, returnType);
   } // ArgumentMethod
 
   static private Function wrapArgumentMethod(final String methodName,
-                                             final Class<?> argType)
+                                             final Class<?> argType,
+					     final Class<?> returnType)
   {
     final List<Method> methods = Arrays.asList(argType.getMethods());
     final Method method = Algorithms.findIf(methods, new NullaryMethodNamed(methodName));
     if(method == null)
       throw new RuntimeException(new NoSuchMethodException(methodName + "()"));
+    verifyReturnType(method, returnType);
                   
     return new Function() {
       private final Method method_;

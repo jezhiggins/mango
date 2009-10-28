@@ -21,7 +21,7 @@ public class CountIf
       return 0;  
 
     int c = 0;
-    for(Iterator<T> filter = new SelectingIterator(iterator, test); 
+    for(Iterator<T> filter = new SelectingIterator<T>(iterator, test); 
 				filter.hasNext();
 				filter.next(), ++c);
     

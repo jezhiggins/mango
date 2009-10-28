@@ -25,13 +25,7 @@ public class Transform
     while(iterator.hasNext())
     {
       R o = fn.fn(iterator.next());
-      if(o != null)
-      {
-        if(o instanceof Collection)
-          results.addAll((Collection)o);
-        else
-          results.add(o);
-      } // if(o != null)
+      results.add(o);
     } // while ...
     return results;
   } // execute

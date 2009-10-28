@@ -9,9 +9,10 @@ import java.util.List;
  */
 public class ReverseIterator<T> implements Iterator<T>
 {
+  @SuppressWarnings("unchecked")
   public ReverseIterator(List<? extends T> list)
   {
-    iter_ = ((List<T>)list).listIterator(list.size());
+    iter_ = (ListIterator<T>)list.listIterator(list.size());
   } // ReverseIterator
 
   public boolean hasNext()

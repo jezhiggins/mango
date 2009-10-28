@@ -23,7 +23,7 @@ public class FindIf
     if((iterator == null) || (test == null))
       return null;  
 
-    Iterator<T> filter = new SelectingIterator(iterator, test);
+    Iterator<T> filter = new SelectingIterator<T>(iterator, test);
     return filter.hasNext() ? filter.next() : null;
   } // execute
 

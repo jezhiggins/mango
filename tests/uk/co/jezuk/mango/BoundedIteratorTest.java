@@ -2,23 +2,27 @@ package uk.co.jezuk.mango;
 
 import junit.framework.*;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class BoundedIteratorTest  extends TestCase
 {
-  java.util.List list;
+  List<Integer> list;
 
   public BoundedIteratorTest(String name) { super(name); }
   public static Test suite() { return new TestSuite(BoundedIteratorTest.class); }
 
   protected void setUp()
   {
-    list = new java.util.ArrayList();
+    list = new ArrayList<Integer>();
     for(int i = 0; i < 10; ++i)
-      list.add(new Integer(i));
+      list.add(i);
   } // setUp
 
   public void test1()
   {
-    java.util.Iterator bi = Iterators.BoundedIterator(list, 2, 5);
+    Iterator<Integer> bi = Iterators.BoundedIterator(list, 2, 5);
     assertEquals(true, bi.hasNext());
     assertEquals(new Integer(2), bi.next());
     assertEquals(true, bi.hasNext());
@@ -30,7 +34,7 @@ public class BoundedIteratorTest  extends TestCase
 
   public void test2()
   {
-    java.util.Iterator bi = Iterators.BoundedIterator(list, 8, 12);
+    Iterator<Integer> bi = Iterators.BoundedIterator(list, 8, 12);
     assertEquals(true, bi.hasNext());
     assertEquals(new Integer(8), bi.next());
     assertEquals(true, bi.hasNext());
@@ -40,13 +44,13 @@ public class BoundedIteratorTest  extends TestCase
 
   public void test3()
   {
-    java.util.Iterator bi = Iterators.BoundedIterator(list, 12, 12);
+    Iterator<Integer> bi = Iterators.BoundedIterator(list, 12, 12);
     assertEquals(false, bi.hasNext());
   } // test3
 
   public void test4()
   {
-    java.util.Iterator bi = Iterators.BoundedIterator(list.iterator(), 2, 5);
+    Iterator<Integer> bi = Iterators.BoundedIterator(list.iterator(), 2, 5);
     assertEquals(true, bi.hasNext());
     assertEquals(new Integer(2), bi.next());
     assertEquals(true, bi.hasNext());
@@ -58,7 +62,7 @@ public class BoundedIteratorTest  extends TestCase
 
   public void test5()
   {
-    java.util.Iterator bi = Iterators.BoundedIterator(list.iterator(), 8, 12);
+    Iterator<Integer> bi = Iterators.BoundedIterator(list.iterator(), 8, 12);
     assertEquals(true, bi.hasNext());
     assertEquals(new Integer(8), bi.next());
     assertEquals(true, bi.hasNext());
@@ -68,7 +72,7 @@ public class BoundedIteratorTest  extends TestCase
 
   public void test6()
   {
-    java.util.Iterator bi = Iterators.BoundedIterator(list.iterator(), 12, 12);
+    Iterator<Integer> bi = Iterators.BoundedIterator(list.iterator(), 12, 12);
     assertEquals(false, bi.hasNext());
   } // test6
 } // BoundedIteratorTest

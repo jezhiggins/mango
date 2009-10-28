@@ -10,9 +10,9 @@ public class IdentityTest  extends TestCase
   public void test1()
   {
     Function i = Functions.Identity();
-    assertEquals(this, i.fn(this));
-		assertEquals(null, i.fn(null));
-		assertEquals("hello", i.fn("hello"));
-		assertEquals(i, i.fn(i));
+    assertEquals(this, Functions.Identity().fn(this));
+    assertEquals(null, Functions.Identity().fn(null));
+    assertEquals("hello", Functions.Identity().fn("hello"));
+    assertEquals(i, Functions.Identity().fn(i));
   } // test1
 } // IdentityTest

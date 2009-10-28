@@ -27,8 +27,8 @@
            debug="on" 
            optimize="off" 
            deprecation="on">
-			<!--compilerarg value="-Xlint"/--> 
-		</javac>
+	<compilerarg value="-Xlint"/> 
+    </javac>
   </target>
 
   <target name="javadoc" depends="clean, prepare">

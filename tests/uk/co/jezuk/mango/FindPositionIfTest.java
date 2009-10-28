@@ -7,14 +7,14 @@ import java.util.ArrayList;
 
 public class FindPositionIfTest  extends TestCase
 {
-  List list;
+  List<Integer> list;
 
   public FindPositionIfTest(String name) { super(name); }
   public static Test suite() { return new TestSuite(FindPositionIfTest.class); }
 
   protected void setUp()
   {
-    list = new ArrayList();
+    list = new ArrayList<Integer>();
     for(int i = 0; i < 10; ++i)
       list.add(i);
   } // setUp

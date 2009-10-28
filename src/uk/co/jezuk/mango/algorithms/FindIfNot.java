@@ -17,7 +17,7 @@ public class FindIfNot
     if((iterator == null) || (test == null))
       return null;  
 
-    Iterator<T> filter = new SkippingIterator(iterator, test);
+    Iterator<T> filter = new SkippingIterator<T>(iterator, test);
     return filter.hasNext() ? filter.next() : null;
   } // execute
 

@@ -78,8 +78,8 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
    * A <code>SelectingIterator</code> implements the <code>Iterator</code> interface, 
    * and is constructed by wrapping around an existing iterator. 
    */
-  static public <T> Iterator<T> SelectingIterator(Iterator<? extends T> iterator, 
-                                                  Predicate<T> predicate) 
+  static public <T> Iterator<T> SelectingIterator(Iterator<T> iterator, 
+                                                  Predicate<? super T> predicate) 
   { 
     return new SelectingIterator<T>(iterator, predicate); 
   } // SelectingIterator
@@ -93,8 +93,8 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
    * 
    * @see #SelectingIterator
    */ 
-  static public <T> Iterator<T> SkippingIterator(Iterator<? extends T> iterator, 
-                                                 Predicate<T> predicate) 
+  static public <T> Iterator<T> SkippingIterator(Iterator<T> iterator, 
+                                                 Predicate<? super T> predicate) 
   { 
     return new SkippingIterator<T>(iterator, predicate); 
   } // SkippingIterator

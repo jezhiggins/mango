@@ -13,6 +13,7 @@ public class GreaterThanEquals <T1, T2>
   /**
    * @return <code>true</code> if <code>x.compareTo(y) &gt; 0</code> 
    */
+  @SuppressWarnings("unchecked")
   public boolean test(T1 x, T2 y)
   {
     if((x == null) && (y == null))

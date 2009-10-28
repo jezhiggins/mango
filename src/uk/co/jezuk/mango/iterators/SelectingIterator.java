@@ -11,9 +11,10 @@ import uk.co.jezuk.mango.Predicate;
  */
 public class SelectingIterator<T> implements Iterator<T>
 {
-  public SelectingIterator(Iterator<? extends T> iterator, Predicate<T> predicate)
+  public SelectingIterator(final Iterator<T> iterator, 
+			   final Predicate<? super T> predicate)
   {
-    iter_ = (Iterator<T>)iterator;
+    iter_ = iterator;
     pred_ = predicate;
   } // SelectingIterator
 
@@ -40,8 +41,8 @@ public class SelectingIterator<T> implements Iterator<T>
   } // remove
 
   ////////////////////////
-  private Iterator<T> iter_;
-  private Predicate<T> pred_;
+  private final Iterator<T> iter_;
+  private final Predicate<? super T> pred_;
   private T next_;
 } // SelectingIterator
 

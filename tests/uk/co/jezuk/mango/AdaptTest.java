@@ -19,13 +19,14 @@ public class AdaptTest  extends TestCase
       list.add(i);
   } // setUp
 
+  @SuppressWarnings("unchecked")
   public void test1()
   {
-    System.out.println("test1");
     Algorithms.forEach(list, Adapt.Method(System.out, "println"));
-    Algorithms.forEach(list, Adapt.Method(System.out, "println", int.class, Void.class));
+    Algorithms.forEach(list, Adapt.Method(System.out, "println", int.class, void.class));
   } // 
 
+  @SuppressWarnings("unchecked")
   public void test2()
   {
     try {
@@ -37,6 +38,7 @@ public class AdaptTest  extends TestCase
     } // RuntimeException
   } // test2
 
+  @SuppressWarnings("unchecked")
   public void test3()
   {
     try {
@@ -48,6 +50,7 @@ public class AdaptTest  extends TestCase
     } // RuntimeException
   } // test3
 
+  @SuppressWarnings("unchecked")
   public void test4()
   {
     try {
@@ -59,15 +62,16 @@ public class AdaptTest  extends TestCase
     } // RuntimeException
   } // test4
 
+  @SuppressWarnings("unchecked")
   public void test5()
   {
-    System.out.println("test5");
     Algorithms.forEach(list, Adapt.Method(this, "staticMethod"));
   } // test5
 
   public void test6()
   {
-    System.out.println("test6");
+    Algorithms.forEach(list, Adapt.Method(this.getClass(), "staticOverloadedMethod", int.class));
+    Algorithms.forEach(list, Adapt.Method(AdaptTest.class, "staticOverloadedMethod", int.class, Void.class));
     Algorithms.forEach(list, Adapt.Method(this.getClass(), "staticOverloadedMethod", int.class));
     Algorithms.forEach(list, Adapt.Method(AdaptTest.class, "staticOverloadedMethod", int.class, Void.class));
   } // test6
@@ -81,13 +85,15 @@ public class AdaptTest  extends TestCase
   {
       Something(int i) { i_ = i; }
       public void print() { System.out.println(i_); }
+      public Integer i() { return i_; }
       private int i_;
   } // Something
 
+  @SuppressWarnings("unchecked")
   public void test7()
   {
     System.out.println("test7");
-    List l = new ArrayList<Something>();
+    List<Something> l = new ArrayList<Something>();
     for(int i = 0; i < 10; ++i)
       l.add(new Something(i));
 
@@ -109,6 +115,7 @@ public class AdaptTest  extends TestCase
     assertEquals("helloXworldX", fn.fn("hello", "world"));
   } // test9
 
+  @SuppressWarnings("unchecked")
   public void test10()
   {
     try { 
@@ -137,7 +144,15 @@ public class AdaptTest  extends TestCase
       fail();
     }
     catch(RuntimeException re) { }
-  } // test11
+  } // test12
+
+  public void test13()
+  {
+    Function<Something, Integer> fn = Adapt.ArgumentMethod("i", Something.class, Integer.class);
+    Function<Something, Number> fn2 = Adapt.ArgumentMethod("i", Something.class, Number.class);
+    Function<Something, Object> fn3 = Adapt.ArgumentMethod("i", Something.class, Object.class);
+    Function<Something, Void> fn4 = Adapt.ArgumentMethod("i", Something.class, void.class);
+  } // test13
 
 		
   static public class Concat implements BinaryFunction<String, String, String>
