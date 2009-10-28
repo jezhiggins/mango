@@ -123,7 +123,7 @@ public class AdaptTest  extends TestCase
   {
     try { 
       // method not on type
-      Algorithms.forEach(list, Adapt.ArgumentMethod("fruit"), Something.class);
+      Adapt.ArgumentMethod("fruit", Something.class);
       fail();
     }
     catch(RuntimeException re) { }
@@ -133,7 +133,7 @@ public class AdaptTest  extends TestCase
   {
     try { 
       // bad return type
-      Algorithms.forEach(list, Adapt.ArgumentMethod("print"), Something.class, long.class);
+      Adapt.ArgumentMethod("print", Something.class, long.class);
       fail();
     }
     catch(RuntimeException re) { }
