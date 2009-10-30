@@ -3,8 +3,13 @@ package uk.co.jezuk.mango;
 import uk.co.jezuk.mango.generators.*;
 
 /**
- * The Mango Library Generators Library.
- *
+ * <strong>The Mango Library Generators</strong>
+ * <br/><br/>
+ * A <code>{@link Generator}</code> describes a function which takes no arguments
+ * <code>fn()</code>. It returns some object of type <code>R</code>, and
+ * may return the same object or different objects for each invocation.  
+ * It can refer to local state, perform disk reads or writes, or whatever.  
+ * @see Generator
  * @author Jez Higgins, jez@jezuk.co.uk
  */
 public class Generators

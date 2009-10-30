@@ -6,7 +6,10 @@ import java.util.List;
 import java.util.Arrays;
 
 /**
- * Object method adaptors.
+ * <strong>The Mango Library Object Adaptors</strong>
+ * <br/><br/>
+ * Provides methods to adapt instance and static methods into 
+ * {@link Function}s. 
  * @see Bind
  * @author Jez Higgins, jez@jezuk.co.uk
  */

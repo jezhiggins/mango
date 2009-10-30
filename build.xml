@@ -5,7 +5,7 @@
   <property name="srctests"     value="tests"/>
   <property name="javadocdir"	value="javadoc"/>
   <property name="distdir"      value="dist"/>
-	<property name="junit.jar" value="lib/junit-3.8.2.jar"/>
+  <property name="junit.jar" value="lib/junit-3.8.2.jar"/>
 
   <target name="prepare">
     <mkdir dir="${targetdir}"/>
@@ -38,9 +38,12 @@
            author="true"
            version="true"
            use="true"
+           Windowtitle="The Mango Library"
 	   >
       <doctitle><![CDATA[<h2>The Mango Library</h2>]]></doctitle>
-      <bottom>Copyright &#169; 2002-2006 JezUK Ltd.</bottom>
+      <header><![CDATA[<a href='http://www.jezuk.co.uk/mango/'><img src='http://www.jezuk.co.uk/files/mango-short-header.png' title='The Mango Library' style='border: 0px'/></a>]]></header>
+      <footer><![CDATA[<a href='http://www.jezuk.co.uk/'><img src='http://www.jezuk.co.uk/files/jezuk-logo.png' title='Jez UK Ltd' style='border: 0px'/></a>]]></footer>
+      <bottom>Copyright &#169; 2002-2009 JezUK Ltd.</bottom>
     </javadoc>
   </target>
 

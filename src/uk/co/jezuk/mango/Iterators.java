@@ -6,7 +6,8 @@ import java.util.List;
 import uk.co.jezuk.mango.iterators.*;
 
 /**
- * The Mango Library Iterator classes. 
+ * <strong>The Mango Library Iterators</strong>
+ * <br/><br/>
  *
  * @author Jez Higgins, jez@jezuk.co.uk
  */
@@ -16,7 +17,7 @@ public class Iterators
    * A <code>StringIterator</code> iterators over a String, returning each character in turn as a <code>String</code> of length 1.
 	 * e.g. StringIterator("123") will return "1", "2", "3"
    */
-	static public Iterator<String> StringIterator(String s) 
+  static public Iterator<String> StringIterator(String s) 
   { 
     return new StringIterator(s); 
   } // StringIterator

@@ -3,8 +3,13 @@ package uk.co.jezuk.mango;
 import uk.co.jezuk.mango.binarypredicates.*;
 
 /**
- * The Mango Library Binary Predicates
- *
+ * <strong>The Mango Library Binary Predicates</strong>
+ * <br/><br/>
+ * A <code>BinaryPredicate</code> is some function taking two arguments -
+ * <code>fn(x, y)</code> and returning the result of some test.
+ * It returns <code>true</code> if the conditions of the test are satisfied,
+ * <code>false</code> otherwise
+ * @see BinaryPredicate
  * @author Jez Higgins, jez@jezuk.co.uk
  */
 public class BinaryPredicates

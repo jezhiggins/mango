@@ -3,8 +3,13 @@ package uk.co.jezuk.mango;
 import uk.co.jezuk.mango.unarypredicates.*;
 
 /**
- * The Mango Library Unary Predicates
- *
+ * <strong>The Mango Library Unary Predicates</strong>
+ * <br/><br/>
+ * A <code>{@link Predicate}</code> is a special form of a <code>Function</code>, 
+ * whose result represents the truth or otherwise of some condition.
+ * Returns <code>true</code> if the condition the Predicate tests for 
+ * is satisfied, <code>false</code> otherwise.
+ * @see Predicate
  * @author Jez Higgins, jez@jezuk.co.uk
  */
 public class Predicates
@@ -56,6 +61,24 @@ public class Predicates
    * <code>a.test(x)</code> returns <code>pred1.test(x) || pred2.test(x)</code>
    */
   static public <T> Predicate<T> Or(Predicate<T> pred1, Predicate<T> pred2) { return new Or<T>(pred1, pred2); }
+
+  /**
+   * A <code>Predicate<T></code> which checks whether the passed object 
+   * reference is null.
+   */
+  static public <T> Predicate<T> IsNull()
+  {
+    return (Predicate<T>)IsNull.INSTANCE;
+  } // IsNull
+
+  /**
+   * A <code>Predicate<T></code> which checks whether the passed object 
+   * reference is not null.
+   */
+  static public <T> Predicate<T> NotNull()
+  {
+    return (Predicate<T>)NotNull.INSTANCE;
+  } // NotNull
 
   //////////////////////////////////
   private Predicates() { }

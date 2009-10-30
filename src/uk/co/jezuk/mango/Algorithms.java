@@ -9,8 +9,8 @@ import java.util.Comparator;
 import uk.co.jezuk.mango.algorithms.*;
 
 /**
- * The Mango Algorithms Library.
- * 
+ * <strong>The Mango Library Algorithms</strong>
+ * <br/><br/>
  * @author Jez Higgins, jez@jezuk.co.uk
  */
 public class Algorithms
