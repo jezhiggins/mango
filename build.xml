@@ -41,8 +41,8 @@
            Windowtitle="The Mango Library"
 	   >
       <doctitle><![CDATA[<h2>The Mango Library</h2>]]></doctitle>
-      <header><![CDATA[<a href='http://www.jezuk.co.uk/mango/'><img src='http://www.jezuk.co.uk/files/mango-short-header.png' title='The Mango Library' style='border: 0px'/></a>]]></header>
-      <footer><![CDATA[<a href='http://www.jezuk.co.uk/'><img src='http://www.jezuk.co.uk/files/jezuk-logo.png' title='Jez UK Ltd' style='border: 0px'/></a>]]></footer>
+      <header><![CDATA[<a href='http://www.jezuk.co.uk/mango' target='_top'><img src='http://www.jezuk.co.uk/files/mango-short-header.png' title='The Mango Library' style='border: 0px'/></a>]]></header>
+      <footer><![CDATA[<a href='http://www.jezuk.co.uk/' target='_top'><img src='http://www.jezuk.co.uk/files/jezuk-logo.png' title='Jez UK Ltd' style='border: 0px'/></a>]]></footer>
       <bottom>Copyright &#169; 2002-2009 JezUK Ltd.</bottom>
     </javadoc>
   </target>
