@@ -66,6 +66,9 @@
         <include name="${srctests}/**/*.java"/>
       </fileset>
     </zip>
+		<zip zipfile="${distdir}/mango-javadoc.zip">
+			<fileset dir="${javadocdir}" includes="**/*"/>
+		</zip>
     <tar tarfile="${distdir}/mango-bin.tar">
       <tarfileset dir="${distdir}" includes="*.jar"/>
     </tar>
@@ -96,6 +99,7 @@
 				<pathelement location="${junit.jar}"/>
       </classpath>
       <formatter type="plain"/>
+      <formatter type="xml"/>
       <batchtest todir="${srctests}/results">
         <fileset dir="${targetdir}">
 	  <include name="**/*Test.class"/>
