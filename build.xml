@@ -31,7 +31,7 @@
     </javac>
   </target>
 
-  <target name="javadoc" depends="clean, prepare">
+  <target name="javadoc">
     <javadoc packagenames="uk.co.jezuk.mango"
            sourcepath="${srcdir}"
            destdir="${javadocdir}"
@@ -55,7 +55,7 @@
     </jar>
   </target>
 
-  <target name="dist" depends="test, javadoc, jar">
+  <target name="dist" depends="clean, test, javadoc, jar">
     <zip zipfile="${distdir}/mango-bin.zip">
       <fileset dir="${distdir}" includes="*.jar"/>
     </zip>
