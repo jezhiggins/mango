@@ -38,7 +38,7 @@
            author="true"
            version="true"
            use="true"
-           Windowtitle="The Mango Library"
+           windowtitle="The Mango Library"
 	   >
       <doctitle><![CDATA[<h2>The Mango Library</h2>]]></doctitle>
       <header><![CDATA[<a href='http://www.jezuk.co.uk/mango' target='_top'><img src='http://www.jezuk.co.uk/files/mango-short-header.png' title='The Mango Library' style='border: 0px'/></a>]]></header>
