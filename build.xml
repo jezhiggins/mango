@@ -1,22 +1,33 @@
 <project name="mango" default="compile" basedir=".">
 
   <property name="targetdir"    value="classes"/>
+	<property name="coberturadir" value="instrumented-classes"/>
   <property name="srcdir"       value="src"/>
   <property name="srctests"     value="tests"/>
   <property name="javadocdir"	value="javadoc"/>
   <property name="distdir"      value="dist"/>
   <property name="junit.jar" value="lib/junit-3.8.2.jar"/>
 
+	<path id="cobertura.classpath">
+		<fileset dir="lib">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+
+	<taskdef resource="tasks.properties" classpathref="cobertura.classpath"/>
+
   <target name="prepare">
     <mkdir dir="${targetdir}"/>
     <mkdir dir="${javadocdir}"/>
     <mkdir dir="${distdir}"/>
+		<mkdir dir="${coberturadir}"/>
   </target>
 
   <target name="clean">
     <delete dir="${targetdir}"/>
     <delete dir="${javadocdir}"/>
     <delete dir="${distdir}"/>
+		<delete dir="${coberturadir}"/>
     <delete dir="${srctests}/results"/>
   </target>
 
@@ -27,8 +38,14 @@
            debug="on" 
            optimize="off" 
            deprecation="on">
-	<compilerarg value="-Xlint"/> 
+			<compilerarg value="-Xlint"/> 
     </javac>
+		<cobertura-instrument todir="${coberturadir}">
+			<fileset dir="${targetdir}">
+				<include name="**/*.class"/>
+				<exclude name="**/*Test*.class"/>
+			</fileset>
+		</cobertura-instrument>
   </target>
 
   <target name="javadoc">
@@ -93,19 +110,27 @@
   <target name="test" depends="compile">
     <delete dir="${srctests}/results"/>
     <mkdir dir="${srctests}/results"/>
-    <junit>
+
+    <junit fork="yes">
+			<sysproperty key="net.sourceforge.cobertura.datafile" file="${srctests}/results/cobertura.ser"/>
       <classpath>
+				<pathelement location="${coberturadir}"/> 
 				<pathelement location="${targetdir}"/>
 				<pathelement location="${junit.jar}"/>
+				<path refid="cobertura.classpath"/>
       </classpath>
       <formatter type="plain"/>
       <formatter type="xml"/>
       <batchtest todir="${srctests}/results">
         <fileset dir="${targetdir}">
-	  <include name="**/*Test.class"/>
-	</fileset>
-      </batchtest>
+					<include name="**/*Test.class"/>
+				</fileset>
+			</batchtest>
     </junit>
+		<cobertura-report format="xml"
+											datafile="${srctests}/results/cobertura.ser"
+											destdir="${srctests}/results"
+											srcdir="${srcdir}"/>
   </target>
 
   <target name="all" depends="clean,prepare,compile,javadoc,jar"/>

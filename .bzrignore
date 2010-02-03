@@ -2,3 +2,4 @@ classes
 dist
 tests/results
 javadoc
+instrumented-classes
