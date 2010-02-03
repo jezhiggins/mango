@@ -112,7 +112,7 @@
     <mkdir dir="${srctests}/results"/>
 
     <junit fork="yes">
-			<sysproperty key="net.sourceforge.cobertura.datafile" file="${srctests}/results/cobertura.ser"/>
+			<sysproperty key="net.sourceforge.cobertura.datafile" file="${srctests}/cobertura.ser"/>
       <classpath>
 				<pathelement location="${coberturadir}"/> 
 				<pathelement location="${targetdir}"/>
@@ -128,8 +128,8 @@
 			</batchtest>
     </junit>
 		<cobertura-report format="xml"
-											datafile="${srctests}/results/cobertura.ser"
-											destdir="${srctests}/results"
+											datafile="${srctests}/cobertura.ser"
+											destdir="${srctests}"
 											srcdir="${srcdir}"/>
   </target>
 
