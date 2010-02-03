@@ -1,6 +1,8 @@
 package uk.co.jezuk.mango;
 
 import junit.framework.*;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class SingletonIteratorTest  extends TestCase
 {
@@ -9,7 +11,7 @@ public class SingletonIteratorTest  extends TestCase
 
   public void test1()
   {
-    java.util.Iterator i = Iterators.SingletonIterator(new String("one"));
+    Iterator i = Iterators.SingletonIterator(new String("one"));
     assertEquals(true, i.hasNext());
     assertEquals("one", i.next());
     assertEquals(false, i.hasNext());
@@ -17,7 +19,13 @@ public class SingletonIteratorTest  extends TestCase
 
   public void test2()
   {
-      java.util.Iterator i = Iterators.SingletonIterator(null);
+    Iterator i = Iterators.SingletonIterator(null);
     assertEquals(false, i.hasNext());
+    try {
+      i.next();
+      fail();
+    } 
+    catch(NoSuchElementException e) {
+    } 
   } // test2
 } // SingletonIteratorTest
