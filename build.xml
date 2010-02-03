@@ -29,6 +29,7 @@
     <delete dir="${distdir}"/>
 		<delete dir="${coberturadir}"/>
     <delete dir="${srctests}/results"/>
+    <delete dir="${srctests}/cobertura"/>
   </target>
 
   <target name="compile" depends="prepare">
@@ -40,12 +41,6 @@
            deprecation="on">
 			<compilerarg value="-Xlint"/> 
     </javac>
-		<cobertura-instrument todir="${coberturadir}">
-			<fileset dir="${targetdir}">
-				<include name="**/*.class"/>
-				<exclude name="**/*Test*.class"/>
-			</fileset>
-		</cobertura-instrument>
   </target>
 
   <target name="javadoc">
@@ -109,10 +104,18 @@
 
   <target name="test" depends="compile">
     <delete dir="${srctests}/results"/>
+    <delete dir="${srctests}/cobertura"/>
     <mkdir dir="${srctests}/results"/>
+    <mkdir dir="${srctests}/cobertura"/>
 
+		<cobertura-instrument todir="${coberturadir}">
+			<fileset dir="${targetdir}">
+				<include name="**/*.class"/>
+				<exclude name="**/*Test*.class"/>
+			</fileset>
+		</cobertura-instrument>
     <junit fork="yes">
-			<sysproperty key="net.sourceforge.cobertura.datafile" file="${srctests}/cobertura.ser"/>
+			<sysproperty key="net.sourceforge.cobertura.datafile" file="${srctests}/cobertura/cobertura.ser"/>
       <classpath>
 				<pathelement location="${coberturadir}"/> 
 				<pathelement location="${targetdir}"/>
@@ -128,8 +131,8 @@
 			</batchtest>
     </junit>
 		<cobertura-report format="xml"
-											datafile="${srctests}/cobertura.ser"
-											destdir="${srctests}"
+											datafile="${srctests}/cobertura/cobertura.ser"
+											destdir="${srctests}/cobertura"
 											srcdir="${srcdir}"/>
   </target>
 
