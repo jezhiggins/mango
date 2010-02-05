@@ -75,4 +75,37 @@ public class BoundedIteratorTest  extends TestCase
     Iterator<Integer> bi = Iterators.BoundedIterator(list.iterator(), 12, 12);
     assertEquals(false, bi.hasNext());
   } // test6
+
+  public void test7()
+  {
+    try {
+      Iterator<Integer> bi =  Iterators.BoundedIterator(list.iterator(), -1, 12);
+      fail();
+    }
+    catch(IndexOutOfBoundsException e)
+    {
+    } // catch
+  }
+
+  public void test8()
+  {
+    try {
+      Iterator<Integer> bi =  Iterators.BoundedIterator(list.iterator(), 12, -12);
+      fail();
+    }
+    catch(IndexOutOfBoundsException e)
+    {
+    } // catch
+  }
+
+  public void test9()
+  {
+    try {
+      Iterator<Integer> bi =  Iterators.BoundedIterator(list.iterator(), 12, 6);
+      fail();
+    }
+    catch(IndexOutOfBoundsException e)
+    {
+    } // catch
+  }
 } // BoundedIteratorTest
