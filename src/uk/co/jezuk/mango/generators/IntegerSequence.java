@@ -26,7 +26,7 @@ public class IntegerSequence implements Generator<Integer>
 
   public Integer fn()
   {
-    return new Integer(seed_++);
+    return Integer.valueOf(seed_++);
   } // fn
 
   private int seed_;
