@@ -1,26 +1,36 @@
 <project name="mango" default="compile" basedir=".">
 
   <property name="targetdir"    value="classes"/>
-	<property name="coberturadir" value="instrumented-classes"/>
+  <property name="coberturadir" value="instrumented-classes"/>
   <property name="srcdir"       value="src"/>
   <property name="srctests"     value="tests"/>
   <property name="javadocdir"	value="javadoc"/>
   <property name="distdir"      value="dist"/>
   <property name="junit.jar" value="lib/junit-3.8.2.jar"/>
 
-	<path id="cobertura.classpath">
-		<fileset dir="lib">
-			<include name="*.jar"/>
-		</fileset>
-	</path>
+  <path id="cobertura.classpath">
+    <fileset dir="lib">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
+  
+  <taskdef resource="tasks.properties" classpathref="cobertura.classpath"/>
 
-	<taskdef resource="tasks.properties" classpathref="cobertura.classpath"/>
+  <path id="findbugs.classpath">
+    <fileset dir="lib/findbugs">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
 
+  <taskdef name="findbugs" 
+	classname="edu.umd.cs.findbugs.anttask.FindBugsTask"
+	classpathref="findbugs.classpath"/>
+  
   <target name="prepare">
     <mkdir dir="${targetdir}"/>
     <mkdir dir="${javadocdir}"/>
     <mkdir dir="${distdir}"/>
-		<mkdir dir="${coberturadir}"/>
+    <mkdir dir="${coberturadir}"/>
   </target>
 
   <target name="clean">
@@ -57,6 +67,15 @@
       <footer><![CDATA[<a href='http://www.jezuk.co.uk/' target='_top'><img src='http://www.jezuk.co.uk/files/jezuk-logo.png' title='Jez UK Ltd' style='border: 0px'/></a>]]></footer>
       <bottom>Copyright &#169; 2002-2009 JezUK Ltd.</bottom>
     </javadoc>
+  </target>
+
+  <target name="findbugs" depends="jar">
+    <findbugs home="lib/findbugs"
+	      output="xml"
+	      outputFile="mango-fb.xml">
+      <sourcePath path="${srcdir}"/>
+      <class location="${distdir}/mango.jar"/>
+    </findbugs>
   </target>
 
   <target name="jar" depends="clean, compile">
