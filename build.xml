@@ -41,14 +41,16 @@
   <target name="prepare">
     <mkdir dir="${targetdir}"/>
     <mkdir dir="${testdir}"/>
-    <mkdir dir="${javadocdir}"/>
-    <mkdir dir="${distdir}"/>
   </target>
 
   <target name="clean">
     <delete dir="out"/>
-    <delete dir="${javadocdir}"/>
-    <delete dir="${distdir}"/>
+  </target>
+
+  <target name="really-clean">
+    <delete dir="out"/>
+    <delete dir="dist"/>
+    <delete dir="javadoc"/>
   </target>
 
   <target name="compile" depends="prepare">
@@ -174,7 +176,9 @@
     </findbugs>
   </target>
 
-  <target name="jar" depends="clean, compile">
+  <target name="jar" depends="compile">
+    <delete dir="${distdir}"/>
+    <mkdir dir="${distdir}"/>
     <jar jarfile="${distdir}/mango.jar">
       <fileset dir="${targetdir}">
         <exclude name="**/*Test*.class"/>
@@ -183,6 +187,8 @@
   </target>
 
   <target name="javadoc">
+    <delete dir="${javadocdir}"/>
+    <mkdir dir="${javadocdir}"/>
     <javadoc packagenames="uk.co.jezuk.mango"
            sourcepath="${srcdir}"
            destdir="${javadocdir}"
@@ -198,7 +204,7 @@
     </javadoc>
   </target>
 
-  <target name="dist" depends="clean, test, javadoc, jar">
+  <target name="dist" depends="clean, javadoc, jar">
     <zip zipfile="${distdir}/mango-bin.zip">
       <fileset dir="${distdir}" includes="*.jar"/>
     </zip>
