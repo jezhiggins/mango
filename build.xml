@@ -177,7 +177,6 @@
   </target>
 
   <target name="jar" depends="compile">
-    <delete dir="${distdir}"/>
     <mkdir dir="${distdir}"/>
     <jar jarfile="${distdir}/mango.jar">
       <fileset dir="${targetdir}">
