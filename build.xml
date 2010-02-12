@@ -1,11 +1,16 @@
 <project name="mango" default="compile" basedir=".">
 
-  <property name="targetdir"    value="classes"/>
-  <property name="coberturadir" value="cobertura"/>
-  <property name="srcdir"       value="src"/>
-  <property name="srctests"     value="tests"/>
+  <property name="targetdir"    value="out/classes"/>
+  <property name="testdir" value="out/test"/>
+  <property name="coberturadir" value="out/cobertura"/>
+  <property name="emmadir" value="out/emma"/>
+  <property name="findbugsdir" value="out/findbugs"/>
   <property name="javadocdir"	value="javadoc"/>
   <property name="distdir"      value="dist"/>
+
+  <property name="srcdir"       value="src"/>
+  <property name="srctests"     value="tests"/>
+
   <property name="junit.jar" value="lib/junit-3.8.2.jar"/>
 
   <path id="cobertura.classpath">
@@ -16,6 +21,13 @@
   
   <taskdef resource="tasks.properties" classpathref="cobertura.classpath"/>
 
+  <path id="emma.classpath">
+    <pathelement location="lib/emma/emma.jar"/>
+    <pathelement location="lib/emma/emma_ant.jar"/>
+  </path>
+
+  <taskdef resource="emma_ant.properties" classpathref="emma.classpath"/>
+
   <path id="findbugs.classpath">
     <fileset dir="lib/findbugs">
       <include name="*.jar"/>
@@ -23,33 +35,151 @@
   </path>
 
   <taskdef name="findbugs" 
-	classname="edu.umd.cs.findbugs.anttask.FindBugsTask"
-	classpathref="findbugs.classpath"/>
+	   classname="edu.umd.cs.findbugs.anttask.FindBugsTask"
+	   classpathref="findbugs.classpath"/>
   
   <target name="prepare">
     <mkdir dir="${targetdir}"/>
+    <mkdir dir="${testdir}"/>
     <mkdir dir="${javadocdir}"/>
     <mkdir dir="${distdir}"/>
-    <mkdir dir="${coberturadir}"/>
   </target>
 
   <target name="clean">
-    <delete dir="${targetdir}"/>
+    <delete dir="out"/>
     <delete dir="${javadocdir}"/>
     <delete dir="${distdir}"/>
-    <delete dir="${coberturadir}"/>
-    <delete dir="${srctests}/results"/>
   </target>
 
   <target name="compile" depends="prepare">
-    <javac srcdir="${srcdir};${srctests}" 
+    <javac srcdir="${srcdir}" 
            destdir="${targetdir}" 
+           classpath="${targetdir}"
+           debug="on" 
+           optimize="off" 
+           deprecation="on">
+      <compilerarg value="-Xlint"/> 
+    </javac>
+  </target>
+
+  <target name="compile-tests" depends="compile">
+    <mkdir dir="${testdir}/classes"/>
+    <javac srcdir="${srctests}" 
+           destdir="${testdir}/classes" 
            classpath="${targetdir};${junit.jar}"
            debug="on" 
            optimize="off" 
            deprecation="on">
-			<compilerarg value="-Xlint"/> 
+      <compilerarg value="-Xlint"/> 
     </javac>
+  </target>
+
+  <target name="instrument" 
+	  depends="compile, emma-instrument, cobertura-instrument"/>
+
+  <target name="emma-instrument"
+	  depends="compile, dont-emma-instrument, do-emma-instrument"/>
+
+  <target name="dont-emma-instrument" unless="build.emma">
+    <delete dir="${emmadir}/classes"/>
+  </target>
+
+  <target name="do-emma-instrument" if="build.emma">
+    <emma>
+      <instr instrpath="${targetdir}"
+	     destdir="${emmadir}/classes"
+	     metadatafile="${emmadir}/metadata.emma"
+	     merge="true"/>
+    </emma>
+  </target>
+
+  <target name="cobertura-instrument" 
+	  depends="compile, dont-cobertura-instrument, do-cobertura-instrument"/>
+
+  <target name="dont-cobertura-instrument" unless="build.cobertura">
+    <delete dir="${coberturadir}/classes"/>
+  </target>
+
+  <target name="do-cobertura-instrument" if="build.cobertura">
+    <cobertura-instrument todir="${coberturadir}/classes"
+                          datafile="${coberturadir}/cobertura.ser">
+      <fileset dir="${targetdir}">
+	<include name="**/*.class"/>
+      </fileset>
+    </cobertura-instrument>
+  </target>
+
+  <target name="run-tests" depends="compile, compile-tests">
+    <delete dir="${testdir}/results"/>
+    <mkdir dir="${testdir}/results"/>
+
+    <junit fork="yes">
+      <sysproperty key="net.sourceforge.cobertura.datafile" 
+		   file="${coberturadir}/cobertura.ser"/>
+      <sysproperty key="emma.coverage.out.file" 
+		   file="${emmadir}/coverage.emma"/>      
+      <classpath>
+	<pathelement location="${coberturadir}/classes"/> 
+	<pathelement location="${emmadir}/classes"/>
+	<pathelement location="${targetdir}"/>
+	<pathelement location="${testdir}/classes"/>
+	<pathelement location="${junit.jar}"/>
+	<path refid="cobertura.classpath"/>
+	<path refid="emma.classpath"/>
+      </classpath>
+      <formatter type="plain"/>
+      <formatter type="xml"/>
+      <batchtest todir="${testdir}/results">
+        <fileset dir="${testdir}/classes">
+	  <include name="**/*Test.class"/>
+	</fileset>
+      </batchtest>
+    </junit>
+  </target>
+  
+  <target name="coverage-report" depends="cobertura-report, emma-report"/>
+
+  <target name="emma-report" if="build.emma">
+    <emma>
+      <report sourcepath="${srcdir}">
+	<fileset dir="${emmadir}">
+	  <include name="*.emma"/>
+	</fileset>
+	<html outfile="${emmadir}/coverage.html"/>
+	<xml outfile="${emmadir}/coverage.xml"/>
+      </report>
+    </emma>
+  </target>
+
+  <target name="cobertura-report" if="build.cobertura">
+    <cobertura-report format="xml"
+		      datafile="${coberturadir}/cobertura.ser"
+		      destdir="${coberturadir}/cobertura"
+		      srcdir="${srcdir}"/>
+    <cobertura-report format="html"
+		      datafile="${coberturadir}/cobertura.ser"
+		      destdir="${coberturadir}/cobertura"
+		      srcdir="${srcdir}"/>
+  </target>
+
+  <target name="test" depends="instrument, run-tests, coverage-report"/>
+  
+  <target name="findbugs" depends="jar">
+    <mkdir dir="${findbugsdir}"/>
+    <findbugs home="lib/findbugs"
+	      output="xml"
+	      outputFile="${findbugsdir}/mango-fb.xml">
+      <sourcePath path="${srcdir}"/>
+      <class location="${distdir}/mango.jar"/>
+    </findbugs>
+  </target>
+
+  <target name="jar" depends="clean, compile">
+    <jar jarfile="${distdir}/mango.jar">
+      <fileset dir="${targetdir}">
+        <exclude name="**/*Test*.class"/>
+      </fileset>
+    </jar>
   </target>
 
   <target name="javadoc">
@@ -68,23 +198,6 @@
     </javadoc>
   </target>
 
-  <target name="findbugs" depends="jar">
-    <findbugs home="lib/findbugs"
-	      output="xml"
-	      outputFile="mango-fb.xml">
-      <sourcePath path="${srcdir}"/>
-      <class location="${distdir}/mango.jar"/>
-    </findbugs>
-  </target>
-
-  <target name="jar" depends="clean, compile">
-    <jar jarfile="${distdir}/mango.jar">
-      <fileset dir="${targetdir}">
-        <exclude name="**/*Test*.class"/>
-      </fileset>
-    </jar>
-  </target>
-
   <target name="dist" depends="clean, test, javadoc, jar">
     <zip zipfile="${distdir}/mango-bin.zip">
       <fileset dir="${distdir}" includes="*.jar"/>
@@ -96,9 +209,9 @@
         <include name="${srctests}/**/*.java"/>
       </fileset>
     </zip>
-		<zip zipfile="${distdir}/mango-javadoc.zip">
-			<fileset dir="${javadocdir}" includes="**/*"/>
-		</zip>
+    <zip zipfile="${distdir}/mango-javadoc.zip">
+      <fileset dir="${javadocdir}" includes="**/*"/>
+    </zip>
     <tar tarfile="${distdir}/mango-bin.tar">
       <tarfileset dir="${distdir}" includes="*.jar"/>
     </tar>
@@ -120,45 +233,5 @@
     <delete file="${distdir}/mango-javadoc.tar"/>
   </target>
 
-  <target name="instrument" depends="compile">
-    <cobertura-instrument todir="${coberturadir}/classes"
-                          datafile="${coberturadir}/cobertura.ser">
-      <fileset dir="${targetdir}">
-	<include name="**/*.class"/>
-	<exclude name="**/*Test*.class"/>
-      </fileset>
-    </cobertura-instrument>
-  </target>
-
-  <target name="test" depends="compile, instrument">
-    <delete dir="${srctests}/results"/>
-    <mkdir dir="${srctests}/results"/>
-
-    <junit fork="yes">
-      <sysproperty key="net.sourceforge.cobertura.datafile" file="${coberturadir}/cobertura.ser"/>
-      <classpath>
-	<pathelement location="${coberturadir}/classes"/> 
-	<pathelement location="${targetdir}"/>
-	<pathelement location="${junit.jar}"/>
-	<path refid="cobertura.classpath"/>
-      </classpath>
-      <formatter type="plain"/>
-      <formatter type="xml"/>
-      <batchtest todir="${srctests}/results">
-        <fileset dir="${targetdir}">
-	  <include name="**/*Test.class"/>
-	</fileset>
-      </batchtest>
-    </junit>
-    <cobertura-report format="xml"
-		      datafile="${coberturadir}/cobertura.ser"
-		      destdir="${coberturadir}/cobertura"
-		      srcdir="${srcdir}"/>
-    <cobertura-report format="html"
-		      datafile="${coberturadir}/cobertura.ser"
-		      destdir="${coberturadir}/cobertura"
-		      srcdir="${srcdir}"/>
-  </target>
-  
   <target name="all" depends="clean,prepare,compile,javadoc,jar"/>
 </project>

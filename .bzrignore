@@ -3,3 +3,4 @@ dist
 tests/results
 javadoc
 instrumented-classes
+out
