@@ -1,7 +1,7 @@
 <project name="mango" default="compile" basedir=".">
 
   <property name="targetdir"    value="classes"/>
-  <property name="coberturadir" value="instrumented-classes"/>
+  <property name="coberturadir" value="cobertura"/>
   <property name="srcdir"       value="src"/>
   <property name="srctests"     value="tests"/>
   <property name="javadocdir"	value="javadoc"/>
@@ -37,9 +37,8 @@
     <delete dir="${targetdir}"/>
     <delete dir="${javadocdir}"/>
     <delete dir="${distdir}"/>
-		<delete dir="${coberturadir}"/>
+    <delete dir="${coberturadir}"/>
     <delete dir="${srctests}/results"/>
-    <delete dir="${srctests}/cobertura"/>
   </target>
 
   <target name="compile" depends="prepare">
@@ -121,22 +120,24 @@
     <delete file="${distdir}/mango-javadoc.tar"/>
   </target>
 
-  <target name="test" depends="compile">
-    <delete dir="${srctests}/results"/>
-    <delete dir="${srctests}/cobertura"/>
-    <mkdir dir="${srctests}/results"/>
-    <mkdir dir="${srctests}/cobertura"/>
-
-    <cobertura-instrument todir="${coberturadir}">
+  <target name="instrument" depends="compile">
+    <cobertura-instrument todir="${coberturadir}/classes"
+                          datafile="${coberturadir}/cobertura.ser">
       <fileset dir="${targetdir}">
 	<include name="**/*.class"/>
 	<exclude name="**/*Test*.class"/>
       </fileset>
     </cobertura-instrument>
+  </target>
+
+  <target name="test" depends="compile, instrument">
+    <delete dir="${srctests}/results"/>
+    <mkdir dir="${srctests}/results"/>
+
     <junit fork="yes">
-      <sysproperty key="net.sourceforge.cobertura.datafile" file="${srctests}/cobertura/cobertura.ser"/>
+      <sysproperty key="net.sourceforge.cobertura.datafile" file="${coberturadir}/cobertura.ser"/>
       <classpath>
-	<pathelement location="${coberturadir}"/> 
+	<pathelement location="${coberturadir}/classes"/> 
 	<pathelement location="${targetdir}"/>
 	<pathelement location="${junit.jar}"/>
 	<path refid="cobertura.classpath"/>
@@ -150,12 +151,12 @@
       </batchtest>
     </junit>
     <cobertura-report format="xml"
-		      datafile="${srctests}/cobertura/cobertura.ser"
-		      destdir="${srctests}/cobertura"
+		      datafile="${coberturadir}/cobertura.ser"
+		      destdir="${coberturadir}/cobertura"
 		      srcdir="${srcdir}"/>
     <cobertura-report format="html"
-		      datafile="${srctests}/cobertura/cobertura.ser"
-		      destdir="${srctests}/cobertura"
+		      datafile="${coberturadir}/cobertura.ser"
+		      destdir="${coberturadir}/cobertura"
 		      srcdir="${srcdir}"/>
   </target>
   
