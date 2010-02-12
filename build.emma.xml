@@ -1,0 +1,164 @@
+<project name="mango" default="compile" basedir=".">
+
+  <property name="targetdir"    value="classes"/>
+  <property name="emmadir" value="emma"/>
+  <property name="srcdir"       value="src"/>
+  <property name="srctests"     value="tests"/>
+  <property name="javadocdir"	value="javadoc"/>
+  <property name="distdir"      value="dist"/>
+  <property name="junit.jar" value="lib/junit-3.8.2.jar"/>
+
+  <path id="emma.classpath">
+    <pathelement location="lib/emma/emma.jar"/>
+    <pathelement location="lib/emma/emma_ant.jar"/>
+  </path>
+
+  <taskdef resource="emma_ant.properties" classpathref="emma.classpath"/>
+
+  <path id="findbugs.classpath">
+    <fileset dir="lib/findbugs">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
+
+  <taskdef name="findbugs" 
+	classname="edu.umd.cs.findbugs.anttask.FindBugsTask"
+	classpathref="findbugs.classpath"/>
+  
+  <target name="prepare">
+    <mkdir dir="${targetdir}"/>
+    <mkdir dir="${javadocdir}"/>
+    <mkdir dir="${distdir}"/>
+  </target>
+
+  <target name="clean">
+    <delete dir="${targetdir}"/>
+    <delete dir="${javadocdir}"/>
+    <delete dir="${distdir}"/>
+    <delete dir="${srctests}/results"/>
+  </target>
+
+  <target name="compile" depends="prepare">
+    <javac srcdir="${srcdir};${srctests}" 
+           destdir="${targetdir}" 
+           classpath="${targetdir};${junit.jar}"
+           debug="on" 
+           optimize="off" 
+           deprecation="on">
+			<compilerarg value="-Xlint"/> 
+    </javac>
+  </target>
+
+  <target name="javadoc">
+    <javadoc packagenames="uk.co.jezuk.mango"
+           sourcepath="${srcdir}"
+           destdir="${javadocdir}"
+           author="true"
+           version="true"
+           use="true"
+           windowtitle="The Mango Library"
+	   >
+      <doctitle><![CDATA[<h2>The Mango Library</h2>]]></doctitle>
+      <header><![CDATA[<a href='http://www.jezuk.co.uk/mango' target='_top'><img src='http://www.jezuk.co.uk/files/mango-short-header.png' title='The Mango Library' style='border: 0px'/></a>]]></header>
+      <footer><![CDATA[<a href='http://www.jezuk.co.uk/' target='_top'><img src='http://www.jezuk.co.uk/files/jezuk-logo.png' title='Jez UK Ltd' style='border: 0px'/></a>]]></footer>
+      <bottom>Copyright &#169; 2002-2009 JezUK Ltd.</bottom>
+    </javadoc>
+  </target>
+
+  <target name="findbugs" depends="jar">
+    <findbugs home="lib/findbugs"
+	      output="xml"
+	      outputFile="mango-fb.xml">
+      <sourcePath path="${srcdir}"/>
+      <class location="${distdir}/mango.jar"/>
+    </findbugs>
+  </target>
+
+  <target name="jar" depends="clean, compile">
+    <jar jarfile="${distdir}/mango.jar">
+      <fileset dir="${targetdir}">
+        <exclude name="**/*Test*.class"/>
+      </fileset>
+    </jar>
+  </target>
+
+  <target name="dist" depends="clean, test, javadoc, jar">
+    <zip zipfile="${distdir}/mango-bin.zip">
+      <fileset dir="${distdir}" includes="*.jar"/>
+    </zip>
+    <zip zipfile="${distdir}/mango-src.zip">
+      <fileset dir=".">
+        <include name="build.xml"/>
+        <include name="${srcdir}/**/*.java"/>
+        <include name="${srctests}/**/*.java"/>
+      </fileset>
+    </zip>
+    <zip zipfile="${distdir}/mango-javadoc.zip">
+      <fileset dir="${javadocdir}" includes="**/*"/>
+    </zip>
+    <tar tarfile="${distdir}/mango-bin.tar">
+      <tarfileset dir="${distdir}" includes="*.jar"/>
+    </tar>
+    <tar tarfile="${distdir}/mango-src.tar">
+      <tarfileset dir=".">
+        <include name="build.xml"/>
+        <include name="${srcdir}/**/*.java"/>
+        <include name="${srctests}/**/*.java"/>
+      </tarfileset>
+    </tar>
+    <gzip src="${distdir}/mango-bin.tar" zipfile="${distdir}/mango-bin.tar.gz"/>
+    <gzip src="${distdir}/mango-src.tar" zipfile="${distdir}/mango-src.tar.gz"/>
+    <delete file="${distdir}/mango-bin.tar"/>
+    <delete file="${distdir}/mango-src.tar"/>
+    <tar tarfile="${distdir}/mango-javadoc.tar">
+      <tarfileset dir="${javadocdir}" includes="**/*"/>
+    </tar>
+    <gzip src="${distdir}/mango-javadoc.tar" zipfile="${distdir}/mango-javadoc.tar.gz"/>
+    <delete file="${distdir}/mango-javadoc.tar"/>
+  </target>
+
+  <target name="test" depends="compile">
+    <delete dir="${srctests}/results"/>
+    <mkdir dir="${srctests}/results"/>
+    <delete dir="${emmadir}/classes"/>
+    <mkdir dir="${emmadir}/classes"/>
+
+    <emma>
+      <instr instrpath="${targetdir}"
+	     destdir="${emmadir}/classes"
+	     metadatafile="${emmadir}/metadata.emma"
+	     merge="true"/>
+    </emma>
+
+    <junit fork="yes">
+      <sysproperty key="emma.coverage.out.file" file="${emmadir}/coverage.emma"/>
+      <classpath>
+	<pathelement location="${emmadir}/classes"/>
+	<pathelement location="${targetdir}"/>
+	<pathelement location="${junit.jar}"/>
+	<path refid="emma.classpath"/>
+
+      </classpath>
+      <formatter type="plain"/>
+      <formatter type="xml"/>
+      <batchtest todir="${srctests}/results">
+        <fileset dir="${targetdir}">
+	  <include name="**/*Test.class"/>
+	</fileset>
+      </batchtest>
+    </junit>
+
+    <emma>
+      <report sourcepath="${srcdir}">
+	<fileset dir="${emmadir}">
+	  <include name="*.emma"/>
+	</fileset>
+	<txt outfile="${emmadir}/coverage.txt"/>
+	<html outfile="${emmadir}/coverage.html"/>
+	<xml outfile="${emmadir}/coverage.xml"/>
+      </report>
+    </emma>
+  </target>
+  
+  <target name="all" depends="clean,prepare,compile,javadoc,jar"/>
+</project>
