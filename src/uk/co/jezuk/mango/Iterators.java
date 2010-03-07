@@ -14,8 +14,9 @@ import uk.co.jezuk.mango.iterators.*;
 public class Iterators
 {
   /**
-   * A <code>StringIterator</code> iterators over a String, returning each character in turn as a <code>String</code> of length 1.
-	 * e.g. StringIterator("123") will return "1", "2", "3"
+   * A <code>StringIterator</code> iterators over a String, returning each 
+   * character in turn as a <code>String</code> of length 1.
+   * e.g. StringIterator("123") will return "1", "2", "3"
    */
   static public Iterator<String> StringIterator(String s) 
   { 
@@ -165,6 +166,14 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
   { 
     return new ReverseIterator<T>(list); 
   } // ReverseIterator
+
+  /**
+   * <code>ChainIterator</code>
+   */
+  static public <T> Iterator<T> ChainIterator(Object... iterables)
+  {
+    return new ChainIterator(iterables);
+  } // ChainIterator
 
   //////////////////////////////////
   private Iterators() { }
