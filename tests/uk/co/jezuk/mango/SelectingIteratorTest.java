@@ -71,6 +71,13 @@ public class SelectingIteratorTest  extends TestCase
       assertEquals(true, s.startsWith("S"));
     } // while
     assertEquals(3, i);
+
+    try {
+	iter.next();
+	fail();
+    }
+    catch(NoSuchElementException e) {
+    }
   } // test2
 
   public void test3()

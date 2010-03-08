@@ -11,5 +11,12 @@ public class NullIteratorTest extends TestCase
   {
     java.util.Iterator i = Iterators.NullIterator();
     assertEquals(false, i.hasNext());
+    try {
+	iter.next();
+	fail();
+    }
+    catch(NoSuchElementException e) {
+    }
+    
   } // test1
 } // NullIteratorTest
