@@ -213,7 +213,6 @@ public class Adapt
       private String methodName_;
       private Class lastClass_;
       private Method method_;
-      { methodName_ = methodName; }
       public Object fn(Object arg) 
       { 
         if(!arg.getClass().equals(lastClass_))
