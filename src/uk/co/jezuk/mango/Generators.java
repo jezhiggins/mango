@@ -22,4 +22,9 @@ public class Generators
   static public Generator<Integer> IntegerSequence() { return new IntegerSequence(); }
   static public Generator<Integer> IntegerSequence(int seed) { return new IntegerSequence(seed); }
   static public Generator<Integer> IntegerSequence(Integer seed) { return new IntegerSequence(seed); }
+
+  /**
+   * Returns seed, seed, ... on successive calls to fn()
+   */  
+  static public <T> Generator<T> ConstantSequence(T constant) { return new ConstantSequence<T>(constant); }
 } // class Generators
