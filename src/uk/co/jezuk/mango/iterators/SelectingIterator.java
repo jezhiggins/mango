@@ -1,6 +1,7 @@
 package uk.co.jezuk.mango.iterators;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import uk.co.jezuk.mango.Predicate;
 
 /**
@@ -20,18 +21,23 @@ public class SelectingIterator<T> implements Iterator<T>
 
   public boolean hasNext()
   {
-    next_ = null;
-    while(iter_.hasNext() && next_ == null)
+    valid_ = false;
+    while(iter_.hasNext() && valid_ == false)
     {
       T candidate = iter_.next();
       if(pred_.test(candidate))
+      {
         next_ = candidate;
+        valid_ = true;
+      }
     } // while
-    return next_ != null;
+    return valid_;
   } // hasNext
 
   public T next()
   {
+    if(!valid_)
+      throw new NoSuchElementException();
     return next_;
   } // next
 
@@ -43,6 +49,7 @@ public class SelectingIterator<T> implements Iterator<T>
   ////////////////////////
   private final Iterator<T> iter_;
   private final Predicate<? super T> pred_;
+  private boolean valid_;
   private T next_;
 } // SelectingIterator
 

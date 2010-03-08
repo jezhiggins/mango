@@ -1,7 +1,7 @@
 package uk.co.jezuk.mango.iterators;
 
 import java.util.Iterator;
-
+import java.util.NoSuchElementException;
 /**
  * Iterators over an object array, allowing to be treated in a similar 
  * way to a collection.
@@ -10,7 +10,7 @@ import java.util.Iterator;
  */
 public class ArrayIterator<T> implements Iterator<T>
 {
-  public ArrayIterator(T[] array)
+  public ArrayIterator(final T[] array)
   {
     array_ = array;
     index_ = 0;
@@ -23,6 +23,8 @@ public class ArrayIterator<T> implements Iterator<T>
 
   public T next()
   {
+    if((array_ == null) || (index_ >= array_.length))
+      throw new NoSuchElementException();
     return array_[index_++];
   } // next
 
@@ -32,6 +34,6 @@ public class ArrayIterator<T> implements Iterator<T>
   } // remove
 
   //////////////////////
-  private T[] array_;
+  private final T[] array_;
   private int index_;
 } // ArrayIterator
