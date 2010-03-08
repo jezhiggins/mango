@@ -9,6 +9,7 @@ public class ChainIterator<T> implements Iterator<T>
   private final Iterator<Iterator<T>> chain_;
   private Iterator<T> current_;
 
+  @SuppressWarnings("unchecked")
   public ChainIterator(Object... iterables)
   {
     final List<Iterator<T>> list = new ArrayList<Iterator<T>>();
@@ -16,20 +17,13 @@ public class ChainIterator<T> implements Iterator<T>
     for(final Object o : iterables)
     {
       if(o instanceof Iterable) 
-      {
-	System.out.println(o);
         list.add(((Iterable<T>)o).iterator());
-      } // if
       else if(o instanceof Iterator) 
-      {
-	System.out.println(o);
         list.add((Iterator<T>)o);
-      } // if
+      else if(o.getClass().isArray()) 
+        list.add(new ArrayIterator<T>((T[])o));
       else 
-      {
-	System.out.println(o);
         list.add(new SingletonIterator<T>((T)o));
-      } 
     } // for
 
     chain_ = list.iterator();
@@ -38,7 +32,14 @@ public class ChainIterator<T> implements Iterator<T>
 
   public boolean hasNext()
   {
-    return current_ != null ? current_.hasNext() : false;
+    if(current_ == null)
+      return false;
+
+    if(current_.hasNext())
+      return true;
+
+    current_ = chain_.hasNext() ? chain_.next() : null;
+    return hasNext();
   } // hasNext
 
   public T next()
