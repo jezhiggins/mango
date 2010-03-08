@@ -2,6 +2,9 @@ package uk.co.jezuk.mango;
 
 import junit.framework.*;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class NullIteratorTest extends TestCase
 {
   public NullIteratorTest(String name) { super(name); }
@@ -9,10 +12,10 @@ public class NullIteratorTest extends TestCase
 
   public void test1()
   {
-    java.util.Iterator i = Iterators.NullIterator();
+    Iterator i = Iterators.NullIterator();
     assertEquals(false, i.hasNext());
     try {
-	iter.next();
+	i.next();
 	fail();
     }
     catch(NoSuchElementException e) {
