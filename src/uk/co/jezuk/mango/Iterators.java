@@ -172,7 +172,7 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
    */
   static public <T> Iterator<T> ChainIterator(Object... iterables)
   {
-    return new ChainIterator(iterables);
+    return new ChainIterator<T>(iterables);
   } // ChainIterator
 
   //////////////////////////////////
