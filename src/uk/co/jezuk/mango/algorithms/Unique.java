@@ -28,8 +28,8 @@ public class Unique
     if(c != null)
       return (c.compare(o1, o2) == 0);
 
-    if((o1 == null) && (o2 == null))
-      return true;
+    if(o1 == null)
+      return (o2 == null);
 
     return o1.equals(o2);
   } // compare

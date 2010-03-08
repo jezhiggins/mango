@@ -4,6 +4,7 @@ import junit.framework.*;
 
 import java.util.List;
 import java.util.ArrayList;
+import uk.co.jezuk.mango.algorithms.Unique;
 
 public class UniqueTest extends TestCase 
 {
@@ -105,5 +106,12 @@ public class UniqueTest extends TestCase
     
     Algorithms.unique(list);
     assertEquals(5, list.size());
-  } // test6
+  } // test7
+
+  public void test8()
+  {
+    assertTrue(Unique.match(null, null, null));
+    assertFalse(Unique.match(null, "hello", null));
+    assertFalse(Unique.match(null, null, "hello"));
+  } // test8
 } // class UniqueTest
