@@ -12,7 +12,7 @@ public class Remove
     while(iterator.hasNext())
     {
       T obj = iterator.next();
-      if((value == null && obj == null) || value.equals(obj))
+      if((value == null && obj == null) || (value != null && value.equals(obj)))
         iterator.remove();
     } // while ...
   } // execute
