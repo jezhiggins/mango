@@ -175,6 +175,14 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
     return new ChainIterator<T>(iterables);
   } // ChainIterator
 
+  /**
+   * <code>TeeIterator</code>
+   */
+  static <T> List<Iterator<T>> TeeIterator(final Iterator<T> iterator, final int count)
+  {
+    return TeeIterator.wrap(iterator, count);
+  } // TeeIterator
+
   //////////////////////////////////
   private Iterators() { }
 } // Iterator

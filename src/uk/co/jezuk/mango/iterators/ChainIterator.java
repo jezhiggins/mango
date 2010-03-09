@@ -10,7 +10,7 @@ public class ChainIterator<T> implements Iterator<T>
   private Iterator<T> current_;
 
   @SuppressWarnings("unchecked")
-  public ChainIterator(Object... iterables)
+  public ChainIterator(final Object... iterables)
   {
     final List<Iterator<T>> list = new ArrayList<Iterator<T>>();
 
