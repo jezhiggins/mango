@@ -168,17 +168,24 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
   } // ReverseIterator
 
   /**
-   * <code>ChainIterator</code>
+   * <code>ChainIterator</code> creates an iterator which will traverse 
+   * each of the iterables in turn.  When one is exhausted it moves to the 
+   * next, and so on, until all are exhausted.
+   * The <code>ChainIterator</code> can operate over other iterators, lists,
+   * arrays, individual objects, or any combination thereof.
    */
-  static public <T> Iterator<T> ChainIterator(Object... iterables)
+  static public <T> Iterator<T> ChainIterator(final Object... iterables)
   {
     return new ChainIterator<T>(iterables);
   } // ChainIterator
 
   /**
-   * <code>TeeIterator</code>
+   * <code>TeeIterator</code> creates any number of copies of an iterator,
+   * each of which can be iterated seperately.  The source iterator does not 
+   * have to modified at all, nor does it have to be cloneable.  The 
+   * TeeIterator will buffer as necessary. 
    */
-  static <T> List<Iterator<T>> TeeIterator(final Iterator<T> iterator, final int count)
+  static public <T> List<Iterator<T>> TeeIterator(final Iterator<T> iterator, final int count)
   {
     return TeeIterator.wrap(iterator, count);
   } // TeeIterator
