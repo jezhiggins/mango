@@ -190,6 +190,15 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
     return TeeIterator.wrap(iterator, count);
   } // TeeIterator
 
+  /**
+   * <code>GeneratorIterator</code> puts an iterator face onto a
+   * <code>Generator</code> object.
+   */
+  static public <T> Iterator<T> GeneratorIterator(final Generator<T> generator)
+  {
+    return new GeneratorIterator<T>(generator);
+  } // GeneratorIterator
+
   //////////////////////////////////
   private Iterators() { }
 } // Iterator
