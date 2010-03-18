@@ -194,7 +194,7 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
    * <code>GeneratorIterator</code> puts an iterator face onto a
    * <code>Generator</code> object.
    */
-  static public <T> Iterator<T> GeneratorIterator(final Generator<T> generator)
+  static public <T> Iterator<T> GeneratorIterator(final Generator<? extends T> generator)
   {
     return new GeneratorIterator<T>(generator);
   } // GeneratorIterator

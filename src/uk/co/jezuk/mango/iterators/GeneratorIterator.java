@@ -6,9 +6,9 @@ import uk.co.jezuk.mango.Generator;
 
 public class GeneratorIterator<T> implements Iterator<T>
 {
-  private final Generator<T> generator_;
+  private final Generator<? extends T> generator_;
 
-  public GeneratorIterator(final Generator<T> generator)
+  public GeneratorIterator(final Generator<? extends T> generator)
   {
     generator_ = generator;
   } // GeneratorIterator
