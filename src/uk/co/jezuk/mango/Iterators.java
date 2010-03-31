@@ -179,6 +179,11 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
     return new ChainIterator<T>(iterables);
   } // ChainIterator
 
+  static public <T> Iterator<List<T>> ZipIterator(final Object... iterables)
+  {
+    return new ZipIterator<T>(iterables);
+  } // ZipIterator
+
   /**
    * <code>TeeIterator</code> creates any number of copies of an iterator,
    * each of which can be iterated seperately.  The source iterator does not 

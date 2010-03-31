@@ -9,23 +9,9 @@ public class ChainIterator<T> implements Iterator<T>
   private final Iterator<Iterator<T>> chain_;
   private Iterator<T> current_;
 
-  @SuppressWarnings("unchecked")
   public ChainIterator(final Object... iterables)
   {
-    final List<Iterator<T>> list = new ArrayList<Iterator<T>>();
-
-    for(final Object o : iterables)
-    {
-      if(o instanceof Iterable) 
-        list.add(((Iterable<T>)o).iterator());
-      else if(o instanceof Iterator) 
-        list.add((Iterator<T>)o);
-      else if(o.getClass().isArray()) 
-        list.add(new ArrayIterator<T>((T[])o));
-      else 
-        list.add(new SingletonIterator<T>((T)o));
-    } // for
-
+    final List<Iterator<T>> list = Helpers.toIterators(iterables);
     chain_ = list.iterator();
     current_ = chain_.hasNext() ? chain_.next() : null;
   } // ChainIterator
