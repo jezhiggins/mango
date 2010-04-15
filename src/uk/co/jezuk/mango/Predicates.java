@@ -1,5 +1,10 @@
 package uk.co.jezuk.mango;
 
+import java.util.Collection;
+import java.util.Iterator;
+
+import uk.co.jezuk.mango.iterators.ArrayIterator;
+
 import uk.co.jezuk.mango.unarypredicates.*;
 
 /**
@@ -61,6 +66,13 @@ public class Predicates
    * <code>a.test(x)</code> returns <code>pred1.test(x) || pred2.test(x)</code>
    */
   static public <T> Predicate<T> Or(Predicate<T> pred1, Predicate<T> pred2) { return new Or<T>(pred1, pred2); }
+
+  /**
+   * A <code>Predicate</code> which returns <code>true</code> if all of the supplied <code>Predicate</code>s are true.  It is an AND generalised to any number of arguments.
+   */
+  static public <T> Predicate<T> All(Object... preds) { return All(new ArrayIterator<Predicate<T>>(preds)); }
+  static public <T> Predicate<T> All(Collection<Predicate<T>> preds) { return All(preds.iterator()); }
+  static public <T> Predicate<T> All(Iterator<Predicate<T>> preds) { return new All<T>(preds); }
 
   /**
    * A <code>Predicate<T></code> which checks whether the passed object 

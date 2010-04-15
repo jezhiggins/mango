@@ -10,9 +10,15 @@ import java.util.NoSuchElementException;
  */
 public class ArrayIterator<T> implements Iterator<T>
 {
-  public ArrayIterator(final T[] array)
+  @SuppressWarnings("unchecked")
+  public ArrayIterator(final Object... array)
   {
-    array_ = array;
+    if(array != null)
+      for(int i = 0; i != array.length; ++i) {
+        Object c = ((T)array[i]);
+      }
+
+    array_ = (T[])array;
     index_ = 0;
   } // ArrayIterator
 
