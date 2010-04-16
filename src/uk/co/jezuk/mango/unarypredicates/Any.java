@@ -5,20 +5,20 @@ import uk.co.jezuk.mango.Predicate;
 import java.util.Iterator;
 import java.util.List;
 
-public class All<T> implements Predicate<T>
+public class Any<T> implements Predicate<T>
 {
-  public All(Iterator<Predicate<T>> preds)
+  public Any(Iterator<Predicate<T>> preds)
   {
     preds_ = Collections.list(preds);
-  } // All
+  } // Any
 
   public boolean test(T x)
   {
     for(Iterator<Predicate<T>> i = preds_.iterator(); i.hasNext(); )
-      if(!i.next().test(x))
-        return false;
-    return true;
+      if(i.next().test(x))
+        return true;
+    return false;
   } // boolean
 
   private final List<Predicate<T>> preds_;
-} // All
+} // Any

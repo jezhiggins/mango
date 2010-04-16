@@ -68,11 +68,18 @@ public class Predicates
   static public <T> Predicate<T> Or(Predicate<T> pred1, Predicate<T> pred2) { return new Or<T>(pred1, pred2); }
 
   /**
-   * A <code>Predicate</code> which returns <code>true</code> if all of the supplied <code>Predicate</code>s are true.  It is an AND generalised to any number of arguments.
+   * A <code>Predicate</code> which returns <code>true</code> if all of the supplied <code>Predicate</code>s are true.  It is an AND generalised to any number of arguments.  The <code>Predicate</code>s are evaluated in the order supplied.
    */
   static public <T> Predicate<T> All(Object... preds) { return All(new ArrayIterator<Predicate<T>>(preds)); }
   static public <T> Predicate<T> All(Collection<Predicate<T>> preds) { return All(preds.iterator()); }
   static public <T> Predicate<T> All(Iterator<Predicate<T>> preds) { return new All<T>(preds); }
+
+  /**
+   * A <code>Predicate</code> which returns <code>true</code> if any one of the supplied <code>Predicate</code>s are true.  It is an OR generalised to any number of arguments.  The <code>Predicate</code>s are evaluated in the order supplied.
+   */
+  static public <T> Predicate<T> Any(Object... preds) { return Any(new ArrayIterator<Predicate<T>>(preds)); }
+  static public <T> Predicate<T> Any(Collection<Predicate<T>> preds) { return Any(preds.iterator()); }
+  static public <T> Predicate<T> Any(Iterator<Predicate<T>> preds) { return new Any<T>(preds); }
 
   /**
    * A <code>Predicate<T></code> which checks whether the passed object 

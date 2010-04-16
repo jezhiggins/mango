@@ -4,20 +4,20 @@ import junit.framework.*;
 import java.util.List;
 import java.util.Iterator;
 
-public class UnaryAllTest extends TestCase
+public class UnaryAnyTest extends TestCase
 {
-  public UnaryAllTest(String name) { super(name); }
-  public static Test suite() { return new TestSuite(UnaryAllTest.class); }
+  public UnaryAnyTest(String name) { super(name); }
+  public static Test suite() { return new TestSuite(UnaryAnyTest.class); }
 
   public void test1()
   {
-    Predicate<Object> t = Predicates.All(Predicates.True());
+    Predicate<Object> t = Predicates.Any(Predicates.True());
     assertEquals(true, t.test(null));
   } // test1
 
   public void test2()
   {
-    Predicate<Object> t = Predicates.All(Predicates.False());
+    Predicate<Object> t = Predicates.Any(Predicates.False());
     assertEquals(false, t.test(null));
   } // test2
 
@@ -31,8 +31,8 @@ public class UnaryAllTest extends TestCase
       for(Iterator<Predicate<Object>> inner = p.iterator(); inner.hasNext(); )
       {
         Predicate<Object> b = inner.next();
-        Predicate<Object> and = Predicates.And(a, b);
-        Predicate<Object> all = Predicates.All(a, b);
+        Predicate<Object> and = Predicates.Or(a, b);
+        Predicate<Object> all = Predicates.Any(a, b);
 
         assertEquals(and.test(null), all.test(null));
       }
@@ -52,8 +52,8 @@ public class UnaryAllTest extends TestCase
         for(Iterator<Predicate<Object>> inner = p.iterator(); inner.hasNext(); )
         {
           Predicate<Object> c = inner.next();
-          Predicate<Object> and = Predicates.And(a, Predicates.And(b, c));
-          Predicate<Object> all = Predicates.All(a, b, c);
+          Predicate<Object> and = Predicates.Or(a, Predicates.Or(b, c));
+          Predicate<Object> all = Predicates.Any(a, b, c);
 
           assertEquals(and.test(null), all.test(null));
         }
@@ -61,4 +61,4 @@ public class UnaryAllTest extends TestCase
     }
   } // test4
 
-} // class UnaryAllTest
+} // class UnaryAnyTest
