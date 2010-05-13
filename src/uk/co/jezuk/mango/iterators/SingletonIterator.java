@@ -13,20 +13,20 @@ public class SingletonIterator<T> implements Iterator<T>
   public SingletonIterator(T object)
   {
     object_ = object;
+    spent_ = false;
   } // SingletonIterator
 
   public boolean hasNext()
   {
-    return (object_ != null);
+    return (spent_ == false);
   } // hasNext
 
   public T next()
   {
-    if(object_ == null)
+    if(spent_)
       throw new java.util.NoSuchElementException();
-    T o = object_;
-    object_ = null;
-    return o;
+    spent_ = true;
+    return object_;
   } // next
 
   public void remove()
@@ -35,5 +35,6 @@ public class SingletonIterator<T> implements Iterator<T>
   } // remove
 
   //////////////////////
-  private T object_;
+  private final T object_;
+  private boolean spent_;
 } // SingletonIterator

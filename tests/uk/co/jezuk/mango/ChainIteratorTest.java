@@ -242,4 +242,49 @@ public class ChainIteratorTest extends TestCase
     assertEquals(false, i.hasNext());
   } // test17
  
+  public void test18()
+  {
+    String[] l = new String[]{null, "wish"};
+    Iterator<String> i = Iterators.ChainIterator("tree", l, "free");
+    assertEquals(true, i.hasNext());
+    assertEquals("tree", i.next());
+    assertEquals(true, i.hasNext());
+    assertEquals(null, i.next());
+    assertEquals(true, i.hasNext());
+    assertEquals("wish", i.next());
+    assertEquals(true, i.hasNext());
+    assertEquals("free", i.next());
+    assertEquals(false, i.hasNext());
+  } // test18
+
+  public void test19()
+  {
+    String[] l = new String[]{"fish", "wish"};
+    Iterator<String> i = Iterators.ChainIterator("tree", l, null);
+    assertEquals(true, i.hasNext());
+    assertEquals("tree", i.next());
+    assertEquals(true, i.hasNext());
+    assertEquals("fish", i.next());
+    assertEquals(true, i.hasNext());
+    assertEquals("wish", i.next());
+    assertEquals(true, i.hasNext());
+    assertEquals(null, i.next());
+    assertEquals(false, i.hasNext());
+  } // test19
+
+  public void test20()
+  {
+    String[] l = new String[]{"fish", "wish"};
+    Iterator<String> i = Iterators.ChainIterator(null, l, null);
+    assertEquals(true, i.hasNext());
+    assertEquals(null, i.next());
+    assertEquals(true, i.hasNext());
+    assertEquals("fish", i.next());
+    assertEquals(true, i.hasNext());
+    assertEquals("wish", i.next());
+    assertEquals(true, i.hasNext());
+    assertEquals(null, i.next());
+    assertEquals(false, i.hasNext());
+  } // test20
+
 } // ChainIteratorTest

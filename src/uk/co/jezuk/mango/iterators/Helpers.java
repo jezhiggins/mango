@@ -12,7 +12,7 @@ class Helpers
 
     for(final Object o : iterables)
     {
-      Iterator<T> i = toIterator(o);
+      final Iterator<T> i = toIterator(o);
       list.add(i);
     } // for ...
 
@@ -26,7 +26,7 @@ class Helpers
       return ((Iterable<T>)o).iterator();
     if(o instanceof Iterator) 
       return (Iterator<T>)o;
-    if(o.getClass().isArray()) 
+    if(o != null && o.getClass().isArray()) 
       return new ArrayIterator<T>((T[])o);
     
     return new SingletonIterator<T>((T)o);

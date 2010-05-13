@@ -20,6 +20,8 @@ public class SingletonIteratorTest  extends TestCase
   public void test2()
   {
     Iterator i = Iterators.SingletonIterator(null);
+    assertEquals(true, i.hasNext());
+    assertEquals(null, i.next());
     assertEquals(false, i.hasNext());
     try {
       i.next();
