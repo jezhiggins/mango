@@ -27,4 +27,9 @@ public class Generators
    * Returns seed, seed, ... on successive calls to fn()
    */  
   static public <T> Generator<T> ConstantSequence(T constant) { return new ConstantSequence<T>(constant); }
+
+  /**
+   * Always returns null
+   */
+  static public <T> Generator<T> NullSequence() { return (Generator<T>)NullSequence.INSTANCE; }
 } // class Generators
