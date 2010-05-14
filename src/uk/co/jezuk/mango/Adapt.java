@@ -210,7 +210,6 @@ public class Adapt
   static public Function ArgumentMethod(final String methodName)
   {
     return new Function() {
-      private String methodName_;
       private Class lastClass_;
       private Method method_;
       public Object fn(Object arg) 
