@@ -30,6 +30,14 @@ public class ChainIteratorTest extends TestCase
     assertEquals(false, i.hasNext());
   } // test2
   
+  public void testWithNull()
+  {
+    Iterator<String> i = Iterators.ChainIterator((Object)null);
+    assertEquals(true, i.hasNext());
+    assertEquals(null, i.next());
+    assertEquals(false, i.hasNext());
+  } // test2
+  
   public void test3()
   {
     Iterator<String> i = Iterators.ChainIterator("fish", "wish");
@@ -39,6 +47,26 @@ public class ChainIteratorTest extends TestCase
     assertEquals("wish", i.next());
     assertEquals(false, i.hasNext());
   } // test3
+  
+  public void test3a()
+  {
+    Iterator<String> i = Iterators.ChainIterator("fish", null);
+    assertEquals(true, i.hasNext());
+    assertEquals("fish", i.next());
+    assertEquals(true, i.hasNext());
+    assertEquals(null, i.next());
+    assertEquals(false, i.hasNext());
+  } // test3a
+  
+  public void test3b()
+  {
+    Iterator<String> i = Iterators.ChainIterator(null, "wish");
+    assertEquals(true, i.hasNext());
+    assertEquals(null, i.next());
+    assertEquals(true, i.hasNext());
+    assertEquals("wish", i.next());
+    assertEquals(false, i.hasNext());
+  } // test3b
   
   public void test4()
   {
