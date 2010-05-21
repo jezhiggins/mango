@@ -44,7 +44,7 @@ public class Collections
    * list.add("prod");<br/>
    * list.add("nose");</code>
    */
-  static public <T> List<T> list(final Object... values)
+  static public <T> List<T> list(final T... values)
   {
     return ListFactory.list(values);
   } // list

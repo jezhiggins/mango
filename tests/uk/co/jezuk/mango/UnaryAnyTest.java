@@ -21,6 +21,7 @@ public class UnaryAnyTest extends TestCase
     assertEquals(false, t.test(null));
   } // test2
 
+  @SuppressWarnings("unchecked")
   public void test3()
   {
     List<Predicate<Object>> p = Collections.list(Predicates.True(), Predicates.False());
@@ -39,6 +40,7 @@ public class UnaryAnyTest extends TestCase
     }
   } // test3
 
+  @SuppressWarnings("unchecked")
   public void test4()
   {
     List<Predicate<Object>> p = Collections.list(Predicates.True(), Predicates.False());

@@ -6,13 +6,12 @@ import java.util.ArrayList;
 
 public class ListFactory<T>
 {
-  @SuppressWarnings("unchecked")
-  static public <T> List<T> list(final Object... values)
+  static public <T> List<T> list(final T... values)
   {
     final List<T> l = new ArrayList<T>();
     
-    for(final Object o : values)
-      l.add((T)o);
+    for(final T o : values)
+      l.add(o);
 
     return l;
   } // list
