@@ -73,6 +73,25 @@ public class Predicates
   static public <T> Predicate<T> Xor(Predicate<T> pred1, Predicate<T> pred2) { return new Xor<T>(pred1, pred2); }
 
   /**
+   * A <code>Predicate</code> which returns the logical NAND of two other <code>Predicate</code>.  If <code>a</code>
+   * is an <code>Nand</code> object, constructed with <code>pred1</code> and <code>pred2</code>, then 
+   * <code>a.test(x)</code> returns <code>!(pred1.test(x) && pred2.test(x))</code>
+   */
+  static public <T> Predicate<T> Nand(Predicate<T> pred1, Predicate<T> pred2) { return new Nand<T>(pred1, pred2); }
+
+  /**
+   * A <code>Predicate<T></code> which returns the logical NOR of two other <code>Predicate<T></code>.  If <code>a</code>
+   * is an <code>Nor</code> object, constructed with <code>pred1</code> and <code>pred2</code>, then 
+   * <code>a.test(x)</code> returns <code>!(pred1.test(x) || pred2.test(x))</code>
+   */
+  static public <T> Predicate<T> Nor(Predicate<T> pred1, Predicate<T> pred2) { return new Nor<T>(pred1, pred2); }
+
+  /**
+   * A <code>Predicate<T></code> which returns the logical XNOR of two other <code>Predicate<T></code>.
+   */
+  static public <T> Predicate<T> Xnor(Predicate<T> pred1, Predicate<T> pred2) { return new Xnor<T>(pred1, pred2); }
+
+  /**
    * A <code>Predicate</code> which returns <code>true</code> if all of the supplied <code>Predicate</code>s are true.  It is an AND generalised to any number of arguments.  The <code>Predicate</code>s are evaluated in the order supplied.  Evaluation is short circuited as soon as a predicate fails.
    */
   static public <T> Predicate<T> All(Object... preds) { return All(new ArrayIterator<Predicate<T>>(preds)); }
