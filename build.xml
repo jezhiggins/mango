@@ -8,8 +8,8 @@
   <property name="javadocdir"	value="javadoc"/>
   <property name="distdir"      value="dist"/>
 
-  <property name="srcdir"       value="src"/>
-  <property name="srctests"     value="tests"/>
+  <property name="srcdir"       value="src/main/java"/>
+  <property name="srctests"     value="src/test/java"/>
 
   <property name="junit.jar" value="lib/junit-3.8.2.jar"/>
 
