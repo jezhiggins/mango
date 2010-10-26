@@ -212,6 +212,7 @@
         <include name="build.xml"/>
         <include name="${srcdir}/**/*.java"/>
         <include name="${srctests}/**/*.java"/>
+	<include name="lib/**"/>
       </fileset>
     </zip>
     <zip zipfile="${distdir}/mango-javadoc.zip">
@@ -225,6 +226,7 @@
         <include name="build.xml"/>
         <include name="${srcdir}/**/*.java"/>
         <include name="${srctests}/**/*.java"/>
+	<include name="lib/**"/>
       </tarfileset>
     </tar>
     <gzip src="${distdir}/mango-bin.tar" zipfile="${distdir}/mango-bin.tar.gz"/>
