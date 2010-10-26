@@ -115,7 +115,7 @@
     <delete dir="${testdir}/results"/>
     <mkdir dir="${testdir}/results"/>
 
-    <junit fork="yes">
+    <junit>
       <sysproperty key="net.sourceforge.cobertura.datafile" 
 		   file="${coberturadir}/cobertura.ser"/>
       <sysproperty key="emma.coverage.out.file" 
@@ -203,7 +203,7 @@
     </javadoc>
   </target>
 
-  <target name="dist" depends="clean, javadoc, jar">
+  <target name="dist" depends="clean, javadoc, test, jar">
     <zip zipfile="${distdir}/mango-bin.zip">
       <fileset dir="${distdir}" includes="*.jar"/>
     </zip>
