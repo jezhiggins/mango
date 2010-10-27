@@ -209,10 +209,9 @@
     </zip>
     <zip zipfile="${distdir}/mango-src.zip">
       <fileset dir=".">
-        <include name="build.xml"/>
+        <include name="pom.xml"/>
         <include name="${srcdir}/**/*.java"/>
         <include name="${srctests}/**/*.java"/>
-	<include name="lib/**"/>
       </fileset>
     </zip>
     <zip zipfile="${distdir}/mango-javadoc.zip">
@@ -223,10 +222,9 @@
     </tar>
     <tar tarfile="${distdir}/mango-src.tar">
       <tarfileset dir=".">
-        <include name="build.xml"/>
+        <include name="pom.xml"/>
         <include name="${srcdir}/**/*.java"/>
         <include name="${srctests}/**/*.java"/>
-	<include name="lib/**"/>
       </tarfileset>
     </tar>
     <gzip src="${distdir}/mango-bin.tar" zipfile="${distdir}/mango-bin.tar.gz"/>
