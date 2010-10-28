@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class TeeIterator<T> 
 {
-  static public <T> List<Iterator<T>> wrap(final Iterator<T> iterator,
+  static public <T> List<Iterator<T>> wrap(final Iterator<? extends T> iterator,
                                 final int count)
   {
     final Buffer<T> buffer = new Buffer<T>(iterator, count);
@@ -35,10 +35,10 @@ public class TeeIterator<T>
 
     private int index_ = 0;
     private final int useCount_;
-    private final Iterator<T> iterator_;
+    private final Iterator<? extends T> iterator_;
     private final List<Item<T>> buffer_;
 
-    public Buffer(final Iterator<T> iterator, final int count)
+    public Buffer(final Iterator<? extends T> iterator, final int count)
     {
       useCount_ = count;
       iterator_ = iterator;

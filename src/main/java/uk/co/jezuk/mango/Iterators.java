@@ -1,6 +1,7 @@
 package uk.co.jezuk.mango;
 
 import java.util.Iterator;
+import java.util.Collection;
 import java.util.List;
 
 import uk.co.jezuk.mango.iterators.*;
@@ -190,7 +191,7 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
    * have to modified at all, nor does it have to be cloneable.  The 
    * TeeIterator will buffer as necessary. 
    */
-  static public <T> List<Iterator<T>> TeeIterator(final Iterator<T> iterator, final int count)
+  static public <T> List<Iterator<T>> TeeIterator(final Iterator<? extends T> iterator, final int count)
   {
     return TeeIterator.wrap(iterator, count);
   } // TeeIterator
@@ -203,6 +204,15 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
   {
     return new GeneratorIterator<T>(generator);
   } // GeneratorIterator
+
+  /**
+   * <code>LoopingIterator</code> loops over and over the sequence,
+   * restarting back at the beginning when it hits the end
+   */
+  static public <T> Iterator<T> LoopingIterator(final Collection<? extends T> iterable)
+  {
+    return new LoopOverIterableIterator<T>(iterable);
+  } // LoopingIterator
 
   //////////////////////////////////
   private Iterators() { }
