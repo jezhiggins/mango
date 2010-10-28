@@ -30,7 +30,7 @@ public class TransformIteratorTest  extends TestCase
   
   public void test1()
   {
-    Iterator<Integer> iter = Iterators.TransformIterator(list.iterator(), new DoubleUp());
+    Iterator<Integer> iter = Iterators.TransformIterator(list, new DoubleUp());
 
     int i = 0;
     while(iter.hasNext())
@@ -68,7 +68,7 @@ public class TransformIteratorTest  extends TestCase
     slist.add(new NameObject("SIMEON"));
 
     // find the object called CORGAN
-    String found = Algorithms.find(Iterators.TransformIterator(slist.iterator(), 
+    String found = Algorithms.find(Iterators.TransformIterator(slist, 
 							       Adapt.ArgumentMethod("getName", NameObject.class, String.class)),
 				   new String("CORGAN"));
     assertEquals("CORGAN", found);

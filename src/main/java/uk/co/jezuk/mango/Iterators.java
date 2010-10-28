@@ -167,10 +167,15 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
        ...
      </pre> 
    */ 
-  static public <T, R> Iterator<R> TransformIterator(Iterator<T> iterator, 
+  static public <T, R> Iterator<R> TransformIterator(Iterator<? extends T> iterator, 
                                                      Function<? super T, R> transform) 
   { 
     return new TransformIterator<T, R>(iterator, transform); 
+  } // TransformIterator
+  static public <T, R> Iterator<R> TransformIterator(Iterable<? extends T> iterable, 
+                                                     Function<? super T, R> transform) 
+  { 
+    return TransformIterator(iterable.iterator(), transform); 
   } // TransformIterator
 
   /**
@@ -208,6 +213,10 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
   static public <T> List<Iterator<T>> TeeIterator(final Iterator<? extends T> iterator, final int count)
   {
     return TeeIterator.wrap(iterator, count);
+  } // TeeIterator
+  static public <T> List<Iterator<T>> TeeIterator(final Iterable<? extends T> iterable, final int count)
+  {
+    return TeeIterator(iterable.iterator(), count);
   } // TeeIterator
 
   /**

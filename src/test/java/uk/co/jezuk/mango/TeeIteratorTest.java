@@ -3,6 +3,7 @@ package uk.co.jezuk.mango;
 import junit.framework.*;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ArrayList;
 
 public class TeeIteratorTest extends TestCase
 {
@@ -27,4 +28,27 @@ public class TeeIteratorTest extends TestCase
       assertFalse(i.hasNext());
     } // for ...
   } // test1
+
+  public void test2()
+  {
+    List<String> listOfStrings = new ArrayList<String>();
+    listOfStrings.add("hello");
+    listOfStrings.add("there");
+    listOfStrings.add("chummy");
+
+    List<Iterator<String>> iters = Iterators.TeeIterator(listOfStrings, 4);
+
+    assertEquals(4, iters.size());
+
+    for(Iterator<String> i : iters)
+    {
+      assertTrue(i.hasNext());
+      assertEquals("hello", i.next());
+      assertTrue(i.hasNext());
+      assertEquals("there", i.next());
+      assertTrue(i.hasNext());
+      assertEquals("chummy", i.next());
+      assertFalse(i.hasNext());
+    } // for ...
+  } // test2
 } // TeeIteratorTest
