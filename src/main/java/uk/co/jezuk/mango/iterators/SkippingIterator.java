@@ -13,7 +13,8 @@ import uk.co.jezuk.mango.Predicate;
  */
 public class SkippingIterator<T> implements Iterator<T>
 {
-  public SkippingIterator(Iterator<T> iterator, Predicate<? super T> predicate)
+  public SkippingIterator(Iterator<? extends T> iterator, 
+			  Predicate<? super T> predicate)
   {
     iter_ = iterator;
     pred_ = predicate;
@@ -50,7 +51,7 @@ public class SkippingIterator<T> implements Iterator<T>
   } // findNext
 
   ////////////////////////
-  private final Iterator<T> iter_;
+  private final Iterator<? extends T> iter_;
   private final Predicate<? super T> pred_;
   private T next_;
 } // SkippingIterator

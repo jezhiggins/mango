@@ -100,7 +100,7 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
    * 
    * @see #SelectingIterator
    */ 
-  static public <T> Iterator<T> SkippingIterator(Iterator<T> iterator, 
+  static public <T> Iterator<T> SkippingIterator(Iterator<? extends T> iterator, 
                                                  Predicate<? super T> predicate) 
   { 
     return new SkippingIterator<T>(iterator, predicate); 
