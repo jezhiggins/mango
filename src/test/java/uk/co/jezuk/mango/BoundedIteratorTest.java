@@ -2,6 +2,7 @@ package uk.co.jezuk.mango;
 
 import junit.framework.*;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -108,4 +109,17 @@ public class BoundedIteratorTest  extends TestCase
     {
     } // catch
   }
+
+  public void testUseIterable()
+  {
+    Collection<Integer> coll = list;
+    Iterator<Integer> bi = Iterators.BoundedIterator(coll, 2, 5);
+    assertEquals(true, bi.hasNext());
+    assertEquals(2, (int)bi.next());
+    assertEquals(true, bi.hasNext());
+    assertEquals(3, (int)bi.next());
+    assertEquals(true, bi.hasNext());
+    assertEquals(4, (int)bi.next());
+    assertEquals(false, bi.hasNext());
+  } // testUseIterable
 } // BoundedIteratorTest

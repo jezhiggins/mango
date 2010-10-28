@@ -52,7 +52,11 @@ public class Iterators
   { 
     return new BoundedIterator<T>(iterator, start, end); 
   } // BoundedIterator
-
+  static public <T> Iterator<T> BoundedIterator(Iterable<? extends T> iterable,
+                                                int start, int end)
+  {
+    return BoundedIterator(iterable.iterator(), start, end);
+  } // BoundedIterator
   static public <T> Iterator<T> BoundedIterator(List<? extends T> list, 
                                                 int start, int end) 
   { 
