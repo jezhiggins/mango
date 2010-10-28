@@ -4,3 +4,4 @@ tests/results
 javadoc
 instrumented-classes
 out
+target
