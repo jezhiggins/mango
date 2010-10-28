@@ -31,7 +31,7 @@ public class SkippingIteratorTest  extends TestCase
   
   public void test1()
   {
-    Iterator<Integer> iter = Iterators.SkippingIterator(list.iterator(), new LessThanFive());
+    Iterator<Integer> iter = Iterators.SkippingIterator(list, new LessThanFive());
 
     assertEquals(new Integer(5), iter.next());
     assertEquals(new Integer(6), iter.next());
@@ -55,7 +55,7 @@ public class SkippingIteratorTest  extends TestCase
     slist.add("CHARLES");
     slist.add("SIMEON");
 
-    Iterator<String> iter = Iterators.SkippingIterator(slist.iterator(), 
+    Iterator<String> iter = Iterators.SkippingIterator(slist, 
                                        new Predicate<String>() {
                                            public boolean test(String s) {
                                              return s.charAt(0) == 'S';

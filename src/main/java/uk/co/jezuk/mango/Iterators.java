@@ -90,6 +90,11 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
   { 
     return new SelectingIterator<T>(iterator, predicate); 
   } // SelectingIterator
+  static public <T> Iterator<T> SelectingIterator(Iterable<? extends T> iterable, 
+                                                  Predicate<? super T> predicate) 
+  {
+    return SelectingIterator(iterable.iterator(), predicate);
+  } // SelectingIterator
 
   /**
    * A <code>SkippingIterator</code> enumerates a sequence,
@@ -104,6 +109,11 @@ Iterator iter = Iterators.SelectingIterator(myStringList.iterator(),
                                                  Predicate<? super T> predicate) 
   { 
     return new SkippingIterator<T>(iterator, predicate); 
+  } // SkippingIterator
+  static public <T> Iterator<T> SkippingIterator(Iterable<? extends T> iterable, 
+                                                 Predicate<? super T> predicate) 
+  { 
+    return SkippingIterator(iterable.iterator(), predicate); 
   } // SkippingIterator
 
   /** 

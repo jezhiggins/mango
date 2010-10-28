@@ -32,7 +32,7 @@ public class SelectingIteratorTest  extends TestCase
   
   public void test1()
   {
-    Iterator<Integer> iter = Iterators.SelectingIterator(list.iterator(), new LessThanFive());
+    Iterator<Integer> iter = Iterators.SelectingIterator(list, new LessThanFive());
     int i = 0;
     while(iter.hasNext())
     {
@@ -58,7 +58,7 @@ public class SelectingIteratorTest  extends TestCase
     slist.add("CHARLES");
     slist.add("SIMEON");
 
-    Iterator<String> iter = Iterators.SelectingIterator(slist.iterator(), 
+    Iterator<String> iter = Iterators.SelectingIterator(slist, 
                                        new Predicate<String>() {
                                            public boolean test(String s) {
                                              return s.charAt(0) == 'S';
@@ -96,7 +96,7 @@ public class SelectingIteratorTest  extends TestCase
     slist.add("CHARLES");
     slist.add("SIMEON");
 
-    Iterator<String> iter = Iterators.SelectingIterator(slist.iterator(), 
+    Iterator<String> iter = Iterators.SelectingIterator(slist, 
                                        new Predicate<String>() {
                                            public boolean test(String s) {
                                              return s.charAt(0) == 'S';
