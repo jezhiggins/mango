@@ -11,7 +11,7 @@ public class ArrayIteratorTest  extends TestCase
 
   public void test1()
   {
-    Iterator i = Iterators.ArrayIterator(new String[]{ "one", "two", "three" } );
+    Iterator<String> i = Iterators.ArrayIterator(new String[]{ "one", "two", "three" } );
     assertEquals(true, i.hasNext());
     assertEquals("one", i.next());
     assertEquals(true, i.hasNext());
@@ -30,7 +30,7 @@ public class ArrayIteratorTest  extends TestCase
 
   public void test2()
   {
-    Iterator i = Iterators.ArrayIterator(null);
+    Iterator<Void> i = Iterators.ArrayIterator(null);
     assertEquals(false, i.hasNext());
     try {
       i.next();
