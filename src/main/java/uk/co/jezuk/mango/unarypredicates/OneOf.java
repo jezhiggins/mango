@@ -17,7 +17,7 @@ public class OneOf<T> implements Predicate<T>
     int t = 0;
     for(Iterator<Predicate<T>> i = preds_.iterator(); i.hasNext() && t <= 2; )
       if(i.next().test(x))
-        ++t; ;
+        ++t;
     return (t == 1);
   } // boolean
 

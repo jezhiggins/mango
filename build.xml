@@ -2,7 +2,6 @@
 
   <property name="targetdir"    value="out/classes"/>
   <property name="testdir" value="out/test"/>
-  <property name="coberturadir" value="out/cobertura"/>
   <property name="emmadir" value="out/emma"/>
   <property name="findbugsdir" value="out/findbugs"/>
   <property name="javadocdir"	value="javadoc"/>
@@ -12,14 +11,6 @@
   <property name="srctests"     value="src/test/java"/>
 
   <property name="junit.jar" value="lib/junit-3.8.2.jar"/>
-
-  <path id="cobertura.classpath">
-    <fileset dir="lib">
-      <include name="*.jar"/>
-    </fileset>
-  </path>
-  
-  <taskdef resource="tasks.properties" classpathref="cobertura.classpath"/>
 
   <path id="emma.classpath">
     <pathelement location="lib/emma/emma.jar"/>
@@ -34,10 +25,10 @@
     </fileset>
   </path>
 
-  <taskdef name="findbugs" 
+  <taskdef name="findbugs"
 	   classname="edu.umd.cs.findbugs.anttask.FindBugsTask"
 	   classpathref="findbugs.classpath"/>
-  
+
   <target name="prepare">
     <mkdir dir="${targetdir}"/>
     <mkdir dir="${testdir}"/>
@@ -54,30 +45,30 @@
   </target>
 
   <target name="compile" depends="prepare">
-    <javac srcdir="${srcdir}" 
-           destdir="${targetdir}" 
+    <javac srcdir="${srcdir}"
+           destdir="${targetdir}"
            classpath="${targetdir}"
-           debug="on" 
-           optimize="off" 
+           debug="on"
+           optimize="off"
            deprecation="on">
-      <compilerarg value="-Xlint"/> 
+      <compilerarg value="-Xlint"/>
     </javac>
   </target>
 
   <target name="compile-tests" depends="compile">
     <mkdir dir="${testdir}/classes"/>
-    <javac srcdir="${srctests}" 
-           destdir="${testdir}/classes" 
+    <javac srcdir="${srctests}"
+           destdir="${testdir}/classes"
            classpath="${targetdir};${junit.jar}"
-           debug="on" 
-           optimize="off" 
+           debug="on"
+           optimize="off"
            deprecation="on">
-      <compilerarg value="-Xlint"/> 
+      <compilerarg value="-Xlint"/>
     </javac>
   </target>
 
-  <target name="instrument" 
-	  depends="compile, emma-instrument, cobertura-instrument"/>
+  <target name="instrument"
+	  depends="compile, emma-instrument"/>
 
   <target name="emma-instrument"
 	  depends="compile, dont-emma-instrument, do-emma-instrument"/>
@@ -95,38 +86,18 @@
     </emma>
   </target>
 
-  <target name="cobertura-instrument" 
-	  depends="compile, dont-cobertura-instrument, do-cobertura-instrument"/>
-
-  <target name="dont-cobertura-instrument" unless="build.cobertura">
-    <delete dir="${coberturadir}/classes"/>
-  </target>
-
-  <target name="do-cobertura-instrument" if="build.cobertura">
-    <cobertura-instrument todir="${coberturadir}/classes"
-                          datafile="${coberturadir}/cobertura.ser">
-      <fileset dir="${targetdir}">
-	<include name="**/*.class"/>
-      </fileset>
-    </cobertura-instrument>
-  </target>
-
   <target name="run-tests" depends="compile, compile-tests">
     <delete dir="${testdir}/results"/>
     <mkdir dir="${testdir}/results"/>
 
     <junit>
-      <sysproperty key="net.sourceforge.cobertura.datafile" 
-		   file="${coberturadir}/cobertura.ser"/>
-      <sysproperty key="emma.coverage.out.file" 
-		   file="${emmadir}/coverage.emma"/>      
+      <sysproperty key="emma.coverage.out.file"
+		   file="${emmadir}/coverage.emma"/>
       <classpath>
-	<pathelement location="${coberturadir}/classes"/> 
 	<pathelement location="${emmadir}/classes"/>
 	<pathelement location="${targetdir}"/>
 	<pathelement location="${testdir}/classes"/>
 	<pathelement location="${junit.jar}"/>
-	<path refid="cobertura.classpath"/>
 	<path refid="emma.classpath"/>
       </classpath>
       <formatter type="plain"/>
@@ -138,8 +109,8 @@
       </batchtest>
     </junit>
   </target>
-  
-  <target name="coverage-report" depends="cobertura-report, emma-report"/>
+
+  <target name="coverage-report" depends="emma-report"/>
 
   <target name="emma-report" if="build.emma">
     <emma>
@@ -153,19 +124,8 @@
     </emma>
   </target>
 
-  <target name="cobertura-report" if="build.cobertura">
-    <cobertura-report format="xml"
-		      datafile="${coberturadir}/cobertura.ser"
-		      destdir="${coberturadir}/cobertura"
-		      srcdir="${srcdir}"/>
-    <cobertura-report format="html"
-		      datafile="${coberturadir}/cobertura.ser"
-		      destdir="${coberturadir}/cobertura"
-		      srcdir="${srcdir}"/>
-  </target>
-
   <target name="test" depends="instrument, run-tests, coverage-report"/>
-  
+
   <target name="findbugs" depends="jar">
     <mkdir dir="${findbugsdir}"/>
     <findbugs home="lib/findbugs"
