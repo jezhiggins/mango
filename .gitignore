@@ -1,5 +1,7 @@
+.gradle
+out
 *.class
-
+build
 # Package Files #
 *.jar
 *.war

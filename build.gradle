@@ -1,0 +1,14 @@
+apply plugin: 'java'
+apply plugin: 'findbugs'
+apply plugin: 'pmd'
+
+version =  '1.0-SNAPSHOT'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  testCompile group: 'junit', name: 'junit', version: '3.8.1'
+}
+
