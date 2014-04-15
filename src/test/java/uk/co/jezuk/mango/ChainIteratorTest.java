@@ -4,6 +4,7 @@ import junit.framework.*;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 public class ChainIteratorTest extends TestCase
 {
@@ -21,7 +22,7 @@ public class ChainIteratorTest extends TestCase
     Iterator<String> i = Iterators.ChainIterator(Iterators.NullIterator());
     assertEquals(false, i.hasNext());
   } // test1
-  
+
   public void test2()
   {
     Iterator<String> i = Iterators.ChainIterator("fish");
@@ -29,7 +30,7 @@ public class ChainIteratorTest extends TestCase
     assertEquals("fish", i.next());
     assertEquals(false, i.hasNext());
   } // test2
-  
+
   public void testWithNull()
   {
     Iterator<String> i = Iterators.ChainIterator((Object)null);
@@ -37,7 +38,7 @@ public class ChainIteratorTest extends TestCase
     assertEquals(null, i.next());
     assertEquals(false, i.hasNext());
   } // test2
-  
+
   public void test3()
   {
     Iterator<String> i = Iterators.ChainIterator("fish", "wish");
@@ -47,7 +48,7 @@ public class ChainIteratorTest extends TestCase
     assertEquals("wish", i.next());
     assertEquals(false, i.hasNext());
   } // test3
-  
+
   public void test3a()
   {
     Iterator<String> i = Iterators.ChainIterator("fish", null);
@@ -57,7 +58,7 @@ public class ChainIteratorTest extends TestCase
     assertEquals(null, i.next());
     assertEquals(false, i.hasNext());
   } // test3a
-  
+
   public void test3b()
   {
     Iterator<String> i = Iterators.ChainIterator(null, "wish");
@@ -67,7 +68,7 @@ public class ChainIteratorTest extends TestCase
     assertEquals("wish", i.next());
     assertEquals(false, i.hasNext());
   } // test3b
-  
+
   public void test4()
   {
     List<String> l = new ArrayList<String>();
@@ -172,7 +173,7 @@ public class ChainIteratorTest extends TestCase
     assertEquals(true, i.hasNext());
     assertEquals("wish", i.next());
     assertEquals(false, i.hasNext());
-  } // test10    
+  } // test10
 
   public void test11()
   {
@@ -261,7 +262,7 @@ public class ChainIteratorTest extends TestCase
     Iterator<String> i = Iterators.ChainIterator(Iterators.NullIterator(), Iterators.NullIterator(), Iterators.NullIterator(), Iterators.NullIterator());
     assertEquals(false, i.hasNext());
   } // test16
-  
+
   public void test17()
   {
     Iterator<String> i = Iterators.ChainIterator(Iterators.NullIterator(), Iterators.NullIterator(), Iterators.NullIterator(), Iterators.NullIterator(), "result");
@@ -269,7 +270,7 @@ public class ChainIteratorTest extends TestCase
     assertEquals("result", i.next());
     assertEquals(false, i.hasNext());
   } // test17
- 
+
   public void test18()
   {
     String[] l = new String[]{null, "wish"};
@@ -315,4 +316,54 @@ public class ChainIteratorTest extends TestCase
     assertEquals(false, i.hasNext());
   } // test20
 
+  public void testArrayWithOneMemberWithHasNext() {
+    Object[] l = new Object[]{ "fish" };
+    Iterator<Object> i = Iterators.ChainIterator(l);
+    i.next();
+    i.hasNext();
+
+    try {
+      i.next();
+    } catch(NoSuchElementException e) {
+    }
+  }
+
+  public void testArrayWithOneMemberWithOutHasNext() {
+    Object[] l = new Object[]{ "fish" };
+    Iterator<Object> i = Iterators.ChainIterator(l);
+    i.next();
+
+    try {
+      i.next();
+    } catch(NoSuchElementException e) {
+    }
+  }
+
+  public void testTwoArraysWithOneMemberWithHasNext() {
+    Object[] l = new Object[]{ "fish" };
+    Object[] m = new Object[]{ "wish" };
+    Iterator<Object> i = Iterators.ChainIterator(l, m);
+    i.next();
+    i.hasNext();
+    i.next();
+    i.hasNext();
+
+    try {
+      i.next();
+    } catch(NoSuchElementException e) {
+    }
+  }
+
+  public void testTwoArraysWithOneMemberWithOutHasNext() {
+    Object[] l = new Object[]{ "fish" };
+    Object[] m = new Object[]{ "wish" };
+    Iterator<Object> i = Iterators.ChainIterator(l, m);
+    i.next();
+    i.next();
+
+    try {
+      i.next();
+    } catch(NoSuchElementException e) {
+    }
+  }
 } // ChainIteratorTest
