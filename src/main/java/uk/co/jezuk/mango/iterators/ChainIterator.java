@@ -3,6 +3,7 @@ package uk.co.jezuk.mango.iterators;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 public class ChainIterator<T> implements Iterator<T>
 {
@@ -30,7 +31,10 @@ public class ChainIterator<T> implements Iterator<T>
 
   public T next()
   {
-    return current_.next();
+    if (hasNext())
+      return current_.next();
+
+    throw new NoSuchElementException("ChainIterator is exhausted");
   } // next
 
   public void remove()
